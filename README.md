@@ -15,7 +15,7 @@
   - [ ] DRY
 
 ### Entwurfsmuster
-- [ ] >= 2 Entwurfsmuster einsetzen und begründen
+- [ ] \>= 2 Entwurfsmuster einsetzen und begründen
 - [ ] UML-Daiagramm vorher und nachher
 
 ### Domain Driven Design
@@ -32,14 +32,14 @@
 - [ ] Schichten analysieren
 
 ### Unit Tests
-- [ ] >= 10 Unit Tests
+- [ ] \>= 10 Unit Tests
 - [ ] ATRIP-Regeln
 - [ ] Code Coverage
 - [ ] Einsatz von Mocks
 
 ### Refactoring
 - [ ] Code Smells identifizieren
-- [ ] >= 2 Refactorings anwenden und begründen
+- [ ] \>= 2 Refactorings anwenden und begründen
 
 ## Source Code
 - [ ] Versionskontrolle (git)
