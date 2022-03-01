@@ -1,0 +1,19 @@
+# Elemente für den randomizer
+art:
+  - Bleistift
+  - Wasserfarbe
+stimmung:
+  - traurig
+  - fröhlich
+  - entspannt
+objekt:
+  - name: Landschaft
+    tag:
+      - Landschaft
+  - name: Uhr
+    tag:
+      - Gegenstände
+  - name: Drache
+    tag:
+      - Fantasy
+      - Tier
