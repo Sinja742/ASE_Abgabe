@@ -5,6 +5,11 @@ import Entity.entityStatus;
 import java.util.List;
 
 public class Steuerung {
+
+    public static void main(String[] args) {
+
+    }
+
     private List<Entity> artList;
     private List<Entity> stimmungList;
     private List<Entity> objektList;
