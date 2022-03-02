@@ -2,12 +2,15 @@ package Entity;
 
 import java.util.List;
 
-public class Objekt {
-    public String name;
-    public List<String> tags;
+public class Objekt extends Entity{
+    private List<String> tags;
 
-    public Objekt(String name, List<String> tags) {
-        this.name = name;
+    public Objekt(String bezeichnung, List<String> tags) {
+        super(bezeichnung);
         this.tags = tags;
+    }
+
+    public List<String> getTags() {
+        return this.tags;
     }
 }
