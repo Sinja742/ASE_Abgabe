@@ -2,12 +2,15 @@ import jobs.YmlReader;
 import Entity.Entity;
 import Entity.entityStatus;
 
+import java.io.IOException;
 import java.util.List;
 
 public class Steuerung {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
+        GUI gui = new GUI();
 
+        gui.getSearchTags();
     }
 
     private List<Entity> artList;
