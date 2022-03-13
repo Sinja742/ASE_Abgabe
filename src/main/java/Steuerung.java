@@ -1,6 +1,6 @@
-import jobs.YmlReader;
+import jobs.TxtReader;
 import Entity.Entity;
-import Entity.entityStatus;
+import Entity.EntityStatus;
 
 import java.util.List;
 
@@ -10,8 +10,8 @@ public class Steuerung {
     private List<Entity> objektList;
 
     private void readEntitys() {
-        this.artList = YmlReader.readEntity(entityStatus.ART);
-        this.stimmungList = YmlReader.readEntity(entityStatus.STIMMUNG);
-        this.objektList = YmlReader.readEntity(entityStatus.OBJEKT);
+        this.artList = TxtReader.readEntity(EntityStatus.ART);
+        this.stimmungList = TxtReader.readEntity(EntityStatus.STIMMUNG);
+        this.objektList = TxtReader.readEntity(EntityStatus.OBJEKT);
     }
 }
