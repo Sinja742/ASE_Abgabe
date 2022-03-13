@@ -7,7 +7,8 @@ public class Entity {
         this.bezeichnung = bezeichnung;
     }
 
-    public String getBezeichnung() {
+    public String toString() {
         return this.bezeichnung;
     }
+
 }
