@@ -55,7 +55,6 @@ public class TxtReader {
         List<Entity> objektList = new ArrayList<>();
         String[] text = readYml();
 
-        String[] objektWithTags;
         if (text != null) {
             text = text[2].split(";");
             for (String s : text) {
