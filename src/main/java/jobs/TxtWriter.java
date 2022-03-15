@@ -14,12 +14,15 @@ public class TxtWriter {
        }else if (status.equals(EntityStatus.STIMMUNG)){
            elementArray[1] = elementArray[1] + ","+ element;
        }else if (status.equals(EntityStatus.OBJEKT)){
-           elementArray[2] = elementArray[2] + ","+ element;
+           elementArray[2] = elementArray[2] + ";"+ element;
        }
        createNewTxtDocument(elementArray);
     }
 
     private static void createNewTxtDocument(String[] elementArray) throws IOException {
+        File file = new File("Elemente.txt");
+        file.delete();
+        file.createNewFile();
         PrintWriter out = new PrintWriter("Elemente.txt");
         String text = elementArray[0] + "&&" + elementArray[1] + "&&" + elementArray[2];
         out.println(text);
