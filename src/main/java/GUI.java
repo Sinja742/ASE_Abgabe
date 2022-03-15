@@ -1,10 +1,12 @@
 import Entity.Entity;
 import Entity.EntityStatus;
 import jobs.TxtWriter;
+import Entity.Tags;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.sql.SQLOutput;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -112,15 +114,32 @@ public class GUI {
     private void addObjektElement() throws IOException {
         System.out.println("Wollen Sie ein Element zum Typ Objekt hinzufügen? (" + this.JA + "/" + this.NEIN + "): ");
         String element;
+        String[] tagsEntered;
         BufferedReader tastatur = new BufferedReader(new InputStreamReader(System.in));
+
         if (tastatur.readLine().equals(this.JA)) {
             System.out.println("Geben Sie ein Wort für Objekt ein: ");
             element = tastatur.readLine();
             System.out.println("Wollen sie tags zu diesem Wort hinzufügen? (" + this.JA + "/" + this.NEIN + "): ");
             if (tastatur.readLine().equals(this.JA)) {
-//                Hier müssen die tags erst noch ausgegeben werden mit IDs und dann geschrieben werden
-//                die müssen in eine liste gespeist werden
+                System.out.println("Diese Tags stehen ihnen zur Auswahl: ");
+                Tags[] tagsArray = Tags.values();
+                StringBuilder tags = new StringBuilder();
+                for (Tags value : tagsArray) {
+                    tags.append(value).append(" ");
+                }
+                System.out.println(tags);
+                tagsEntered = tastatur.readLine().split(" ");
+
+                for (String s : tagsEntered) {
+                    for (Tags tag : Tags.values()) {
+                        if (tag.toString().equals(s)) {
+                            element = element + "," + tag.getId();
+                        }
+                    }
+                }
             }
+            TxtWriter.addElement(element, EntityStatus.OBJEKT);
         }
     }
 }
