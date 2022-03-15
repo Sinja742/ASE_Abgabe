@@ -11,7 +11,9 @@ import java.util.*;
 public class TxtReader {
     public static String[] readYml() {
         try {
-            String text = new BufferedReader(new FileReader("Elemente.txt")).readLine();
+            BufferedReader bfr = new BufferedReader(new FileReader("Elemente.txt"));
+            String text = bfr.readLine();
+            bfr.close();
             return text.split("&&");
         } catch (Exception e) {
             e.getMessage();
