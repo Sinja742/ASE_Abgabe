@@ -36,9 +36,21 @@ public class Steuerung {
     }
 
     private static void userIneraction(GUI gui) throws IOException {
+        if(gui.trueBooleanQuestion("Wollen Sie nach einer kreativen Idee suchen?")) {
+            searchIdea(gui);
+        }
+        if(gui.trueBooleanQuestion("Wollen Sie neue Elemente hinzufügen?")) {
+            addWordToElementeList(gui);
+        }
+        if(gui.trueBooleanQuestion("Wollen Sie Elemente bearbeiten?")) {
+        }
+        if(gui.trueBooleanQuestion("Wollen Sie Elemente löschen?")) {
+        }
+    }
+
+    private static void searchIdea(GUI gui) throws IOException {
         getAllSearchOpportiunities(gui);
         gui.showIdea(getIdea());
-        addWordToElementeList(gui);
     }
 
     private static void getAllSearchOpportiunities(GUI gui) throws IOException {
