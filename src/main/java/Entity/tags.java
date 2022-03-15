@@ -8,8 +8,8 @@ public enum Tags {
     ABSTRAKT(05, "Abstrakt"),
     MODERN(06, "Modern");
 
-    private int id;
-    private String tag;
+    private final int id;
+    private final String tag;
 
     Tags(int id, String tag) {
         this.id = id;
