@@ -1,5 +1,6 @@
-import jobs.YmlReader;
+import jobs.TxtReader;
 import Entity.Entity;
+import Entity.EntityStatus;
 import Entity.entityStatus;
 import Entity.tags;
 
@@ -53,10 +54,10 @@ public class Steuerung {
         readEntitys();
     }
 
-    private static void readEntitys() {
-        artList = YmlReader.readEntity(entityStatus.ART);
-        stimmungList = YmlReader.readEntity(entityStatus.STIMMUNG);
-        objektList = YmlReader.readEntity(entityStatus.OBJEKT);
+    private void readEntitys() {
+        this.artList = TxtReader.readEntity(EntityStatus.ART);
+        this.stimmungList = TxtReader.readEntity(EntityStatus.STIMMUNG);
+        this.objektList = TxtReader.readEntity(EntityStatus.OBJEKT);
     }
 
     private static void filterObjekteIfTag() {

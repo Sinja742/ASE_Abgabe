@@ -1,6 +1,6 @@
 package Entity;
 
-public enum entityStatus {
+public enum EntityStatus {
 
     ART("art"),
     STIMMUNG("stimmung"),
@@ -8,7 +8,7 @@ public enum entityStatus {
 
     private String bezeichnung;
 
-    entityStatus(String bezeichnung) {
+    EntityStatus(String bezeichnung) {
         this.bezeichnung = bezeichnung;
     }
 
