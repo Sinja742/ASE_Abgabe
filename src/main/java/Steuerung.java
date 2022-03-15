@@ -53,10 +53,10 @@ public class Steuerung {
         readEntitys();
     }
 
-    private void readEntitys() {
-        this.artList = TxtReader.readEntity(EntityStatus.ART);
-        this.stimmungList = TxtReader.readEntity(EntityStatus.STIMMUNG);
-        this.objektList = TxtReader.readEntity(EntityStatus.OBJEKT);
+    private static void readEntitys() {
+        artList = TxtReader.readEntity(EntityStatus.ART);
+        stimmungList = TxtReader.readEntity(EntityStatus.STIMMUNG);
+        objektList = TxtReader.readEntity(EntityStatus.OBJEKT);
     }
 
     private static void filterObjekteIfTag() {

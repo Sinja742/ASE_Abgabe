@@ -1,6 +1,6 @@
 package Entity;
 
-public enum tags {
+public enum Tags {
     LANDSCHAFT(01, "Landschaft"),
     GEGENSTAND(02, "Gegenstand"),
     FANTASIE(03, "Fantasie"),
@@ -11,7 +11,7 @@ public enum tags {
     private int id;
     private String tag;
 
-    tags(int id, String tag) {
+    Tags(int id, String tag) {
         this.id = id;
         this.tag = tag;
     }

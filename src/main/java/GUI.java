@@ -1,5 +1,4 @@
 import Entity.Entity;
-import Entity.tags;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -12,7 +11,7 @@ public class GUI {
     final String NEIN = "n";
 
     public void showIdea(String idea) {
-        System.out.println("Sie können hierzu kreativ werden : ");
+        System.out.println("Sie können hierzu kreativ werden : " + idea);
     }
 
     public String[] getSearchOpportiunities(String kriterium, List<Entity> allOptions) throws IOException {
