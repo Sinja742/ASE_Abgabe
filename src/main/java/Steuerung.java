@@ -38,6 +38,7 @@ public class Steuerung {
     private static void userIneraction(GUI gui) throws IOException {
         getAllSearchOpportiunities(gui);
         gui.showIdea(getIdea());
+        addWordToElementeList(gui);
     }
 
     private static void getAllSearchOpportiunities(GUI gui) throws IOException {
@@ -47,6 +48,10 @@ public class Steuerung {
         tagFilter = gui.getSearchTags(tagList);
 
         fillEmptyFilter();
+    }
+
+    private static void addWordToElementeList(GUI gui) throws IOException {
+        gui.getAddingElement();
     }
 
     private static void getOpportunities() {
@@ -78,7 +83,7 @@ public class Steuerung {
         String idea;
         idea = randomFilterObtion(artFilter);
         idea = idea.concat(" " + randomFilterObtion(stimmungFilter));
-        idea  = idea.concat(" " + randomFilterObtion(objektFilter));
+        idea = idea.concat(" " + randomFilterObtion(objektFilter));
 
         return idea;
     }

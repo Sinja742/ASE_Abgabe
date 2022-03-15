@@ -1,4 +1,6 @@
 import Entity.Entity;
+import Entity.EntityStatus;
+import jobs.TxtWriter;
 import Entity.Tags;
 
 import java.io.BufferedReader;
@@ -38,7 +40,7 @@ public class GUI {
         return tastatur.readLine().equals(this.JA);
     }
 
-    private String[] getFilters(String kriterium, List<Entity> allOptions) throws IOException{
+    private String[] getFilters(String kriterium, List<Entity> allOptions) throws IOException {
         this.showOpportunities(kriterium, getAllOptionsString(allOptions));
         System.out.println("Geben Sie die gewünschten " + kriterium + " ein: ");
 
@@ -55,7 +57,7 @@ public class GUI {
         return allOptionsString;
     }
 
-    private String[] getTags(List<String> allTags) throws IOException{
+    private String[] getTags(List<String> allTags) throws IOException {
         this.showOpportunities("Tags", allTags);
         System.out.println("Geben Sie die gewünschten Tags ein: ");
 
@@ -69,5 +71,57 @@ public class GUI {
             System.out.print(option + " ");
         }
         System.out.println();
+    }
+
+    public void getAddingElement() throws IOException {
+        if (wantAdd()) {
+            addArtElement();
+            addStimmungElement();
+            addObjektElement();
+        }
+    }
+
+    private boolean wantAdd() throws IOException {
+        System.out.println("Wollen Sie ein Element hinzufügen? (" + this.JA + "/" + this.NEIN + "): ");
+
+        BufferedReader tastatur = new BufferedReader(new InputStreamReader(System.in));
+        return tastatur.readLine().equals(this.JA);
+    }
+
+    private void addArtElement() throws IOException {
+        System.out.println("Wollen Sie ein Element zum Typ Art hinzufügen? (" + this.JA + "/" + this.NEIN + "): ");
+        String element;
+        BufferedReader tastatur = new BufferedReader(new InputStreamReader(System.in));
+        if (tastatur.readLine().equals(this.JA)) {
+            System.out.println("Geben Sie ein Wort für Art ein: ");
+            element = tastatur.readLine();
+            TxtWriter.addElement(element, EntityStatus.ART);
+        }
+    }
+
+    private void addStimmungElement() throws IOException {
+        System.out.println("Wollen Sie ein Element zum Typ Stimmung hinzufügen? (" + this.JA + "/" + this.NEIN + "): ");
+        String element;
+        BufferedReader tastatur = new BufferedReader(new InputStreamReader(System.in));
+        if (tastatur.readLine().equals(this.JA)) {
+            System.out.println("Geben Sie ein Wort für Stimmung ein: ");
+            element = tastatur.readLine();
+            TxtWriter.addElement(element, EntityStatus.STIMMUNG);
+        }
+    }
+
+    private void addObjektElement() throws IOException {
+        System.out.println("Wollen Sie ein Element zum Typ Objekt hinzufügen? (" + this.JA + "/" + this.NEIN + "): ");
+        String element;
+        BufferedReader tastatur = new BufferedReader(new InputStreamReader(System.in));
+        if (tastatur.readLine().equals(this.JA)) {
+            System.out.println("Geben Sie ein Wort für Objekt ein: ");
+            element = tastatur.readLine();
+            System.out.println("Wollen sie tags zu diesem Wort hinzufügen? (" + this.JA + "/" + this.NEIN + "): ");
+            if (tastatur.readLine().equals(this.JA)) {
+//                Hier müssen die tags erst noch ausgegeben werden mit IDs und dann geschrieben werden
+//                die müssen in eine liste gespeist werden
+            }
+        }
     }
 }
