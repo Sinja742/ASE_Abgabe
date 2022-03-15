@@ -1,12 +1,12 @@
 package Entity;
 
 public enum Tags {
-    LANDSCHAFT(01, "Landschaft"),
-    GEGENSTAND(02, "Gegenstand"),
-    FANTASIE(03, "Fantasie"),
-    TIER(04, "Tier"),
-    ABSTRAKT(05, "Abstrakt"),
-    MODERN(06, "Modern");
+    LANDSCHAFT(1, "Landschaft"),
+    GEGENSTAND(2, "Gegenstand"),
+    FANTASIE(3, "Fantasie"),
+    TIER(4, "Tier"),
+    ABSTRAKT(5, "Abstrakt"),
+    MODERN(6, "Modern");
 
     private final int id;
     private final String tag;
@@ -23,5 +23,4 @@ public enum Tags {
     public int getId() {
         return this.id;
     }
-
 }
