@@ -1,8 +1,7 @@
 import jobs.TxtReader;
 import Entity.Entity;
 import Entity.EntityStatus;
-import Entity.entityStatus;
-import Entity.tags;
+import Entity.Tags;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -31,7 +30,7 @@ public class Steuerung {
     private static String[] tagFilter;
 
     private static void getAllTags() {
-        for(tags tag : tags.values()) {
+        for(Tags tag : Tags.values()) {
             tagList.add(tag.toString());
         }
     }
@@ -54,10 +53,10 @@ public class Steuerung {
         readEntitys();
     }
 
-    private void readEntitys() {
-        this.artList = TxtReader.readEntity(EntityStatus.ART);
-        this.stimmungList = TxtReader.readEntity(EntityStatus.STIMMUNG);
-        this.objektList = TxtReader.readEntity(EntityStatus.OBJEKT);
+    private static void readEntitys() {
+        artList = TxtReader.readEntity(EntityStatus.ART);
+        stimmungList = TxtReader.readEntity(EntityStatus.STIMMUNG);
+        objektList = TxtReader.readEntity(EntityStatus.OBJEKT);
     }
 
     private static void filterObjekteIfTag() {
