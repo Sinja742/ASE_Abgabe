@@ -17,22 +17,22 @@ public class AddElemente {
     }
     GUI gui;
 
-    public void addingElement(String kriterium, List<Entity> allOptions) throws IOException {
+    public void addingElement(String kriterium, List<String> allOptions) throws IOException {
         String question = "Wollen Sie ein Element des Typs " + kriterium + " hinzufügen?";
         if (gui.trueBooleanQuestion(question)) {
             addNewElement(kriterium, allOptions);
         }
     }
 
-    public void addingElement(String kriterium, List<Entity> objektOptions, List<String> tagsOptions) throws IOException {
+    public void addingElement(String kriterium, List<String> objektOptions, List<String> tagsOptions) throws IOException {
         String question = "Wollen Sie ein Element des Typs " + kriterium + " hinzufügen?";
         if (gui.trueBooleanQuestion(question)) {
             addNewElement(kriterium, objektOptions, tagsOptions);
         }
     }
 
-    private void addNewElement(String kriterium, List<Entity> allOptions ) throws IOException {
-        showExistingElements(kriterium, getAllOptionsString(allOptions));
+    private void addNewElement(String kriterium, List<String> allOptions ) throws IOException {
+        showExistingElements(kriterium, allOptions);
         String element;
         BufferedReader tastatur = new BufferedReader(new InputStreamReader(System.in));
         System.out.println("Geben Sie den Begriff für " + kriterium + " ein: ");
@@ -41,12 +41,14 @@ public class AddElemente {
     }
 
 //    Hier wird ein Objekt mit gegebenenfalls tags hinzugefügt
-    private void addNewElement(String kriterium, List<Entity> allOptions, List<String> tagsOptions ) throws IOException {
-        showExistingElements(kriterium, getAllOptionsString(allOptions));
+    // TODO: mit methode addnewelement zusammenfassen
+    private void addNewElement(String kriterium, List<String> allOptions, List<String> tagsOptions ) throws IOException {
+        showExistingElements(kriterium, allOptions);
         String element;
         BufferedReader tastatur = new BufferedReader(new InputStreamReader(System.in));
         System.out.println("Geben Sie den Begriff für " + kriterium + " ein: ");
         element = tastatur.readLine();
+
         if (gui.trueBooleanQuestion("Wollen Sie Tags zu dem Objekt hinzufügen?")){
             element = addingTags(element, tagsOptions);
         }
@@ -83,14 +85,5 @@ public class AddElemente {
             System.out.print(option + " ");
         }
         System.out.println();
-    }
-
-    private List<String> getAllOptionsString(List<Entity> allOptions) {
-        List<String> allOptionsString = new ArrayList<>();
-        for(Entity option : allOptions) {
-            allOptionsString.add(option.toString());
-        }
-
-        return allOptionsString;
     }
 }

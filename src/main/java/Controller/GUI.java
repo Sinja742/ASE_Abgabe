@@ -16,19 +16,10 @@ public class GUI {
         System.out.println("Sie können hierzu kreativ werden: " + idea);
     }
 
-    public String[] getSearchOpportiunities(String kriterium, List<Entity> allOptions) throws IOException {
+    public String[] getSearchOpportiunities(String kriterium, List<String> allOptions) throws IOException {
         String question = "Wollen Sie nach " + kriterium + " suchen?";
         if(this.trueBooleanQuestion(question)) {
             return this.getFilters(kriterium, allOptions);
-        } else {
-            return new String[0];
-        }
-    }
-
-    public String[] getSearchTags(List<String> allTags) throws IOException {
-        String question = "Wollen Sie nach Tags suchen?";
-        if(this.trueBooleanQuestion(question)) {
-            return this.getTags(allTags);
         } else {
             return new String[0];
         }
@@ -41,26 +32,9 @@ public class GUI {
         return tastatur.readLine().equals(this.JA);
     }
 
-    private String[] getFilters(String kriterium, List<Entity> allOptions) throws IOException {
-        this.showOpportunities(kriterium, getAllOptionsString(allOptions));
+    private String[] getFilters(String kriterium, List<String> allOptions) throws IOException {
+        this.showOpportunities(kriterium, allOptions);
         System.out.println("Geben Sie die gewünschten " + kriterium + " ein: ");
-
-        BufferedReader tastatur = new BufferedReader(new InputStreamReader(System.in));
-        return tastatur.readLine().split(" ");
-    }
-
-    private List<String> getAllOptionsString(List<Entity> allOptions) {
-        List<String> allOptionsString = new ArrayList<>();
-        for(Entity option : allOptions) {
-            allOptionsString.add(option.toString());
-        }
-
-        return allOptionsString;
-    }
-
-    private String[] getTags(List<String> allTags) throws IOException {
-        this.showOpportunities("Tags", allTags);
-        System.out.println("Geben Sie die gewünschten Tags ein: ");
 
         BufferedReader tastatur = new BufferedReader(new InputStreamReader(System.in));
         return tastatur.readLine().split(" ");

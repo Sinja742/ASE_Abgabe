@@ -13,35 +13,26 @@ import java.util.List;
 public class Steuerung {
 
     public static void main(String[] args) throws IOException {
-        GUI gui = new GUI();
+        gui = new GUI();
+        elementeController = new ElementeController();
         AddElemente addElemente = new AddElemente(gui);
-        getAllTags();
-        getOpportunities();
 
         while(true) {
-            userIneraction(gui, addElemente);
+            userIneraction(addElemente);
         }
     }
 
-    private static List<Entity> artList;
-    private static List<Entity> stimmungList;
-    private static List<Entity> objektList;
-    private static List<String> tagList = new ArrayList<>();
+    private static GUI gui;
+    private static ElementeController elementeController;
 
     private static String[] artFilter;
     private static String[] stimmungFilter;
     private static String[] objektFilter;
     private static String[] tagFilter;
 
-    private static void getAllTags() {
-        for(Tags tag : Tags.values()) {
-            tagList.add(tag.toString());
-        }
-    }
-
-    private static void userIneraction(GUI gui, AddElemente addElemente) throws IOException {
+    private static void userIneraction(AddElemente addElemente) throws IOException {
         if(gui.trueBooleanQuestion("Wollen Sie nach einer kreativen Idee suchen?")) {
-            searchIdea(gui);
+            searchIdea();
         }
         if(gui.trueBooleanQuestion("Wollen Sie neue Elemente hinzufügen?")) {
             addWordToElementeList(addElemente);
@@ -52,34 +43,24 @@ public class Steuerung {
         }
     }
 
-    private static void searchIdea(GUI gui) throws IOException {
-        getAllSearchOpportiunities(gui);
+    private static void searchIdea() throws IOException {
+        getAllSearchOpportiunities();
         gui.showIdea(getIdea());
     }
 
-    private static void getAllSearchOpportiunities(GUI gui) throws IOException {
-        artFilter = gui.getSearchOpportiunities("Arten", artList);
-        stimmungFilter = gui.getSearchOpportiunities("Stimmungen", stimmungList);
-        objektFilter = gui.getSearchOpportiunities("Objekte", objektList);
-        tagFilter = gui.getSearchTags(tagList);
+    private static void getAllSearchOpportiunities() throws IOException {
+        artFilter = gui.getSearchOpportiunities("Arten", elementeController.getAllStringArten());
+        stimmungFilter = gui.getSearchOpportiunities("Stimmungen", elementeController.getAllStringStimmungen());
+        objektFilter = gui.getSearchOpportiunities("Objekte", elementeController.getAllStringObjekte());
+        tagFilter = gui.getSearchOpportiunities("Tags", elementeController.getAllStringTags());
 
         fillEmptyFilter();
     }
 
     private static void addWordToElementeList(AddElemente addElemente) throws IOException {
-        addElemente.addingElement("Art" , artList);
-        addElemente.addingElement("Stimmung" , stimmungList);
-        addElemente.addingElement("Objekt" , objektList , tagList);
-    }
-
-    private static void getOpportunities() {
-        readEntitys();
-    }
-
-    private static void readEntitys() {
-        artList = TxtReader.readEntity(EntityStatus.ART);
-        stimmungList = TxtReader.readEntity(EntityStatus.STIMMUNG);
-        objektList = TxtReader.readEntity(EntityStatus.OBJEKT);
+        addElemente.addingElement("Art" , elementeController.getAllStringArten());
+        addElemente.addingElement("Stimmung" , elementeController.getAllStringStimmungen());
+        addElemente.addingElement("Objekt" , elementeController.getAllStringObjekte(), elementeController.getAllStringTags());
     }
 
     private static void filterObjekteIfTag() {
@@ -112,13 +93,13 @@ public class Steuerung {
 
     private static void fillEmptyFilter() {
         if(filterEmpty(artFilter)) {
-            artFilter = entittyListToStringArray(artList);
+            artFilter = entittyListToStringArray(elementeController.getAllArten());
         }
         if(filterEmpty(stimmungFilter)) {
-            stimmungFilter = entittyListToStringArray(stimmungList);
+            stimmungFilter = entittyListToStringArray(elementeController.getAllStimmungen());
         }
         if(filterEmpty(objektFilter)) {
-            objektFilter = entittyListToStringArray(objektList);
+            objektFilter = entittyListToStringArray(elementeController.getAllObjekte());
         }
     }
 
