@@ -62,21 +62,21 @@ public class Steuerung {
     }
 
     private static void addWordToElementeList(AddElemente addElemente) throws IOException {
-        addElemente.addingElementFrage("Art", ManageElement.getAllStringArten());
-        addElemente.addingElementFrage("Stimmung", ManageElement.getAllStringStimmungen());
-        addElemente.addingElementFrage("Objekt", ManageElement.getAllStringObjekte(), ManageElement.getAllStringTags());
+        addElemente.addingElement(CategoryStatus.ART.getStatus(), ManageElement.getAllArten());
+        addElemente.addingElement(CategoryStatus.STIMMUNG.getStatus(), ManageElement.getAllStimmungen());
+        addElemente.addingElement(CategoryStatus.OBJEKT.getStatus(), ManageElement.getAllObjekte(), ManageElement.getAllTags());
     }
 
     private static void deleteWordFromElementeList(DeleteElemente deleteElemente) throws IOException {
-        deleteElemente.deletingElementFrage("Art", ManageElement.getAllStringArten());
-        deleteElemente.deletingElementFrage("Stimmung", ManageElement.getAllStringStimmungen());
-        deleteElemente.deletingElementFrage("Objekt", ManageElement.getAllStringObjekte());
+        deleteElemente.deletingElement(CategoryStatus.ART.getStatus(), ManageElement.getAllArten());
+        deleteElemente.deletingElement(CategoryStatus.STIMMUNG.getStatus(), ManageElement.getAllStimmungen());
+        deleteElemente.deletingElement(CategoryStatus.OBJEKT.getStatus(), ManageElement.getAllObjekte());
     }
 
     private static void updateWordInElementeList(UpdateElemente updateElemente) throws IOException {
-        updateElemente.updatingElementFrage("Art", ManageElement.getAllStringArten());
-        updateElemente.updatingElementFrage("Stimmung", ManageElement.getAllStringStimmungen());
-        updateElemente.updatingElementFrage("Objekt", ManageElement.getAllStringObjekte(), ManageElement.getAllStringTags());
+        updateElemente.updatingElement(CategoryStatus.ART.getStatus(), ManageElement.getAllArten());
+        updateElemente.updatingElement(CategoryStatus.STIMMUNG.getStatus(), ManageElement.getAllStimmungen());
+        updateElemente.updatingElement(CategoryStatus.OBJEKT.getStatus(), ManageElement.getAllObjekte(), ManageElement.getAllTags());
     }
 
     private static void filterObjekteIfTag() {

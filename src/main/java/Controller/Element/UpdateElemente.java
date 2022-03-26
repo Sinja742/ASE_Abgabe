@@ -2,7 +2,9 @@ package Controller.Element;
 
 import Controller.ManageElement;
 import Controller.GUI;
+import Entity.Category;
 import Entity.CategoryStatus;
+import Entity.Tag;
 import jobs.TxtHandling;
 
 import java.io.BufferedReader;
@@ -19,18 +21,18 @@ public class UpdateElemente {
 
     GUI gui;
 
-    public void updatingElementFrage(String kriterium, List<String> allOptions) throws IOException {
+    public void updatingElement(String kriterium, List<Category> allOptions) throws IOException {
         String question = "Wollen Sie ein Element des Typs " + kriterium + " bearbeiten?";
         if (gui.trueBooleanQuestion(question)) {
-            showExistingElements(kriterium, allOptions);
+            showExistingElements(kriterium, List.of(allOptions.toString()));
             updateElement(kriterium);
         }
     }
 
-    public void updatingElementFrage(String kriterium, List<String> objektOptions, List<String> tagsOptions) throws IOException {
+    public void updatingElement(String kriterium, List<Category> objektOptions, List<Tag> tagsOptions) throws IOException {
         String question = "Wollen Sie ein Element des Typs " + kriterium + " bearbeiten?";
         if (gui.trueBooleanQuestion(question)) {
-            showExistingElements(kriterium, objektOptions);
+            showExistingElements(kriterium, List.of(objektOptions.toString()));
             updateElement(kriterium, tagsOptions);
         }
     }
@@ -43,20 +45,20 @@ public class UpdateElemente {
         TxtHandling.addNewElement(tastatur.readLine(), Objects.requireNonNull(getEntityStatus(kriterium)));
     }
 
-    public void updateElement(String kriterium, List<String> tagsOptions) throws IOException {
+    public void updateElement(String kriterium, List<Tag> tagsOptions) throws IOException {
         String newElement;
         BufferedReader tastatur = new BufferedReader(new InputStreamReader(System.in));
         System.out.println("Welches Element wollen Sie bearbeiten? ");
         TxtHandling.deleteElement(tastatur.readLine(), Objects.requireNonNull(getEntityStatus(kriterium)));
         System.out.println("Geben sie das bearbeitete Element ein: ");
         newElement = tastatur.readLine();
-        TxtHandling.addNewElement(addNewTagsFrage(newElement), Objects.requireNonNull(getEntityStatus(kriterium)));
+        TxtHandling.addNewElement(addNewTagsFrage(newElement, tagsOptions), Objects.requireNonNull(getEntityStatus(kriterium)));
     }
 
-    public String addNewTagsFrage(String objekt) throws IOException {
+    public String addNewTagsFrage(String objekt, List<Tag> tags) throws IOException {
         String question = "Wollen Sie Tags zum Objekt " + objekt + " hinzufügen?";
         if (gui.trueBooleanQuestion(question)) {
-            return AddElemente.addingTags(objekt, ManageElement.getAllStringTags());
+            return AddElemente.addingTags(objekt, tags);
         }else return objekt;
     }
 
@@ -70,7 +72,7 @@ public class UpdateElemente {
 
     private CategoryStatus getEntityStatus(String kriterium) {
         for (CategoryStatus status : CategoryStatus.values()) {
-            if (status.toString().equals(kriterium.toLowerCase(Locale.ROOT))) {
+            if (status.getStatus().equals(kriterium.toLowerCase(Locale.ROOT))) {
                 return status;
             }
         }

@@ -1,6 +1,7 @@
 package Controller.Element;
 
 import Controller.GUI;
+import Entity.Category;
 import Entity.CategoryStatus;
 import Entity.Tag;
 import jobs.TxtHandling;
@@ -18,22 +19,22 @@ public class AddElemente {
 
     GUI gui;
 
-    public void addingElementFrage(String kriterium, List<String> allOptions) throws IOException {
+    public void addingElement(String kriterium, List<Category> allOptions) throws IOException {
         String question = "Wollen Sie ein Element des Typs " + kriterium + " hinzufügen?";
         if (gui.trueBooleanQuestion(question)) {
             addNewElement(kriterium, allOptions);
         }
     }
 
-    public void addingElementFrage(String kriterium, List<String> objektOptions, List<String> tagsOptions) throws IOException {
+    public void addingElement(String kriterium, List<Category> objektOptions, List<Tag> tagsOptions) throws IOException {
         String question = "Wollen Sie ein Element des Typs " + kriterium + " hinzufügen?";
         if (gui.trueBooleanQuestion(question)) {
             addNewElement(kriterium, objektOptions, tagsOptions);
         }
     }
 
-    private void addNewElement(String kriterium, List<String> allOptions) throws IOException {
-        showExistingElements(kriterium, allOptions);
+    private void addNewElement(String kriterium, List<Category> allOptions) throws IOException {
+        showExistingElements(kriterium, List.of(allOptions.toString()));
         String element;
         BufferedReader tastatur = new BufferedReader(new InputStreamReader(System.in));
         System.out.println("Geben Sie den Begriff für " + kriterium + " ein: ");
@@ -43,8 +44,8 @@ public class AddElemente {
 
     //    Hier wird ein Objekt mit gegebenenfalls tags hinzugefügt
     // TODO: mit methode addnewelement zusammenfassen
-    private void addNewElement(String kriterium, List<String> allOptions, List<String> tagsOptions) throws IOException {
-        showExistingElements(kriterium, allOptions);
+    private void addNewElement(String kriterium, List<Category> allOptions, List<Tag> tagsOptions) throws IOException {
+        showExistingElements(kriterium, List.of(allOptions.toString()));
         String element;
         BufferedReader tastatur = new BufferedReader(new InputStreamReader(System.in));
         System.out.println("Geben Sie den Begriff für " + kriterium + " ein: ");
@@ -58,23 +59,23 @@ public class AddElemente {
 
     private CategoryStatus getEntityStatus(String kriterium) {
         for (CategoryStatus status : CategoryStatus.values()) {
-            if (status.toString().equals(kriterium.toLowerCase(Locale.ROOT))) {
+            if (status.getStatus().equals(kriterium.toLowerCase(Locale.ROOT))) {
                 return status;
             }
         }
         return null;
     }
 
-    public static String addingTags(String element, List<String> tagsOptions) throws IOException {
+    public static String addingTags(String element, List<Tag> tagsOptions) throws IOException {
         String[] tagsEntered;
-        showExistingElements("Tag", tagsOptions);
+        showExistingElements("Tag", List.of(tagsOptions.toString()));
         System.out.println("Geben Sie die entsprechenden Tags an: ");
         BufferedReader tastatur = new BufferedReader(new InputStreamReader(System.in));
         tagsEntered = tastatur.readLine().split(" ");
         StringBuilder elementBuilder = new StringBuilder(element);
         for (String s : tagsEntered) {
             for (Tag tag : Tag.values()) {
-                if (tag.toString().equals(s)) {
+                if (tag.getDescription().equals(s)) {
                     elementBuilder.append(",").append(tag.getId());
                 }
             }

@@ -1,6 +1,7 @@
 package Controller.Element;
 
 import Controller.GUI;
+import Entity.Category;
 import Entity.CategoryStatus;
 import jobs.TxtHandling;
 
@@ -18,15 +19,15 @@ public class DeleteElemente {
 
     GUI gui;
 
-    public void deletingElementFrage(String kriterium, List<String> allOptions) throws IOException {
+    public void deletingElement(String kriterium, List<Category> allOptions) throws IOException {
         String question = "Wollen Sie ein Element des Typs " + kriterium + " löschen?";
         if (gui.trueBooleanQuestion(question)) {
             deleteElement(kriterium, allOptions);
         }
     }
 
-    public void deleteElement(String kriterium, List<String> allOptions) throws IOException {
-        showExistingElements(kriterium, allOptions);
+    public void deleteElement(String kriterium, List<Category> allOptions) throws IOException {
+        showExistingElements(kriterium, List.of(allOptions.toString()));
         String element;
         BufferedReader tastatur = new BufferedReader(new InputStreamReader(System.in));
         System.out.println("Geben Sie den Begriff für " + kriterium + " ein, den Sie löschen wollen: ");
@@ -44,7 +45,7 @@ public class DeleteElemente {
 
     private CategoryStatus getEntityStatus(String kriterium) {
         for (CategoryStatus status : CategoryStatus.values()) {
-            if (status.toString().equals(kriterium.toLowerCase(Locale.ROOT))) {
+            if (status.getStatus().equals(kriterium.toLowerCase(Locale.ROOT))) {
                 return status;
             }
         }
