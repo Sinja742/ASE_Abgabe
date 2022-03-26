@@ -1,13 +1,11 @@
 package Controller;
 
-import Controller.AddElemente;
-import jobs.TxtReader;
+import Controller.Element.AddElemente;
+import Controller.Element.DeleteElemente;
+import Controller.Element.UpdateElemente;
 import Entity.Entity;
-import Entity.EntityStatus;
-import Entity.Tags;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
 public class Steuerung {
@@ -16,9 +14,11 @@ public class Steuerung {
         gui = new GUI();
         elementeController = new ElementeController();
         AddElemente addElemente = new AddElemente(gui);
+        UpdateElemente updateElemente = new UpdateElemente(gui);
+        DeleteElemente deleteElemente = new DeleteElemente(gui);
 
-        while(true) {
-            userIneraction(addElemente);
+        while (true) {
+            userIneraction(addElemente, updateElemente, deleteElemente);
         }
     }
 
@@ -30,16 +30,18 @@ public class Steuerung {
     private static String[] objektFilter;
     private static String[] tagFilter;
 
-    private static void userIneraction(AddElemente addElemente) throws IOException {
-        if(gui.trueBooleanQuestion("Wollen Sie nach einer kreativen Idee suchen?")) {
+    private static void userIneraction(AddElemente addElemente, UpdateElemente updateElemente, DeleteElemente deleteElemente) throws IOException {
+        if (gui.trueBooleanQuestion("Wollen Sie nach einer kreativen Idee suchen?")) {
             searchIdea();
         }
-        if(gui.trueBooleanQuestion("Wollen Sie neue Elemente hinzufügen?")) {
+        if (gui.trueBooleanQuestion("Wollen Sie neue Elemente hinzufügen?")) {
             addWordToElementeList(addElemente);
         }
-        if(gui.trueBooleanQuestion("Wollen Sie Elemente bearbeiten?")) {
+        if (gui.trueBooleanQuestion("Wollen Sie Elemente bearbeiten?")) {
+            updateWordInElementeList(updateElemente);
         }
-        if(gui.trueBooleanQuestion("Wollen Sie Elemente löschen?")) {
+        if (gui.trueBooleanQuestion("Wollen Sie Elemente löschen?")) {
+            deleteWordFromElementeList(deleteElemente);
         }
     }
 
@@ -58,13 +60,25 @@ public class Steuerung {
     }
 
     private static void addWordToElementeList(AddElemente addElemente) throws IOException {
-        addElemente.addingElement("Art" , elementeController.getAllStringArten());
-        addElemente.addingElement("Stimmung" , elementeController.getAllStringStimmungen());
-        addElemente.addingElement("Objekt" , elementeController.getAllStringObjekte(), elementeController.getAllStringTags());
+        addElemente.addingElementFrage("Art", elementeController.getAllStringArten());
+        addElemente.addingElementFrage("Stimmung", elementeController.getAllStringStimmungen());
+        addElemente.addingElementFrage("Objekt", elementeController.getAllStringObjekte(), elementeController.getAllStringTags());
+    }
+
+    private static void deleteWordFromElementeList(DeleteElemente deleteElemente) throws IOException {
+        deleteElemente.deletingElementFrage("Art", elementeController.getAllStringArten());
+        deleteElemente.deletingElementFrage("Stimmung", elementeController.getAllStringStimmungen());
+        deleteElemente.deletingElementFrage("Objekt", elementeController.getAllStringObjekte());
+    }
+
+    private static void updateWordInElementeList(UpdateElemente updateElemente) throws IOException {
+        updateElemente.updatingElementFrage("Art", elementeController.getAllStringArten());
+        updateElemente.updatingElementFrage("Stimmung", elementeController.getAllStringStimmungen());
+        updateElemente.updatingElementFrage("Objekt", elementeController.getAllStringObjekte(), elementeController.getAllStringTags());
     }
 
     private static void filterObjekteIfTag() {
-        if(!filterEmpty(tagFilter)) {
+        if (!filterEmpty(tagFilter)) {
             filterObjekte();
         }
     }
@@ -88,17 +102,17 @@ public class Steuerung {
     }
 
     private static String randomFilterObtion(String[] filter) {
-        return filter[(int)(Math.random()*filter.length)];
+        return filter[(int) (Math.random() * filter.length)];
     }
 
     private static void fillEmptyFilter() {
-        if(filterEmpty(artFilter)) {
+        if (filterEmpty(artFilter)) {
             artFilter = entittyListToStringArray(elementeController.getAllArten());
         }
-        if(filterEmpty(stimmungFilter)) {
+        if (filterEmpty(stimmungFilter)) {
             stimmungFilter = entittyListToStringArray(elementeController.getAllStimmungen());
         }
-        if(filterEmpty(objektFilter)) {
+        if (filterEmpty(objektFilter)) {
             objektFilter = entittyListToStringArray(elementeController.getAllObjekte());
         }
     }
@@ -109,7 +123,7 @@ public class Steuerung {
 
     private static String[] entittyListToStringArray(List<Entity> entityList) {
         String[] stringArray = new String[entityList.size()];
-        for(int entityListSizeCounter = 0; entityListSizeCounter < entityList.size(); entityListSizeCounter++) {
+        for (int entityListSizeCounter = 0; entityListSizeCounter < entityList.size(); entityListSizeCounter++) {
             stringArray[entityListSizeCounter] = entityList.get(entityListSizeCounter).toString();
         }
         return stringArray;

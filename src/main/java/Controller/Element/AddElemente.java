@@ -1,9 +1,9 @@
-package Controller;
+package Controller.Element;
 
-import Entity.Entity;
+import Controller.GUI;
 import Entity.EntityStatus;
 import Entity.Tags;
-import jobs.TxtWriter;
+import jobs.TxtHandling;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -15,44 +15,45 @@ public class AddElemente {
     public AddElemente(GUI gui) {
         this.gui = gui;
     }
+
     GUI gui;
 
-    public void addingElement(String kriterium, List<String> allOptions) throws IOException {
+    public void addingElementFrage(String kriterium, List<String> allOptions) throws IOException {
         String question = "Wollen Sie ein Element des Typs " + kriterium + " hinzufügen?";
         if (gui.trueBooleanQuestion(question)) {
             addNewElement(kriterium, allOptions);
         }
     }
 
-    public void addingElement(String kriterium, List<String> objektOptions, List<String> tagsOptions) throws IOException {
+    public void addingElementFrage(String kriterium, List<String> objektOptions, List<String> tagsOptions) throws IOException {
         String question = "Wollen Sie ein Element des Typs " + kriterium + " hinzufügen?";
         if (gui.trueBooleanQuestion(question)) {
             addNewElement(kriterium, objektOptions, tagsOptions);
         }
     }
 
-    private void addNewElement(String kriterium, List<String> allOptions ) throws IOException {
+    private void addNewElement(String kriterium, List<String> allOptions) throws IOException {
         showExistingElements(kriterium, allOptions);
         String element;
         BufferedReader tastatur = new BufferedReader(new InputStreamReader(System.in));
         System.out.println("Geben Sie den Begriff für " + kriterium + " ein: ");
         element = tastatur.readLine();
-        TxtWriter.addElement(element, Objects.requireNonNull(getEntityStatus(kriterium)));
+        TxtHandling.addElement(element, Objects.requireNonNull(getEntityStatus(kriterium)));
     }
 
-//    Hier wird ein Objekt mit gegebenenfalls tags hinzugefügt
+    //    Hier wird ein Objekt mit gegebenenfalls tags hinzugefügt
     // TODO: mit methode addnewelement zusammenfassen
-    private void addNewElement(String kriterium, List<String> allOptions, List<String> tagsOptions ) throws IOException {
+    private void addNewElement(String kriterium, List<String> allOptions, List<String> tagsOptions) throws IOException {
         showExistingElements(kriterium, allOptions);
         String element;
         BufferedReader tastatur = new BufferedReader(new InputStreamReader(System.in));
         System.out.println("Geben Sie den Begriff für " + kriterium + " ein: ");
         element = tastatur.readLine();
 
-        if (gui.trueBooleanQuestion("Wollen Sie Tags zu dem Objekt hinzufügen?")){
+        if (gui.trueBooleanQuestion("Wollen Sie Tags zu dem Objekt hinzufügen?")) {
             element = addingTags(element, tagsOptions);
         }
-        TxtWriter.addElement(element, Objects.requireNonNull(getEntityStatus(kriterium)));
+        TxtHandling.addElement(element, Objects.requireNonNull(getEntityStatus(kriterium)));
     }
 
     private EntityStatus getEntityStatus(String kriterium) {
@@ -64,24 +65,27 @@ public class AddElemente {
         return null;
     }
 
-    private String addingTags(String element, List<String> tagsOptions) throws IOException {
+    public static String addingTags(String element, List<String> tagsOptions) throws IOException {
         String[] tagsEntered;
-        showExistingElements("Tag",tagsOptions);
+        showExistingElements("Tag", tagsOptions);
+        System.out.println("Geben Sie die entsprechenden Tags an: ");
         BufferedReader tastatur = new BufferedReader(new InputStreamReader(System.in));
         tagsEntered = tastatur.readLine().split(" ");
+        StringBuilder elementBuilder = new StringBuilder(element);
         for (String s : tagsEntered) {
             for (Tags tag : Tags.values()) {
                 if (tag.toString().equals(s)) {
-                    element = element + "," + tag.getId();
+                    elementBuilder.append(",").append(tag.getId());
                 }
             }
         }
+        element = elementBuilder.toString();
         return element;
     }
 
-    private void showExistingElements(String kriterium, List<String> allElements) {
+    private static void showExistingElements(String kriterium, List<String> allElements) {
         System.out.println("Diese Elemente des Typs " + kriterium + " existieren bereits:");
-        for(String option : allElements) {
+        for (String option : allElements) {
             System.out.print(option + " ");
         }
         System.out.println();

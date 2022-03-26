@@ -48,31 +48,31 @@ public class ElementeController {
         }
     }
 
-    public List<Entity> getAllArten() {
-        return this.arten;
+    public static List<Entity> getAllArten() {
+        return arten;
     }
 
-    public List<Entity> getAllStimmungen() {
-        return this.stimmungen;
+    public static List<Entity> getAllStimmungen() {
+        return stimmungen;
     }
 
-    public List<Entity> getAllObjekte() {
-        return this.objekte;
+    public static List<Entity> getAllObjekte() {
+        return objekte;
     }
 
-    public List<String> getAllStringArten() {
-        return this.artenToString;
+    public static List<String> getAllStringArten() {
+        return artenToString;
     }
 
-    public List<String> getAllStringStimmungen() {
-        return this.stimmungenToString;
+    public static List<String> getAllStringStimmungen() {
+        return stimmungenToString;
     }
 
-    public List<String> getAllStringObjekte() {
-        return this.objekteToString;
+    public static List<String> getAllStringObjekte() {
+        return objekteToString;
     }
 
-    public List<String> getAllStringTags() {
-        return this.tagsToString;
+    public static List<String> getAllStringTags() {
+        return tagsToString;
     }
 }
