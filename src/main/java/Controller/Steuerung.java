@@ -8,6 +8,8 @@ import Entity.CategoryStatus;
 import Entity.Tag;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Steuerung {
 
@@ -86,12 +88,23 @@ public class Steuerung {
     }
 
     private static void filterObjekte() {
-        //nur Objekte mit Tags
+        List<Category> objekte = new ArrayList<>();
+        for (Category category : objektFilter) {
+            if (category.containsTag(tagFilter)) {
+                objekte.add(category);
+            }
+        }
+        System.out.println("Listengröße " + objekte.size());
+        objektFilter = ManageElement.toArray(objekte);
     }
 
     private static String getIdea() {
         filterObjekteIfTag();
-        return randomOptions();
+        if(filterEmpty(objektFilter)) {
+            return "\nEs gibt keine Objekte zu den ausgewählten Tags. Bitte weniger Tags setzen für eine Idee.";
+        } else {
+            return randomOptions();
+        }
     }
 
     private static String randomOptions() {

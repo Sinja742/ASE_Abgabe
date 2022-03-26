@@ -15,4 +15,17 @@ public class Objekt extends Category {
     public List<Tag> getTags() {
         return this.tags;
     }
+
+    public boolean containsTag(Tag[] filterTags) {
+        if(!tags.isEmpty()) {
+            for (Tag filterTag : filterTags) {
+                for (Tag tag : this.tags) {
+                    if (tag.equals(filterTag)) {
+                        return true;
+                    }
+                }
+            }
+        }
+        return false;
+    }
 }

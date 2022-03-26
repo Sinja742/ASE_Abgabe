@@ -15,4 +15,7 @@ public class Category {
         return this.description;
     }
 
+    public boolean containsTag(Tag[] tagFilter) {
+        return false;
+    }
 }
