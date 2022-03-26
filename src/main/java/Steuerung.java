@@ -14,7 +14,7 @@ public class Steuerung {
         getAllTags();
         getOpportunities();
 
-        while (true) {
+        while(true) {
             userIneraction(gui);
         }
     }
@@ -30,15 +30,27 @@ public class Steuerung {
     private static String[] tagFilter;
 
     private static void getAllTags() {
-        for (Tags tag : Tags.values()) {
+        for(Tags tag : Tags.values()) {
             tagList.add(tag.toString());
         }
     }
 
     private static void userIneraction(GUI gui) throws IOException {
+        if(gui.trueBooleanQuestion("Wollen Sie nach einer kreativen Idee suchen?")) {
+            searchIdea(gui);
+        }
+        if(gui.trueBooleanQuestion("Wollen Sie neue Elemente hinzufügen?")) {
+            addWordToElementeList(gui);
+        }
+        if(gui.trueBooleanQuestion("Wollen Sie Elemente bearbeiten?")) {
+        }
+        if(gui.trueBooleanQuestion("Wollen Sie Elemente löschen?")) {
+        }
+    }
+
+    private static void searchIdea(GUI gui) throws IOException {
         getAllSearchOpportiunities(gui);
         gui.showIdea(getIdea());
-        addWordToElementeList(gui);
     }
 
     private static void getAllSearchOpportiunities(GUI gui) throws IOException {
@@ -65,7 +77,7 @@ public class Steuerung {
     }
 
     private static void filterObjekteIfTag() {
-        if (!filterEmpty(tagFilter)) {
+        if(!filterEmpty(tagFilter)) {
             filterObjekte();
         }
     }
@@ -89,17 +101,17 @@ public class Steuerung {
     }
 
     private static String randomFilterObtion(String[] filter) {
-        return filter[(int) (Math.random() * filter.length)];
+        return filter[(int)(Math.random()*filter.length)];
     }
 
     private static void fillEmptyFilter() {
-        if (filterEmpty(artFilter)) {
+        if(filterEmpty(artFilter)) {
             artFilter = entittyListToStringArray(artList);
         }
-        if (filterEmpty(stimmungFilter)) {
+        if(filterEmpty(stimmungFilter)) {
             stimmungFilter = entittyListToStringArray(stimmungList);
         }
-        if (filterEmpty(objektFilter)) {
+        if(filterEmpty(objektFilter)) {
             objektFilter = entittyListToStringArray(objektList);
         }
     }
@@ -110,7 +122,7 @@ public class Steuerung {
 
     private static String[] entittyListToStringArray(List<Entity> entityList) {
         String[] stringArray = new String[entityList.size()];
-        for (int entityListSizeCounter = 0; entityListSizeCounter < entityList.size(); entityListSizeCounter++) {
+        for(int entityListSizeCounter = 0; entityListSizeCounter < entityList.size(); entityListSizeCounter++) {
             stringArray[entityListSizeCounter] = entityList.get(entityListSizeCounter).toString();
         }
         return stringArray;

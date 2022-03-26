@@ -20,10 +20,10 @@ public class TxtWriter {
     }
 
     private static void createNewTxtDocument(String[] elementArray) throws IOException {
-        File file = new File("Elemente.txt");
+        File file = new File("resources/Elemente.txt");
         file.delete();
         file.createNewFile();
-        PrintWriter out = new PrintWriter("Elemente.txt");
+        PrintWriter out = new PrintWriter("resources/Elemente.txt");
         String text = elementArray[0] + "&&" + elementArray[1] + "&&" + elementArray[2];
         out.println(text);
         out.close();
