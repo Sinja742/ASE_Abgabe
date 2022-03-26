@@ -3,6 +3,7 @@ package jobs;
 import Entity.Category;
 import Entity.Objekt;
 import Entity.CategoryStatus;
+import Entity.Tag;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -60,13 +61,12 @@ public class TxtReader {
         if (text != null) {
             text = text[2].split(";");
             for (String s : text) {
-                List<String> tagList = new ArrayList<>();
+                List<Tag> tagList = new ArrayList<>();
                 String[] objekt = s.split(",");
-                for (String value : objekt) {
-                    tagList.add(value);
+                String bezeichnung = objekt[0];
+                for(int objektAttribute = 1; objektAttribute < objekt.length; objektAttribute++) {
+                    tagList.add(Tag.getTag(Integer.parseInt(objekt[objektAttribute])));
                 }
-                String bezeichnung = tagList.get(0);
-                tagList.remove(0);
                 objektList.add(new Objekt(bezeichnung, tagList));
             }
         }

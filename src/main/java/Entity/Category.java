@@ -11,4 +11,8 @@ public class Category {
         return this.description;
     }
 
+    public String toString() {
+        return this.description;
+    }
+
 }

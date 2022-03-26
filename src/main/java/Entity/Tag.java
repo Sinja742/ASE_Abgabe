@@ -20,7 +20,29 @@ public enum Tag {
         return this.description;
     }
 
+    public String toString() {
+        return this.description;
+    }
+
     public int getId() {
         return this.id;
+    }
+
+    public static Tag getTag(int id) {
+        for(Tag tag : Tag.values()) {
+            if(tag.getId() == id) {
+                return tag;
+            }
+        }
+        return null;
+    }
+
+    public static Tag getTag(String description) {
+        for(Tag tag : Tag.values()) {
+            if(tag.getDescription().equals(description)) {
+                return tag;
+            }
+        }
+        return null;
     }
 }

@@ -6,6 +6,7 @@ import Entity.CategoryStatus;
 import jobs.TxtReader;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class ManageElement {
@@ -13,6 +14,7 @@ public class ManageElement {
     private static List<Category> arten;
     private static List<Category> stimmungen;
     private static List<Category> objekte;
+    private static List<Tag> tags = new ArrayList<>();
     private static List<String> artenToString = new ArrayList<>();
     private static List<String> stimmungenToString = new ArrayList<>();
     private static List<String> objekteToString = new ArrayList<>();
@@ -22,9 +24,10 @@ public class ManageElement {
         this.arten = TxtReader.readEntity(CategoryStatus.ART);
         this.stimmungen = TxtReader.readEntity(CategoryStatus.STIMMUNG);
         this.objekte = TxtReader.readEntity(CategoryStatus.OBJEKT);
+        this.tags.addAll(Arrays.asList(Tag.values()));
 
         this.getStringLists();
-        this.readAllTags();
+        this.getStringTags();
     }
 
     private void getStringLists() {
@@ -42,9 +45,9 @@ public class ManageElement {
         return entityListString;
     }
 
-    private static void readAllTags() {
-        for(Tag tag : Tag.values()) {
-            tagsToString.add(tag.toString());
+    private static void getStringTags() {
+        for(Tag tag : tags) {
+            tagsToString.add(tag.getDescription());
         }
     }
 
@@ -58,6 +61,10 @@ public class ManageElement {
 
     public static List<Category> getAllObjekte() {
         return objekte;
+    }
+
+    public static List<Tag> getAllTags() {
+        return tags;
     }
 
     public static List<String> getAllStringArten() {
@@ -74,5 +81,13 @@ public class ManageElement {
 
     public static List<String> getAllStringTags() {
         return tagsToString;
+    }
+
+    public static Category[] toArray(List<Category> elementsList) {
+        Category[] elements = new Category[elementsList.size()];
+        for(int countElements = 0; countElements < elementsList.size(); countElements++) {
+            elements[countElements] = elementsList.get(countElements);
+        }
+        return elements;
     }
 }
