@@ -15,10 +15,7 @@ public class AddElemente {
     public AddElemente(GUI gui) {
         this.gui = gui;
     }
-
     GUI gui;
-    final String JA = "j";
-    final String NEIN = "n";
 
     public void addingElement(String kriterium, List<Entity> allOptions) throws IOException {
         String question = "Wollen Sie ein Element des Typs " + kriterium + " hinzufügen?";
@@ -33,7 +30,6 @@ public class AddElemente {
             addNewElement(kriterium, objektOptions, tagsOptions);
         }
     }
-
 
     private void addNewElement(String kriterium, List<Entity> allOptions ) throws IOException {
         showExistingElements(kriterium, getAllOptionsString(allOptions));
