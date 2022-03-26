@@ -1,8 +1,8 @@
 package Controller.Element;
 
 import Controller.GUI;
-import Entity.EntityStatus;
-import Entity.Tags;
+import Entity.CategoryStatus;
+import Entity.Tag;
 import jobs.TxtHandling;
 
 import java.io.BufferedReader;
@@ -38,7 +38,7 @@ public class AddElemente {
         BufferedReader tastatur = new BufferedReader(new InputStreamReader(System.in));
         System.out.println("Geben Sie den Begriff für " + kriterium + " ein: ");
         element = tastatur.readLine();
-        TxtHandling.addElement(element, Objects.requireNonNull(getEntityStatus(kriterium)));
+        TxtHandling.addNewElement(element, Objects.requireNonNull(getEntityStatus(kriterium)));
     }
 
     //    Hier wird ein Objekt mit gegebenenfalls tags hinzugefügt
@@ -53,11 +53,11 @@ public class AddElemente {
         if (gui.trueBooleanQuestion("Wollen Sie Tags zu dem Objekt hinzufügen?")) {
             element = addingTags(element, tagsOptions);
         }
-        TxtHandling.addElement(element, Objects.requireNonNull(getEntityStatus(kriterium)));
+        TxtHandling.addNewElement(element, Objects.requireNonNull(getEntityStatus(kriterium)));
     }
 
-    private EntityStatus getEntityStatus(String kriterium) {
-        for (EntityStatus status : EntityStatus.values()) {
+    private CategoryStatus getEntityStatus(String kriterium) {
+        for (CategoryStatus status : CategoryStatus.values()) {
             if (status.toString().equals(kriterium.toLowerCase(Locale.ROOT))) {
                 return status;
             }
@@ -73,7 +73,7 @@ public class AddElemente {
         tagsEntered = tastatur.readLine().split(" ");
         StringBuilder elementBuilder = new StringBuilder(element);
         for (String s : tagsEntered) {
-            for (Tags tag : Tags.values()) {
+            for (Tag tag : Tag.values()) {
                 if (tag.toString().equals(s)) {
                     elementBuilder.append(",").append(tag.getId());
                 }

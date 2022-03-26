@@ -3,7 +3,7 @@ package Controller;
 import Controller.Element.AddElemente;
 import Controller.Element.DeleteElemente;
 import Controller.Element.UpdateElemente;
-import Entity.Entity;
+import Entity.Category;
 
 import java.io.IOException;
 import java.util.List;
@@ -12,7 +12,8 @@ public class Steuerung {
 
     public static void main(String[] args) throws IOException {
         gui = new GUI();
-        elementeController = new ElementeController();
+        new ManageElement();
+
         AddElemente addElemente = new AddElemente(gui);
         UpdateElemente updateElemente = new UpdateElemente(gui);
         DeleteElemente deleteElemente = new DeleteElemente(gui);
@@ -23,7 +24,7 @@ public class Steuerung {
     }
 
     private static GUI gui;
-    private static ElementeController elementeController;
+
 
     private static String[] artFilter;
     private static String[] stimmungFilter;
@@ -51,30 +52,30 @@ public class Steuerung {
     }
 
     private static void getAllSearchOpportiunities() throws IOException {
-        artFilter = gui.getSearchOpportiunities("Arten", elementeController.getAllStringArten());
-        stimmungFilter = gui.getSearchOpportiunities("Stimmungen", elementeController.getAllStringStimmungen());
-        objektFilter = gui.getSearchOpportiunities("Objekte", elementeController.getAllStringObjekte());
-        tagFilter = gui.getSearchOpportiunities("Tags", elementeController.getAllStringTags());
+        artFilter = gui.getSearchOpportiunities("Arten", ManageElement.getAllStringArten());
+        stimmungFilter = gui.getSearchOpportiunities("Stimmungen", ManageElement.getAllStringStimmungen());
+        objektFilter = gui.getSearchOpportiunities("Objekte", ManageElement.getAllStringObjekte());
+        tagFilter = gui.getSearchOpportiunities("Tags", ManageElement.getAllStringTags());
 
         fillEmptyFilter();
     }
 
     private static void addWordToElementeList(AddElemente addElemente) throws IOException {
-        addElemente.addingElementFrage("Art", elementeController.getAllStringArten());
-        addElemente.addingElementFrage("Stimmung", elementeController.getAllStringStimmungen());
-        addElemente.addingElementFrage("Objekt", elementeController.getAllStringObjekte(), elementeController.getAllStringTags());
+        addElemente.addingElementFrage("Art", ManageElement.getAllStringArten());
+        addElemente.addingElementFrage("Stimmung", ManageElement.getAllStringStimmungen());
+        addElemente.addingElementFrage("Objekt", ManageElement.getAllStringObjekte(), ManageElement.getAllStringTags());
     }
 
     private static void deleteWordFromElementeList(DeleteElemente deleteElemente) throws IOException {
-        deleteElemente.deletingElementFrage("Art", elementeController.getAllStringArten());
-        deleteElemente.deletingElementFrage("Stimmung", elementeController.getAllStringStimmungen());
-        deleteElemente.deletingElementFrage("Objekt", elementeController.getAllStringObjekte());
+        deleteElemente.deletingElementFrage("Art", ManageElement.getAllStringArten());
+        deleteElemente.deletingElementFrage("Stimmung", ManageElement.getAllStringStimmungen());
+        deleteElemente.deletingElementFrage("Objekt", ManageElement.getAllStringObjekte());
     }
 
     private static void updateWordInElementeList(UpdateElemente updateElemente) throws IOException {
-        updateElemente.updatingElementFrage("Art", elementeController.getAllStringArten());
-        updateElemente.updatingElementFrage("Stimmung", elementeController.getAllStringStimmungen());
-        updateElemente.updatingElementFrage("Objekt", elementeController.getAllStringObjekte(), elementeController.getAllStringTags());
+        updateElemente.updatingElementFrage("Art", ManageElement.getAllStringArten());
+        updateElemente.updatingElementFrage("Stimmung", ManageElement.getAllStringStimmungen());
+        updateElemente.updatingElementFrage("Objekt", ManageElement.getAllStringObjekte(), ManageElement.getAllStringTags());
     }
 
     private static void filterObjekteIfTag() {
@@ -107,13 +108,13 @@ public class Steuerung {
 
     private static void fillEmptyFilter() {
         if (filterEmpty(artFilter)) {
-            artFilter = entittyListToStringArray(elementeController.getAllArten());
+            artFilter = entittyListToStringArray(ManageElement.getAllArten());
         }
         if (filterEmpty(stimmungFilter)) {
-            stimmungFilter = entittyListToStringArray(elementeController.getAllStimmungen());
+            stimmungFilter = entittyListToStringArray(ManageElement.getAllStimmungen());
         }
         if (filterEmpty(objektFilter)) {
-            objektFilter = entittyListToStringArray(elementeController.getAllObjekte());
+            objektFilter = entittyListToStringArray(ManageElement.getAllObjekte());
         }
     }
 
@@ -121,7 +122,7 @@ public class Steuerung {
         return filter.length == 0;
     }
 
-    private static String[] entittyListToStringArray(List<Entity> entityList) {
+    private static String[] entittyListToStringArray(List<Category> entityList) {
         String[] stringArray = new String[entityList.size()];
         for (int entityListSizeCounter = 0; entityListSizeCounter < entityList.size(); entityListSizeCounter++) {
             stringArray[entityListSizeCounter] = entityList.get(entityListSizeCounter).toString();

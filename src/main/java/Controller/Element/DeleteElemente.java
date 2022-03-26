@@ -1,7 +1,7 @@
 package Controller.Element;
 
 import Controller.GUI;
-import Entity.EntityStatus;
+import Entity.CategoryStatus;
 import jobs.TxtHandling;
 
 import java.io.BufferedReader;
@@ -42,8 +42,8 @@ public class DeleteElemente {
         System.out.println();
     }
 
-    private EntityStatus getEntityStatus(String kriterium) {
-        for (EntityStatus status : EntityStatus.values()) {
+    private CategoryStatus getEntityStatus(String kriterium) {
+        for (CategoryStatus status : CategoryStatus.values()) {
             if (status.toString().equals(kriterium.toLowerCase(Locale.ROOT))) {
                 return status;
             }

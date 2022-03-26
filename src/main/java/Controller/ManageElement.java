@@ -1,27 +1,27 @@
 package Controller;
 
-import Entity.Entity;
-import Entity.Tags;
-import Entity.EntityStatus;
+import Entity.Category;
+import Entity.Tag;
+import Entity.CategoryStatus;
 import jobs.TxtReader;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class ElementeController {
+public class ManageElement {
 
-    private static List<Entity> arten;
-    private static List<Entity> stimmungen;
-    private static List<Entity> objekte;
+    private static List<Category> arten;
+    private static List<Category> stimmungen;
+    private static List<Category> objekte;
     private static List<String> artenToString = new ArrayList<>();
     private static List<String> stimmungenToString = new ArrayList<>();
     private static List<String> objekteToString = new ArrayList<>();
     private static List<String> tagsToString = new ArrayList<>();
 
-    ElementeController() {
-        this.arten = TxtReader.readEntity(EntityStatus.ART);
-        this.stimmungen = TxtReader.readEntity(EntityStatus.STIMMUNG);
-        this.objekte = TxtReader.readEntity(EntityStatus.OBJEKT);
+    ManageElement() {
+        this.arten = TxtReader.readEntity(CategoryStatus.ART);
+        this.stimmungen = TxtReader.readEntity(CategoryStatus.STIMMUNG);
+        this.objekte = TxtReader.readEntity(CategoryStatus.OBJEKT);
 
         this.getStringLists();
         this.readAllTags();
@@ -33,9 +33,9 @@ public class ElementeController {
         this.objekteToString = entityListToStringList(this.objekte);
     }
 
-    private List<String> entityListToStringList(List<Entity> allElements) {
+    private List<String> entityListToStringList(List<Category> allElements) {
         List<String> entityListString = new ArrayList<>();
-        for(Entity element : allElements) {
+        for(Category element : allElements) {
             entityListString.add(element.toString());
         }
 
@@ -43,20 +43,20 @@ public class ElementeController {
     }
 
     private static void readAllTags() {
-        for(Tags tag : Tags.values()) {
+        for(Tag tag : Tag.values()) {
             tagsToString.add(tag.toString());
         }
     }
 
-    public static List<Entity> getAllArten() {
+    public static List<Category> getAllArten() {
         return arten;
     }
 
-    public static List<Entity> getAllStimmungen() {
+    public static List<Category> getAllStimmungen() {
         return stimmungen;
     }
 
-    public static List<Entity> getAllObjekte() {
+    public static List<Category> getAllObjekte() {
         return objekte;
     }
 

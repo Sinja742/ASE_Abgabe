@@ -1,6 +1,6 @@
 package Entity;
 
-public enum Tags {
+public enum Tag {
     LANDSCHAFT(1, "Landschaft"),
     GEGENSTAND(2, "Gegenstand"),
     FANTASIE(3, "Fantasie"),
@@ -9,15 +9,15 @@ public enum Tags {
     MODERN(6, "Modern");
 
     private final int id;
-    private final String tag;
+    private final String description;
 
-    Tags(int id, String tag) {
+    Tag(int id, String description) {
         this.id = id;
-        this.tag = tag;
+        this.description = description;
     }
 
-    public String toString() {
-        return this.tag;
+    public String getDescription() {
+        return this.description;
     }
 
     public int getId() {

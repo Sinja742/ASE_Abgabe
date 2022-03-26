@@ -1,16 +1,11 @@
 package Controller;
 
-import Entity.Entity;
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.ArrayList;
 import java.util.List;
 
 public class GUI {
-    final String JA = "j";
-    final String NEIN = "n";
 
     public void showIdea(String idea) {
         System.out.println("Sie können hierzu kreativ werden: " + idea);
@@ -26,10 +21,12 @@ public class GUI {
     }
 
     public boolean trueBooleanQuestion(String question) throws IOException {
+        String JA = "j";
+        String NEIN = "n";
         BufferedReader tastatur = new BufferedReader(new InputStreamReader(System.in));
 
-        System.out.print(question + " (" + this.JA + "/" + this.NEIN + "): ");
-        return tastatur.readLine().equals(this.JA);
+        System.out.print(question + " (" + JA + "/" + NEIN + "): ");
+        return tastatur.readLine().equals(JA);
     }
 
     private String[] getFilters(String kriterium, List<String> allOptions) throws IOException {

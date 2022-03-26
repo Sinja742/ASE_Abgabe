@@ -1,15 +1,15 @@
 package jobs;
 
-import Entity.Entity;
+import Entity.Category;
 import Entity.Objekt;
-import Entity.EntityStatus;
+import Entity.CategoryStatus;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.util.*;
 
 public class TxtReader {
-    public static String[] readYml() {
+    public static String[] readTxt() {
         try {
             BufferedReader bfr = new BufferedReader(new FileReader("resources/Elemente.txt"));
             String text = bfr.readLine();
@@ -21,7 +21,7 @@ public class TxtReader {
         }
     }
 
-    public static List<Entity> readEntity(EntityStatus entityStatus) {
+    public static List<Category> readEntity(CategoryStatus entityStatus) {
         if (isObjekt(entityStatus)) {
             return getObjekt(entityStatus);
         } else {
@@ -30,16 +30,16 @@ public class TxtReader {
         //return (isObjekt(entityStatus) ? getObjekt() : getEntity(entityStatus));
     }
 
-    private static boolean isObjekt(EntityStatus entityStatus) {
-        return entityStatus.equals(EntityStatus.OBJEKT);
+    private static boolean isObjekt(CategoryStatus entityStatus) {
+        return entityStatus.equals(CategoryStatus.OBJEKT);
     }
 
-    private static List<Entity> getEntity(EntityStatus entityStatus) {
-        List<Entity> entityList = new ArrayList<>();
-        String[] text = readYml();
+    private static List<Category> getEntity(CategoryStatus entityStatus) {
+        List<Category> entityList = new ArrayList<>();
+        String[] text = readTxt();
         String entityText;
         if (text != null) {
-            if (entityStatus.equals(EntityStatus.ART)) {
+            if (entityStatus.equals(CategoryStatus.ART)) {
                 entityText = text[0];
             } else {
                 entityText = text[1];
@@ -47,15 +47,15 @@ public class TxtReader {
             text = entityText.split(",");
 
             for (String s : text) {
-                entityList.add(new Entity(s));
+                entityList.add(new Category(s));
             }
         }
         return entityList;
     }
 
-    public static List<Entity> getObjekt(EntityStatus entityStatus) {
-        List<Entity> objektList = new ArrayList<>();
-        String[] text = readYml();
+    public static List<Category> getObjekt(CategoryStatus entityStatus) {
+        List<Category> objektList = new ArrayList<>();
+        String[] text = readTxt();
 
         if (text != null) {
             text = text[2].split(";");

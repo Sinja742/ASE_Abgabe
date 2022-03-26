@@ -1,6 +1,6 @@
 package jobs;
 
-import Entity.EntityStatus;
+import Entity.CategoryStatus;
 
 import java.io.File;
 import java.io.IOException;
@@ -12,45 +12,45 @@ import java.util.stream.Stream;
 
 public class TxtHandling {
 
-    public static void addElement(String element, EntityStatus status) throws IOException {
-        String[] elementArray = TxtReader.readYml();
-        assert elementArray != null;
-        if (status.equals(EntityStatus.ART)){
-            elementArray[0] = elementArray[0] + ","+ element;
-        }else if (status.equals(EntityStatus.STIMMUNG)){
-            elementArray[1] = elementArray[1] + ","+ element;
-        }else if (status.equals(EntityStatus.OBJEKT)){
-            elementArray[2] = elementArray[2] + ";"+ element;
+    public static void addNewElement(String element, CategoryStatus status) throws IOException {
+        String[] allTxtElements = TxtReader.readTxt();
+        assert allTxtElements != null;
+        if (status.equals(CategoryStatus.ART)){
+            allTxtElements[0] = allTxtElements[0] + ","+ element;
+        }else if (status.equals(CategoryStatus.STIMMUNG)){
+            allTxtElements[1] = allTxtElements[1] + ","+ element;
+        }else if (status.equals(CategoryStatus.OBJEKT)){
+            allTxtElements[2] = allTxtElements[2] + ";"+ element;
         }
-        createNewTxtDocument(elementArray);
+        updateTxtDocument(allTxtElements);
     }
 
-    private static void createNewTxtDocument(String[] elementArray) throws IOException {
+    private static void updateTxtDocument(String[] allElements) throws IOException {
         File file = new File("resources/Elemente.txt");
         file.delete();
         file.createNewFile();
         PrintWriter out = new PrintWriter("resources/Elemente.txt");
-        String text = elementArray[0] + "&&" + elementArray[1] + "&&" + elementArray[2];
+        String text = allElements[0] + "&&" + allElements[1] + "&&" + allElements[2];
         out.println(text);
         out.close();
     }
 
-    public static void deleteElement(String element, EntityStatus status) throws IOException {
-        String[] elementArray = TxtReader.readYml();
-        assert elementArray != null;
-        if (status.equals(EntityStatus.ART)){
-            elementArray[0] = searchElementToDelete(element, elementArray[0].split(","));
-        }else if (status.equals(EntityStatus.STIMMUNG)){
-            elementArray[1] = searchElementToDelete(element, elementArray[1].split(","));
-        }else if (status.equals(EntityStatus.OBJEKT)){
-            elementArray[2] = searchObjektToDelete(element, elementArray[2].split(";"));
+    public static void deleteElement(String element, CategoryStatus status) throws IOException {
+        String[] allTextElements = TxtReader.readTxt();
+        assert allTextElements != null;
+        if (status.equals(CategoryStatus.ART)){
+            allTextElements[0] = searchElementToDelete(element, allTextElements[0].split(","));
+        }else if (status.equals(CategoryStatus.STIMMUNG)){
+            allTextElements[1] = searchElementToDelete(element, allTextElements[1].split(","));
+        }else if (status.equals(CategoryStatus.OBJEKT)){
+            allTextElements[2] = searchObjektToDelete(element, allTextElements[2].split(";"));
         }
-        createNewTxtDocument(elementArray);
+        updateTxtDocument(allTextElements);
     }
 
-    private static String searchElementToDelete(String element, String[] elementArray){
-       List<String> returnArrayList = Stream.of(elementArray).collect(Collectors.toList());
-        for (String s : elementArray){
+    private static String searchElementToDelete(String element, String[] allTextElements){
+       List<String> returnArrayList = Stream.of(allTextElements).collect(Collectors.toList());
+        for (String s : allTextElements){
             if (element.equals(s)){
                 returnArrayList.remove(s);
             }
@@ -58,11 +58,11 @@ public class TxtHandling {
         return String.join(",", returnArrayList);
     }
 
-    private static String searchObjektToDelete(String element, String[] elementArray){
+    private static String searchObjektToDelete(String element, String[] allTextElements){
         String[] objektArray;
         List<String> returnArrayList;
         List<String> returnObjektList = new ArrayList<>();
-        for (String s : elementArray) {
+        for (String s : allTextElements) {
             objektArray = s.split(",");
             returnArrayList = Stream.of(objektArray).collect(Collectors.toList());
             if (element.equals(returnArrayList.get(0))) {
