@@ -6,7 +6,6 @@ import Entity.Tags;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.sql.SQLOutput;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,11 +14,11 @@ public class GUI {
     final String NEIN = "n";
 
     public void showIdea(String idea) {
-        System.out.println("Sie können hierzu kreativ werden : " + idea);
+        System.out.println("Sie können hierzu kreativ werden: " + idea);
     }
 
     public String[] getSearchOpportiunities(String kriterium, List<Entity> allOptions) throws IOException {
-        if (this.wantSearch(kriterium)) {
+        if(this.wantSearch(kriterium)) {
             return this.getFilters(kriterium, allOptions);
         } else {
             return new String[0];
@@ -27,7 +26,7 @@ public class GUI {
     }
 
     public String[] getSearchTags(List<String> allTags) throws IOException {
-        if (this.wantSearch("Tags")) {
+        if(this.wantSearch("Tags")) {
             return this.getTags(allTags);
         } else {
             return new String[0];
@@ -41,7 +40,7 @@ public class GUI {
         return tastatur.readLine().equals(this.JA);
     }
 
-    private String[] getFilters(String kriterium, List<Entity> allOptions) throws IOException {
+    private String[] getFilters(String kriterium, List<Entity> allOptions) throws IOException{
         this.showOpportunities(kriterium, getAllOptionsString(allOptions));
         System.out.println("Geben Sie die gewünschten " + kriterium + " ein: ");
 
@@ -51,14 +50,14 @@ public class GUI {
 
     private List<String> getAllOptionsString(List<Entity> allOptions) {
         List<String> allOptionsString = new ArrayList<>();
-        for (Entity option : allOptions) {
+        for(Entity option : allOptions) {
             allOptionsString.add(option.toString());
         }
 
         return allOptionsString;
     }
 
-    private String[] getTags(List<String> allTags) throws IOException {
+    private String[] getTags(List<String> allTags) throws IOException{
         this.showOpportunities("Tags", allTags);
         System.out.println("Geben Sie die gewünschten Tags ein: ");
 
@@ -68,7 +67,7 @@ public class GUI {
 
     private void showOpportunities(String kriterium, List<String> allOptions) {
         System.out.println("Diese " + kriterium + " können gesetzt werden:");
-        for (String option : allOptions) {
+        for(String option : allOptions) {
             System.out.print(option + " ");
         }
         System.out.println();

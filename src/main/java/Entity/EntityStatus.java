@@ -6,13 +6,13 @@ public enum EntityStatus {
     STIMMUNG("stimmung"),
     OBJEKT("objekt");
 
-    private String bezeichnung;
+    private String status;
 
-    EntityStatus(String bezeichnung) {
-        this.bezeichnung = bezeichnung;
+    EntityStatus(String status) {
+        this.status = status;
     }
 
     public String toString() {
-        return this.bezeichnung;
+        return this.status;
     }
 }
