@@ -1,3 +1,6 @@
+package Controller;
+
+import Controller.AddElemente;
 import jobs.TxtReader;
 import Entity.Entity;
 import Entity.EntityStatus;
@@ -11,11 +14,12 @@ public class Steuerung {
 
     public static void main(String[] args) throws IOException {
         GUI gui = new GUI();
+        AddElemente addElemente = new AddElemente(gui);
         getAllTags();
         getOpportunities();
 
         while(true) {
-            userIneraction(gui);
+            userIneraction(gui, addElemente);
         }
     }
 
@@ -35,12 +39,12 @@ public class Steuerung {
         }
     }
 
-    private static void userIneraction(GUI gui) throws IOException {
+    private static void userIneraction(GUI gui, AddElemente addElemente) throws IOException {
         if(gui.trueBooleanQuestion("Wollen Sie nach einer kreativen Idee suchen?")) {
             searchIdea(gui);
         }
         if(gui.trueBooleanQuestion("Wollen Sie neue Elemente hinzufügen?")) {
-            addWordToElementeList(gui);
+            addWordToElementeList(addElemente);
         }
         if(gui.trueBooleanQuestion("Wollen Sie Elemente bearbeiten?")) {
         }
@@ -62,8 +66,10 @@ public class Steuerung {
         fillEmptyFilter();
     }
 
-    private static void addWordToElementeList(GUI gui) throws IOException {
-        gui.getAddingElement();
+    private static void addWordToElementeList(AddElemente addElemente) throws IOException {
+        addElemente.addingElement("Art" , artList);
+        addElemente.addingElement("Stimmung" , stimmungList);
+        addElemente.addingElement("Objekt" , objektList , tagList);
     }
 
     private static void getOpportunities() {
