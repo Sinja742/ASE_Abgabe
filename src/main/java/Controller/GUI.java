@@ -53,14 +53,14 @@ public class GUI {
     }
 
     private String[] getFiltersString(String kriterium, List<Category> allOptions) throws IOException {
-        this.showOpportunities(kriterium, ManageElement.toStringList(allOptions));
+        showExistingElements(kriterium, ManageElement.toStringList(allOptions));
         System.out.println("Geben Sie die gewünschten " + kriterium + " ein: ");
 
         BufferedReader tastatur = new BufferedReader(new InputStreamReader(System.in));
         return tastatur.readLine().split(" ");
     }
 
-    private Tag[] getTags(List<Tag> allTags) throws IOException {
+    public static Tag[] getTags(List<Tag> allTags) throws IOException {
         String[] tagsString = getTagsString(allTags);
         Tag[] tags = new Tag[tagsString.length];
         for(int countTags = 0; countTags < tagsString.length; countTags++) {
@@ -69,17 +69,17 @@ public class GUI {
         return tags;
     }
 
-    private String[] getTagsString(List<Tag> allTags) throws IOException {
-        this.showOpportunities("Tags", ManageElement.tagsToStringList(allTags));
+    private static String[] getTagsString(List<Tag> allTags) throws IOException {
+        showExistingElements("Tag", Tag.tagsToStringList(allTags));
         System.out.println("Geben Sie die gewünschten Tags ein: ");
 
         BufferedReader tastatur = new BufferedReader(new InputStreamReader(System.in));
         return tastatur.readLine().split(" ");
     }
 
-    private void showOpportunities(String kriterium, List<String> allOptions) {
-        System.out.println("Diese " + kriterium + " können gesetzt werden:");
-        for(String option : allOptions) {
+    public static void showExistingElements(String kriterium, List<String> allElements) {
+        System.out.println("Diese Elemente des Typs " + kriterium + " existieren:");
+        for (String option : allElements) {
             System.out.print(option + " ");
         }
         System.out.println();

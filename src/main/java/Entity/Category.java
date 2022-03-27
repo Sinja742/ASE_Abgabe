@@ -1,5 +1,7 @@
 package Entity;
 
+import java.util.Objects;
+
 public class Category {
     private String description;
 

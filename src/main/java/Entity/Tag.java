@@ -1,5 +1,9 @@
 package Entity;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 public enum Tag {
     LANDSCHAFT(1, "Landschaft"),
     GEGENSTAND(2, "Gegenstand"),
@@ -41,4 +45,27 @@ public enum Tag {
         }
         return null;
     }
+    public static List<Tag> getAllTags() {
+        List<Tag> tagList = new ArrayList<>();
+        tagList.addAll(Arrays.asList(Tag.values()));
+        return tagList;
+    }
+
+    public static List<String> tagsToStringList(List<Tag> tagsList) {
+        List<String> tagsListString = new ArrayList<>();
+        for(Tag tag : tagsList) {
+            tagsListString.add(tag.toString());
+        }
+
+        return tagsListString;
+    }
+
+    //    public static Tag[] tagsToArray(List<Tag> tagsList) {
+//        Tag[] tags = new Tag[tagsList.size()];
+//        for(int countTags = 0; countTags < tagsList.size(); countTags++) {
+//            tags[countTags] = tagsList.get(countTags);
+//        }
+//        return tags;
+//    }
+//
 }

@@ -1,8 +1,8 @@
 package Controller;
 
-import Controller.Element.AddElemente;
-import Controller.Element.DeleteElemente;
-import Controller.Element.UpdateElemente;
+import Controller.Element.AddElement;
+import Controller.Element.DeleteElement;
+import Controller.Element.UpdateElement;
 import Entity.Category;
 import Entity.CategoryStatus;
 import Entity.Tag;
@@ -17,9 +17,9 @@ public class Steuerung {
         gui = new GUI();
         new ManageElement();
 
-        AddElemente addElemente = new AddElemente(gui);
-        UpdateElemente updateElemente = new UpdateElemente(gui);
-        DeleteElemente deleteElemente = new DeleteElemente(gui);
+        AddElement addElemente = new AddElement(gui);
+        UpdateElement updateElemente = new UpdateElement(gui);
+        DeleteElement deleteElemente = new DeleteElement(gui);
 
         while (true) {
             userIneraction(addElemente, updateElemente, deleteElemente);
@@ -34,18 +34,21 @@ public class Steuerung {
     private static Category[] objektFilter;
     private static Tag[] tagFilter;
 
-    private static void userIneraction(AddElemente addElemente, UpdateElemente updateElemente, DeleteElemente deleteElemente) throws IOException {
+    private static void userIneraction(AddElement addElemente, UpdateElement updateElemente, DeleteElement deleteElemente) throws IOException {
         if (gui.trueBooleanQuestion("Wollen Sie nach einer kreativen Idee suchen?")) {
             searchIdea();
         }
         if (gui.trueBooleanQuestion("Wollen Sie neue Elemente hinzufügen?")) {
-            addWordToElementeList(addElemente);
+            addElementToElementList(addElemente);
+            ManageElement.reloadElements();
         }
         if (gui.trueBooleanQuestion("Wollen Sie Elemente bearbeiten?")) {
-            updateWordInElementeList(updateElemente);
+            updateElementInElementList(updateElemente);
+            ManageElement.reloadElements();
         }
         if (gui.trueBooleanQuestion("Wollen Sie Elemente löschen?")) {
-            deleteWordFromElementeList(deleteElemente);
+            deleteElementFromElementList(deleteElemente);
+            ManageElement.reloadElements();
         }
     }
 
@@ -58,27 +61,27 @@ public class Steuerung {
         artFilter = gui.getSearchOpportiunities(CategoryStatus.ART.getStatusPlural(), ManageElement.getAllArten());
         stimmungFilter = gui.getSearchOpportiunities(CategoryStatus.STIMMUNG.getStatusPlural(), ManageElement.getAllStimmungen());
         objektFilter = gui.getSearchOpportiunities(CategoryStatus.OBJEKT.getStatusPlural(), ManageElement.getAllObjekte());
-        tagFilter = gui.getSearchTags(ManageElement.getAllTags());
+        tagFilter = gui.getSearchTags(Tag.getAllTags());
 
         fillEmptyFilter();
     }
 
-    private static void addWordToElementeList(AddElemente addElemente) throws IOException {
+    private static void addElementToElementList(AddElement addElemente) throws IOException {
         addElemente.addingElement(CategoryStatus.ART.getStatus(), ManageElement.getAllArten());
         addElemente.addingElement(CategoryStatus.STIMMUNG.getStatus(), ManageElement.getAllStimmungen());
-        addElemente.addingElement(CategoryStatus.OBJEKT.getStatus(), ManageElement.getAllObjekte(), ManageElement.getAllTags());
+        addElemente.addingElement(CategoryStatus.OBJEKT.getStatus(), ManageElement.getAllObjekte());
     }
 
-    private static void deleteWordFromElementeList(DeleteElemente deleteElemente) throws IOException {
+    private static void deleteElementFromElementList(DeleteElement deleteElemente) throws IOException {
         deleteElemente.deletingElement(CategoryStatus.ART.getStatus(), ManageElement.getAllArten());
         deleteElemente.deletingElement(CategoryStatus.STIMMUNG.getStatus(), ManageElement.getAllStimmungen());
         deleteElemente.deletingElement(CategoryStatus.OBJEKT.getStatus(), ManageElement.getAllObjekte());
     }
 
-    private static void updateWordInElementeList(UpdateElemente updateElemente) throws IOException {
+    private static void updateElementInElementList(UpdateElement updateElemente) throws IOException {
         updateElemente.updatingElement(CategoryStatus.ART.getStatus(), ManageElement.getAllArten());
         updateElemente.updatingElement(CategoryStatus.STIMMUNG.getStatus(), ManageElement.getAllStimmungen());
-        updateElemente.updatingElement(CategoryStatus.OBJEKT.getStatus(), ManageElement.getAllObjekte(), ManageElement.getAllTags());
+        updateElemente.updatingElement(CategoryStatus.OBJEKT.getStatus(), ManageElement.getAllObjekte());
     }
 
     private static void filterObjekteIfTag() {
@@ -100,7 +103,7 @@ public class Steuerung {
 
     private static String getIdea() {
         filterObjekteIfTag();
-        if(filterEmpty(objektFilter)) {
+        if (filterEmpty(objektFilter)) {
             return "\nEs gibt keine Objekte zu den ausgewählten Tags. Bitte weniger Tags setzen für eine Idee.";
         } else {
             return randomOptions();

@@ -23,15 +23,11 @@ public class TxtReader {
     }
 
     public static List<Category> readEntity(CategoryStatus entityStatus) {
-        if (isObjekt(entityStatus)) {
+        if (CategoryStatus.OBJEKT.isEqualCategory(entityStatus.getStatus())) {
             return getObjekt();
         } else {
             return getEntity(entityStatus);
         }
-    }
-
-    private static boolean isObjekt(CategoryStatus entityStatus) {
-        return entityStatus.equals(CategoryStatus.OBJEKT);
     }
 
     private static List<Category> getEntity(CategoryStatus entityStatus) {
