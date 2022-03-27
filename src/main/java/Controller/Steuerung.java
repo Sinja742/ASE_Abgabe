@@ -28,7 +28,6 @@ public class Steuerung {
 
     private static GUI gui;
 
-
     private static Category[] artFilter;
     private static Category[] stimmungFilter;
     private static Category[] objektFilter;
@@ -52,19 +51,23 @@ public class Steuerung {
         }
     }
 
+    // <<
+
     private static void searchIdea() throws IOException {
         getAllSearchOpportiunities();
         gui.showIdea(getIdea());
     }
 
     private static void getAllSearchOpportiunities() throws IOException {
-        artFilter = gui.getSearchOpportiunities(CategoryStatus.ART.getStatusPlural(), ManageElement.getAllArten());
-        stimmungFilter = gui.getSearchOpportiunities(CategoryStatus.STIMMUNG.getStatusPlural(), ManageElement.getAllStimmungen());
-        objektFilter = gui.getSearchOpportiunities(CategoryStatus.OBJEKT.getStatusPlural(), ManageElement.getAllObjekte());
+        artFilter = gui.getSearchOpportiunities(CategoryStatus.ART, ManageElement.getAllArten());
+        stimmungFilter = gui.getSearchOpportiunities(CategoryStatus.STIMMUNG, ManageElement.getAllStimmungen());
+        objektFilter = gui.getSearchOpportiunities(CategoryStatus.OBJEKT, ManageElement.getAllObjekte());
         tagFilter = gui.getSearchTags(Tag.getAllTags());
 
         fillEmptyFilter();
     }
+
+    // >>
 
     private static void addElementToElementList(AddElement addElemente) throws IOException {
         addElemente.addElement(CategoryStatus.ART, ManageElement.getAllArten());

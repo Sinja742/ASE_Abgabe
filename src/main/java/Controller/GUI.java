@@ -1,6 +1,7 @@
 package Controller;
 
 import Entity.Category;
+import Entity.CategoryStatus;
 import Entity.Tag;
 
 import java.io.BufferedReader;
@@ -12,12 +13,14 @@ import java.util.List;
 
 public class GUI {
 
+//    TODO: searchElement / filterElement in eine neue Klasse packen
+
     public void showIdea(String idea) {
         System.out.println("Sie können hierzu kreativ werden: " + idea);
     }
 
-    public Category[] getSearchOpportiunities(String categoryStatus, List<Category> allElements) throws IOException {
-        String question = "Wollen Sie nach " + categoryStatus + " suchen?";
+    public Category[] getSearchOpportiunities(CategoryStatus categoryStatus, List<Category> allElements) throws IOException {
+        String question = "Wollen Sie nach " + categoryStatus.getStatusPlural() + " suchen?";
         if(this.trueBooleanQuestion(question)) {
             return this.getFilters(categoryStatus, allElements);
         } else {
@@ -43,18 +46,17 @@ public class GUI {
         return tastatur.readLine().equals(JA);
     }
 
-    private Category[] getFilters(String categoryStatus, List<Category> allElements) throws IOException {
-        String[] filtersString = getFiltersString(categoryStatus, allElements);
+    private Category[] getFilters(CategoryStatus categoryStatus, List<Category> allElements) throws IOException {
+        String[] filtersString = getStringArrayOfElements(categoryStatus, allElements,"Geben Sie die gewünschten " + categoryStatus.getStatusPlural() + " ein: ");
         Category[] filters = new Category[filtersString.length];
         for(int countFilter = 0; countFilter < filtersString.length; countFilter++) {
             filters[countFilter] = new Category(filtersString[countFilter]);
         }
         return filters;
     }
-
-    private String[] getFiltersString(String categoryStatus, List<Category> allElements) throws IOException {
-        showExistingElements(categoryStatus, ManageElement.toStringList(allElements));
-        System.out.println("Geben Sie die gewünschten " + categoryStatus + " ein: ");
+    public String[] getStringArrayOfElements(CategoryStatus categoryStatus, List<Category> allElements, String text) throws IOException {
+        showExistingElements(categoryStatus.getStatus(), ManageElement.toStringList(allElements));
+        System.out.println(text);
 
         BufferedReader tastatur = new BufferedReader(new InputStreamReader(System.in));
         return tastatur.readLine().split(" ");
@@ -83,5 +85,11 @@ public class GUI {
             System.out.print(option + " ");
         }
         System.out.println();
+    }
+
+    public String getNewElement() throws IOException {
+        BufferedReader tastatur = new BufferedReader(new InputStreamReader(System.in));
+        System.out.println("Geben Sie den neuen Begriff: ");
+        return tastatur.readLine();
     }
 }

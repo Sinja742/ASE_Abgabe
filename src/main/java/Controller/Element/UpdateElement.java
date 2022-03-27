@@ -7,7 +7,6 @@ import jobs.TxtHandling;
 
 import java.io.IOException;
 import java.util.List;
-import java.util.Objects;
 
 public class UpdateElement extends HandlingElement {
 
@@ -25,7 +24,7 @@ public class UpdateElement extends HandlingElement {
     public void updateElementOfTypeCategory(CategoryStatus categoryStatus, List<Category> allElements) throws IOException {
         String element = handleElement(categoryStatus, allElements, "bearbeiten");
         TxtHandling.deleteElement(element, categoryStatus);
-        String newElement = getNewElement();
+        String newElement = gui.getNewElement();
         if (CategoryStatus.OBJEKT.isEqualCategory(categoryStatus)) {
             TxtHandling.addNewElement(AddElement.addTags(newElement), categoryStatus);
         } else {

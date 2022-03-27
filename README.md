@@ -16,7 +16,7 @@
 
 ### Entwurfsmuster
 - [ ] \>= 2 Entwurfsmuster einsetzen und begründen
-- [ ] UML-Daigramm vorher und nachher
+- [ ] UML-Diagramm vorher und nachher
 
 ### Domain Driven Design
 - [ ] Analyse der Ubiquitous Language
