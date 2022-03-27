@@ -24,11 +24,10 @@ public class TxtReader {
 
     public static List<Category> readEntity(CategoryStatus entityStatus) {
         if (isObjekt(entityStatus)) {
-            return getObjekt(entityStatus);
+            return getObjekt();
         } else {
             return getEntity(entityStatus);
         }
-        //return (isObjekt(entityStatus) ? getObjekt() : getEntity(entityStatus));
     }
 
     private static boolean isObjekt(CategoryStatus entityStatus) {
@@ -54,22 +53,26 @@ public class TxtReader {
         return entityList;
     }
 
-    public static List<Category> getObjekt(CategoryStatus entityStatus) {
+    public static List<Category> getObjekt() {
         List<Category> objektList = new ArrayList<>();
         String[] text = readTxt();
 
         if (text != null) {
             text = text[2].split(";");
             for (String s : text) {
-                List<Tag> tagList = new ArrayList<>();
                 String[] objekt = s.split(",");
                 String bezeichnung = objekt[0];
-                for(int objektAttribute = 1; objektAttribute < objekt.length; objektAttribute++) {
-                    tagList.add(Tag.getTag(Integer.parseInt(objekt[objektAttribute])));
-                }
-                objektList.add(new Objekt(bezeichnung, tagList));
+                objektList.add(new Objekt(bezeichnung, getTags(objekt)));
             }
         }
         return objektList;
+    }
+
+    public static List<Tag> getTags(String[] objekt) {
+        List<Tag> tagList = new ArrayList<>();
+        for(int objektAttribute = 1; objektAttribute < objekt.length; objektAttribute++) {
+            tagList.add(Tag.getTag(Integer.parseInt(objekt[objektAttribute])));
+        }
+        return tagList;
     }
 }
