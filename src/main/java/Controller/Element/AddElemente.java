@@ -1,6 +1,7 @@
 package Controller.Element;
 
 import Controller.GUI;
+import Controller.ManageElement;
 import Entity.Category;
 import Entity.CategoryStatus;
 import Entity.Tag;
@@ -34,7 +35,7 @@ public class AddElemente {
     }
 
     private void addNewElement(String kriterium, List<Category> allOptions) throws IOException {
-        showExistingElements(kriterium, List.of(allOptions.toString()));
+        showExistingElements(kriterium, ManageElement.toStringList(allOptions));
         String element;
         BufferedReader tastatur = new BufferedReader(new InputStreamReader(System.in));
         System.out.println("Geben Sie den Begriff für " + kriterium + " ein: ");
@@ -45,7 +46,7 @@ public class AddElemente {
     //    Hier wird ein Objekt mit gegebenenfalls tags hinzugefügt
     // TODO: mit methode addnewelement zusammenfassen
     private void addNewElement(String kriterium, List<Category> allOptions, List<Tag> tagsOptions) throws IOException {
-        showExistingElements(kriterium, List.of(allOptions.toString()));
+        showExistingElements(kriterium, ManageElement.toStringList(allOptions));
         String element;
         BufferedReader tastatur = new BufferedReader(new InputStreamReader(System.in));
         System.out.println("Geben Sie den Begriff für " + kriterium + " ein: ");
@@ -68,7 +69,7 @@ public class AddElemente {
 
     public static String addingTags(String element, List<Tag> tagsOptions) throws IOException {
         String[] tagsEntered;
-        showExistingElements("Tag", List.of(tagsOptions.toString()));
+        showExistingElements("Tag", ManageElement.tagsToStringList(tagsOptions));
         System.out.println("Geben Sie die entsprechenden Tags an: ");
         BufferedReader tastatur = new BufferedReader(new InputStreamReader(System.in));
         tagsEntered = tastatur.readLine().split(" ");

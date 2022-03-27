@@ -10,6 +10,7 @@ import jobs.TxtHandling;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 import java.util.Objects;
@@ -24,7 +25,7 @@ public class UpdateElemente {
     public void updatingElement(String kriterium, List<Category> allOptions) throws IOException {
         String question = "Wollen Sie ein Element des Typs " + kriterium + " bearbeiten?";
         if (gui.trueBooleanQuestion(question)) {
-            showExistingElements(kriterium, List.of(allOptions.toString()));
+            showExistingElements(kriterium, ManageElement.toStringList(allOptions));
             updateElement(kriterium);
         }
     }
@@ -32,7 +33,7 @@ public class UpdateElemente {
     public void updatingElement(String kriterium, List<Category> objektOptions, List<Tag> tagsOptions) throws IOException {
         String question = "Wollen Sie ein Element des Typs " + kriterium + " bearbeiten?";
         if (gui.trueBooleanQuestion(question)) {
-            showExistingElements(kriterium, List.of(objektOptions.toString()));
+            showExistingElements(kriterium, ManageElement.toStringList(objektOptions));
             updateElement(kriterium, tagsOptions);
         }
     }

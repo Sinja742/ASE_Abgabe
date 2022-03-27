@@ -53,7 +53,7 @@ public class GUI {
     }
 
     private String[] getFiltersString(String kriterium, List<Category> allOptions) throws IOException {
-        this.showOpportunities(kriterium, List.of(allOptions.toString()));
+        this.showOpportunities(kriterium, ManageElement.toStringList(allOptions));
         System.out.println("Geben Sie die gewünschten " + kriterium + " ein: ");
 
         BufferedReader tastatur = new BufferedReader(new InputStreamReader(System.in));
@@ -70,7 +70,7 @@ public class GUI {
     }
 
     private String[] getTagsString(List<Tag> allTags) throws IOException {
-        this.showOpportunities("Tags", List.of(allTags.toString()));
+        this.showOpportunities("Tags", ManageElement.tagsToStringList(allTags));
         System.out.println("Geben Sie die gewünschten Tags ein: ");
 
         BufferedReader tastatur = new BufferedReader(new InputStreamReader(System.in));

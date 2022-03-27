@@ -55,21 +55,21 @@ public class ManageElement {
 //        return tags;
 //    }
 //
-//    public static List<String> toStringList(List<Category> elementsList) {
-//        List<String> elementsListString = new ArrayList<>();
-//        for(Category element : elementsList) {
-//            elementsListString.add(element.toString());
-//        }
-//
-//        return elementsListString;
-//    }
-//
-//    public static List<String> tagsToStringList(List<Tag> tagsList) {
-//        List<String> tagsListString = new ArrayList<>();
-//        for(Tag tag : tagsList) {
-//            tagsListString.add(tag.toString());
-//        }
-//
-//        return tagsListString;
-//    }
+    public static List<String> toStringList(List<Category> elementsList) {
+        List<String> elementsListString = new ArrayList<>();
+        for(Category element : elementsList) {
+            elementsListString.add(element.toString());
+        }
+
+        return elementsListString;
+    }
+
+    public static List<String> tagsToStringList(List<Tag> tagsList) {
+        List<String> tagsListString = new ArrayList<>();
+        for(Tag tag : tagsList) {
+            tagsListString.add(tag.toString());
+        }
+
+        return tagsListString;
+    }
 }

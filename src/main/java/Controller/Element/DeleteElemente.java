@@ -1,6 +1,7 @@
 package Controller.Element;
 
 import Controller.GUI;
+import Controller.ManageElement;
 import Entity.Category;
 import Entity.CategoryStatus;
 import jobs.TxtHandling;
@@ -27,7 +28,7 @@ public class DeleteElemente {
     }
 
     public void deleteElement(String kriterium, List<Category> allOptions) throws IOException {
-        showExistingElements(kriterium, List.of(allOptions.toString()));
+        showExistingElements(kriterium, ManageElement.toStringList(allOptions));
         String element;
         BufferedReader tastatur = new BufferedReader(new InputStreamReader(System.in));
         System.out.println("Geben Sie den Begriff für " + kriterium + " ein, den Sie löschen wollen: ");

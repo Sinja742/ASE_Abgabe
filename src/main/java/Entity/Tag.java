@@ -20,10 +20,6 @@ public enum Tag {
         return this.description;
     }
 
-    public String toString() {
-        return this.description;
-    }
-
     public int getId() {
         return this.id;
     }
