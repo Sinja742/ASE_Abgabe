@@ -20,63 +20,99 @@ public class GUI {
     }
 
     public Category[] getSearchOpportiunities(CategoryStatus categoryStatus, List<Category> allElements) throws IOException {
-        String question = "Wollen Sie nach " + categoryStatus.getStatusPlural() + " suchen?";
-        if(this.trueBooleanQuestion(question)) {
-            return this.getFilters(categoryStatus, allElements);
-        } else {
-            return new Category[0];
+        try {
+            String question = "Wollen Sie nach " + categoryStatus.getStatusPlural() + " suchen?";
+            if (this.trueBooleanQuestion(question)) {
+                return this.getFilters(categoryStatus, allElements);
+            } else {
+                return new Category[0];
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+            return null;
         }
     }
 
     public Tag[] getSearchTags(List<Tag> allTags) throws IOException {
-        String question = "Wollen Sie nach Tags suchen?";
-        if(this.trueBooleanQuestion(question)) {
-            return this.getTags(allTags);
-        } else {
-            return new Tag[0];
+        try {
+            String question = "Wollen Sie nach Tags suchen?";
+            if (this.trueBooleanQuestion(question)) {
+                return this.getTags(allTags);
+            } else {
+                return new Tag[0];
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+            return null;
         }
     }
 
     public boolean trueBooleanQuestion(String question) throws IOException {
-        String JA = "j";
-        String NEIN = "n";
-        BufferedReader tastatur = new BufferedReader(new InputStreamReader(System.in));
+        try {
+            String JA = "j";
+            String NEIN = "n";
+            BufferedReader tastatur = new BufferedReader(new InputStreamReader(System.in));
 
-        System.out.print(question + " (" + JA + "/" + NEIN + "): ");
-        return tastatur.readLine().equals(JA);
+            System.out.print(question + " (" + JA + "/" + NEIN + "): ");
+            return tastatur.readLine().equals(JA);
+        } catch (IOException e) {
+            e.printStackTrace();
+            return false;
+        }
     }
 
     private Category[] getFilters(CategoryStatus categoryStatus, List<Category> allElements) throws IOException {
-        String[] filtersString = getStringArrayOfElements(categoryStatus, allElements,"Geben Sie die gewünschten " + categoryStatus.getStatusPlural() + " ein: ");
-        Category[] filters = new Category[filtersString.length];
-        for(int countFilter = 0; countFilter < filtersString.length; countFilter++) {
-            filters[countFilter] = new Category(filtersString[countFilter]);
+        try {
+            String[] filtersString = getStringArrayOfElements(categoryStatus, allElements, "Geben Sie die gewünschten " + categoryStatus.getStatusPlural() + " ein: ");
+            Category[] filters = new Category[filtersString.length];
+            for (int countFilter = 0; countFilter < filtersString.length; countFilter++) {
+                filters[countFilter] = new Category(filtersString[countFilter]);
+            }
+            return filters;
+        } catch (IOException e) {
+            e.printStackTrace();
+            return null;
         }
-        return filters;
     }
-    public String[] getStringArrayOfElements(CategoryStatus categoryStatus, List<Category> allElements, String text) throws IOException {
-        showExistingElements(categoryStatus.getStatus(), ManageElement.toStringList(allElements));
-        System.out.println(text);
 
-        BufferedReader tastatur = new BufferedReader(new InputStreamReader(System.in));
-        return tastatur.readLine().split(" ");
+    public String[] getStringArrayOfElements(CategoryStatus categoryStatus, List<Category> allElements, String text) throws IOException {
+        try {
+            showExistingElements(categoryStatus.getStatus(), ManageElement.toStringList(allElements));
+            System.out.println(text);
+
+            BufferedReader tastatur = new BufferedReader(new InputStreamReader(System.in));
+            return tastatur.readLine().split(" ");
+        } catch (IOException e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 
     public static Tag[] getTags(List<Tag> allTags) throws IOException {
-        String[] tagsString = getTagsString(allTags);
-        Tag[] tags = new Tag[tagsString.length];
-        for(int countTags = 0; countTags < tagsString.length; countTags++) {
-            tags[countTags] = Tag.getTag(tagsString[countTags]);
+        try {
+            String[] tagsString = getTagsString(allTags);
+            Tag[] tags = new Tag[tagsString.length];
+            for (int countTags = 0; countTags < tagsString.length; countTags++) {
+                tags[countTags] = Tag.getTag(tagsString[countTags]);
+            }
+            return tags;
+        } catch (IOException e) {
+            e.printStackTrace();
+            return null;
         }
-        return tags;
     }
 
     private static String[] getTagsString(List<Tag> allTags) throws IOException {
-        showExistingElements("Tag", Tag.tagsToStringList(allTags));
-        System.out.println("Geben Sie die gewünschten Tags ein: ");
+        try {
+            showExistingElements("Tag", Tag.tagsToStringList(allTags));
+            System.out.println("Geben Sie die gewünschten Tags ein: ");
 
-        BufferedReader tastatur = new BufferedReader(new InputStreamReader(System.in));
-        return tastatur.readLine().split(" ");
+            BufferedReader tastatur = new BufferedReader(new InputStreamReader(System.in));
+            return tastatur.readLine().split(" ");
+        } catch (IOException e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 
     public static void showExistingElements(String categoryStatus, List<String> allElements) {
@@ -88,8 +124,13 @@ public class GUI {
     }
 
     public String getNewElement() throws IOException {
-        BufferedReader tastatur = new BufferedReader(new InputStreamReader(System.in));
-        System.out.println("Geben Sie den neuen Begriff: ");
-        return tastatur.readLine();
+        try {
+            BufferedReader tastatur = new BufferedReader(new InputStreamReader(System.in));
+            System.out.println("Geben Sie den neuen Begriff: ");
+            return tastatur.readLine();
+        } catch (IOException e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 }

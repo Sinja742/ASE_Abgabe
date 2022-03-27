@@ -34,57 +34,81 @@ public class Steuerung {
     private static Tag[] tagFilter;
 
     private static void userIneraction(AddElement addElemente, UpdateElement updateElemente, DeleteElement deleteElemente) throws IOException {
-        if (gui.trueBooleanQuestion("Wollen Sie nach einer kreativen Idee suchen?")) {
-            searchIdea();
-        }
-        if (gui.trueBooleanQuestion("Wollen Sie neue Elemente hinzufügen?")) {
-            addElementToElementList(addElemente);
-            ManageElement.reloadElements();
-        }
-        if (gui.trueBooleanQuestion("Wollen Sie Elemente bearbeiten?")) {
-            updateElementInElementList(updateElemente);
-            ManageElement.reloadElements();
-        }
-        if (gui.trueBooleanQuestion("Wollen Sie Elemente löschen?")) {
-            deleteElementFromElementList(deleteElemente);
-            ManageElement.reloadElements();
+        try {
+            if (gui.trueBooleanQuestion("Wollen Sie nach einer kreativen Idee suchen?")) {
+                searchIdea();
+            }
+            if (gui.trueBooleanQuestion("Wollen Sie neue Elemente hinzufügen?")) {
+                addElementToElementList(addElemente);
+                ManageElement.reloadElements();
+            }
+            if (gui.trueBooleanQuestion("Wollen Sie Elemente bearbeiten?")) {
+                updateElementInElementList(updateElemente);
+                ManageElement.reloadElements();
+            }
+            if (gui.trueBooleanQuestion("Wollen Sie Elemente löschen?")) {
+                deleteElementFromElementList(deleteElemente);
+                ManageElement.reloadElements();
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 
     // <<
 
     private static void searchIdea() throws IOException {
-        getAllSearchOpportiunities();
-        gui.showIdea(getIdea());
+        try {
+            getAllSearchOpportiunities();
+            gui.showIdea(getIdea());
+        }catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     private static void getAllSearchOpportiunities() throws IOException {
-        artFilter = gui.getSearchOpportiunities(CategoryStatus.ART, ManageElement.getAllArten());
-        stimmungFilter = gui.getSearchOpportiunities(CategoryStatus.STIMMUNG, ManageElement.getAllStimmungen());
-        objektFilter = gui.getSearchOpportiunities(CategoryStatus.OBJEKT, ManageElement.getAllObjekte());
-        tagFilter = gui.getSearchTags(Tag.getAllTags());
+        try {
+            artFilter = gui.getSearchOpportiunities(CategoryStatus.ART, ManageElement.getAllArten());
+            stimmungFilter = gui.getSearchOpportiunities(CategoryStatus.STIMMUNG, ManageElement.getAllStimmungen());
+            objektFilter = gui.getSearchOpportiunities(CategoryStatus.OBJEKT, ManageElement.getAllObjekte());
+            tagFilter = gui.getSearchTags(Tag.getAllTags());
 
-        fillEmptyFilter();
+            fillEmptyFilter();
+        }catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     // >>
 
     private static void addElementToElementList(AddElement addElemente) throws IOException {
-        addElemente.addElement(CategoryStatus.ART, ManageElement.getAllArten());
-        addElemente.addElement(CategoryStatus.STIMMUNG, ManageElement.getAllStimmungen());
-        addElemente.addElement(CategoryStatus.OBJEKT, ManageElement.getAllObjekte());
+        try {
+            addElemente.addElement(CategoryStatus.ART, ManageElement.getAllArten());
+            addElemente.addElement(CategoryStatus.STIMMUNG, ManageElement.getAllStimmungen());
+            addElemente.addElement(CategoryStatus.OBJEKT, ManageElement.getAllObjekte());
+        }catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     private static void deleteElementFromElementList(DeleteElement deleteElemente) throws IOException {
-        deleteElemente.deleteElement(CategoryStatus.ART, ManageElement.getAllArten());
-        deleteElemente.deleteElement(CategoryStatus.STIMMUNG, ManageElement.getAllStimmungen());
-        deleteElemente.deleteElement(CategoryStatus.OBJEKT, ManageElement.getAllObjekte());
+        try {
+            deleteElemente.deleteElement(CategoryStatus.ART, ManageElement.getAllArten());
+            deleteElemente.deleteElement(CategoryStatus.STIMMUNG, ManageElement.getAllStimmungen());
+            deleteElemente.deleteElement(CategoryStatus.OBJEKT, ManageElement.getAllObjekte());
+        }catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     private static void updateElementInElementList(UpdateElement updateElemente) throws IOException {
-        updateElemente.updateElement(CategoryStatus.ART, ManageElement.getAllArten());
-        updateElemente.updateElement(CategoryStatus.STIMMUNG, ManageElement.getAllStimmungen());
-        updateElemente.updateElement(CategoryStatus.OBJEKT, ManageElement.getAllObjekte());
+        try {
+            updateElemente.updateElement(CategoryStatus.ART, ManageElement.getAllArten());
+            updateElemente.updateElement(CategoryStatus.STIMMUNG, ManageElement.getAllStimmungen());
+            updateElemente.updateElement(CategoryStatus.OBJEKT, ManageElement.getAllObjekte());
+        }catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     private static void filterObjekteIfTag() {

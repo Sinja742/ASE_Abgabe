@@ -17,38 +17,62 @@ public class AddElement extends HandlingElement {
     }
 
     public void addElement(CategoryStatus categoryStatus, List<Category> allElements) throws IOException {
-        String question = "Wollen Sie ein Element des Typs " + categoryStatus.getStatus() + " hinzufügen? ";
-        if (gui.trueBooleanQuestion(question)) {
-            addNewElementOfTypeCategory(categoryStatus, allElements);
+        try {
+            String question = "Wollen Sie ein Element des Typs " + categoryStatus.getStatus() + " hinzufügen? ";
+            if (gui.trueBooleanQuestion(question)) {
+                addNewElementOfTypeCategory(categoryStatus, allElements);
+            }
+        }catch (IOException e){
+            e.printStackTrace();
         }
     }
 
     private void addNewElementOfTypeCategory(CategoryStatus categoryStatus, List<Category> allElements) throws IOException {
-        String newElement = handleElement(categoryStatus, allElements, "neu anlegen");
-        if (CategoryStatus.OBJEKT.isEqualCategory(categoryStatus)) {
-            TxtHandling.addNewElement(addTags(newElement), categoryStatus);
-        } else {
-            TxtHandling.addNewElement(newElement, categoryStatus);
+        try {
+            String newElement = handleElement(categoryStatus, allElements, "neu anlegen");
+            if (CategoryStatus.OBJEKT.isEqualCategory(categoryStatus)) {
+                TxtHandling.addNewElement(addTags(newElement), categoryStatus);
+            } else {
+                TxtHandling.addNewElement(newElement, categoryStatus);
+            }
+        }catch (IOException e){
+            e.printStackTrace();
         }
     }
 
     public static String addTags(String objektDescription) throws IOException {
-        if (wantAddTags(objektDescription)) {
-            return readNewTags(objektDescription);
+        try {
+            if (wantAddTags(objektDescription)) {
+                return readNewTags(objektDescription);
+            }
+            return objektDescription;
+        }catch (IOException e){
+            e.printStackTrace();
+            return null;
         }
-        return objektDescription;
     }
 
     private static boolean wantAddTags(String objektDescription) throws IOException {
-        String question = "Wollen Sie Tags zum Objekt " + objektDescription + " hinzufügen? ";
-        return gui.trueBooleanQuestion(question);
+
+        try {
+            String question = "Wollen Sie Tags zum Objekt " + objektDescription + " hinzufügen? ";
+            return gui.trueBooleanQuestion(question);
+        }catch (IOException e){
+            e.printStackTrace();
+            return false;
+        }
     }
 
     private static String readNewTags(String objektDescription) throws IOException {
-        Tag[] tagsEntered = GUI.getTags(Tag.getAllTags());
-        for (Tag tag : tagsEntered) {
-            objektDescription = objektDescription.concat("," + tag);
+        try {
+            Tag[] tagsEntered = GUI.getTags(Tag.getAllTags());
+            for (Tag tag : tagsEntered) {
+                objektDescription = objektDescription.concat("," + tag);
+            }
+            return objektDescription;
+        }catch (IOException e){
+            e.printStackTrace();
+            return null;
         }
-        return objektDescription;
     }
 }

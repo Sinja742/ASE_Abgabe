@@ -13,39 +13,51 @@ import java.util.stream.Stream;
 public class TxtHandling {
 
     public static void addNewElement(String element, CategoryStatus status) throws IOException {
-        String[] allTxtElements = TxtReader.readTxt();
-        assert allTxtElements != null;
-        if (status.equals(CategoryStatus.ART)){
-            allTxtElements[0] = allTxtElements[0] + ","+ element;
-        }else if (status.equals(CategoryStatus.STIMMUNG)){
-            allTxtElements[1] = allTxtElements[1] + ","+ element;
-        }else if (status.equals(CategoryStatus.OBJEKT)){
-            allTxtElements[2] = allTxtElements[2] + ";"+ element;
+        try {
+            String[] allTxtElements = TxtReader.readTxt();
+            assert allTxtElements != null;
+            if (status.equals(CategoryStatus.ART)){
+                allTxtElements[0] = allTxtElements[0] + ","+ element;
+            }else if (status.equals(CategoryStatus.STIMMUNG)){
+                allTxtElements[1] = allTxtElements[1] + ","+ element;
+            }else if (status.equals(CategoryStatus.OBJEKT)){
+                allTxtElements[2] = allTxtElements[2] + ";"+ element;
+            }
+            updateTxtDocument(allTxtElements);
+        }catch (IOException e) {
+            e.printStackTrace();
         }
-        updateTxtDocument(allTxtElements);
     }
 
     private static void updateTxtDocument(String[] allElements) throws IOException {
-        File file = new File("resources/Elemente.txt");
-        file.delete();
-        file.createNewFile();
-        PrintWriter out = new PrintWriter("resources/Elemente.txt");
-        String text = allElements[0] + "&&" + allElements[1] + "&&" + allElements[2];
-        out.println(text);
-        out.close();
+        try {
+            File file = new File("resources/Elemente.txt");
+            file.delete();
+            file.createNewFile();
+            PrintWriter out = new PrintWriter("resources/Elemente.txt");
+            String text = allElements[0] + "&&" + allElements[1] + "&&" + allElements[2];
+            out.println(text);
+            out.close();
+        }catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     public static void deleteElement(String element, CategoryStatus status) throws IOException {
-        String[] allTextElements = TxtReader.readTxt();
-        assert allTextElements != null;
-        if (status.equals(CategoryStatus.ART)){
-            allTextElements[0] = searchElementToDelete(element, allTextElements[0].split(","));
-        }else if (status.equals(CategoryStatus.STIMMUNG)){
-            allTextElements[1] = searchElementToDelete(element, allTextElements[1].split(","));
-        }else if (status.equals(CategoryStatus.OBJEKT)){
-            allTextElements[2] = searchObjektToDelete(element, allTextElements[2].split(";"));
+        try {
+            String[] allTextElements = TxtReader.readTxt();
+            assert allTextElements != null;
+            if (status.equals(CategoryStatus.ART)){
+                allTextElements[0] = searchElementToDelete(element, allTextElements[0].split(","));
+            }else if (status.equals(CategoryStatus.STIMMUNG)){
+                allTextElements[1] = searchElementToDelete(element, allTextElements[1].split(","));
+            }else if (status.equals(CategoryStatus.OBJEKT)){
+                allTextElements[2] = searchObjektToDelete(element, allTextElements[2].split(";"));
+            }
+            updateTxtDocument(allTextElements);
+        }catch (IOException e) {
+            e.printStackTrace();
         }
-        updateTxtDocument(allTextElements);
     }
 
     private static String searchElementToDelete(String element, String[] allTextElements){

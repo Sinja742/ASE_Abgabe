@@ -16,8 +16,13 @@ public class HandlingElement {
     static GUI gui;
 
     protected String handleElement(CategoryStatus categoryStatus, List<Category> allElements, String action) throws IOException {
-        String text = "Geben Sie den Begriff für " + categoryStatus + " ein, den Sie " + action + " wollen: ";
-        return gui.getStringArrayOfElements(categoryStatus, allElements, text)[0];
+        try {
+            String text = "Geben Sie den Begriff für " + categoryStatus + " ein, den Sie " + action + " wollen: ";
+            return gui.getStringArrayOfElements(categoryStatus, allElements, text)[0];
+        }catch (IOException e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 
 }
