@@ -22,11 +22,11 @@ public class TxtReader {
         }
     }
 
-    public static List<Category> readEntity(CategoryStatus entityStatus) {
-        if (CategoryStatus.OBJEKT.isEqualCategory(entityStatus.getStatus())) {
+    public static List<Category> readEntity(CategoryStatus categoryStatus) {
+        if (CategoryStatus.OBJEKT.isEqualCategory(categoryStatus)) {
             return getObjekt();
         } else {
-            return getEntity(entityStatus);
+            return getEntity(categoryStatus);
         }
     }
 

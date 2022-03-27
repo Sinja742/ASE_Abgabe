@@ -1,46 +1,54 @@
 package Controller.Element;
 
 import Controller.GUI;
-import Controller.ManageElement;
 import Entity.Category;
 import Entity.CategoryStatus;
 import Entity.Tag;
 import jobs.TxtHandling;
 
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
-import java.util.*;
+import java.util.List;
+import java.util.Objects;
 
 public class AddElement extends HandlingElement {
 
     public AddElement(GUI gui) {
-        this.gui = gui;
+        super(gui);
     }
 
-    GUI gui;
-
-    public void addingElement(String kriterium, List<Category> allOptions) throws IOException {
-        String question = "Wollen Sie ein Element des Typs " + kriterium + " hinzufügen?";
+    public void addElement(CategoryStatus categoryStatus, List<Category> allElements) throws IOException {
+        String question = "Wollen Sie ein Element des Typs " + categoryStatus.getStatus() + " hinzufügen? ";
         if (gui.trueBooleanQuestion(question)) {
-            addNewElement(kriterium, allOptions);
+            addNewElementOfTypeCategory(categoryStatus, allElements);
         }
     }
 
-    private void addNewElement(String kriterium, List<Category> allOptions) throws IOException {
-        String newElement = handleElement(kriterium, allOptions, "neu anlegen");
-        if (CategoryStatus.OBJEKT.isEqualCategory(kriterium)) {
-            TxtHandling.addNewElement(addingTags(newElement), Objects.requireNonNull(CategoryStatus.getCategoryStatus(kriterium)));
+    private void addNewElementOfTypeCategory(CategoryStatus categoryStatus, List<Category> allElements) throws IOException {
+        String newElement = handleElement(categoryStatus, allElements, "neu anlegen");
+        if (CategoryStatus.OBJEKT.isEqualCategory(categoryStatus)) {
+            TxtHandling.addNewElement(addTags(newElement), categoryStatus);
         } else {
-            TxtHandling.addNewElement(newElement, Objects.requireNonNull(CategoryStatus.getCategoryStatus(kriterium)));
+            TxtHandling.addNewElement(newElement, categoryStatus);
         }
     }
 
-    public static String addingTags(String element) throws IOException {
+    public static String addTags(String objektDescription) throws IOException {
+        if (wantAddTags(objektDescription)) {
+            return readNewTags(objektDescription);
+        }
+        return objektDescription;
+    }
+
+    private static boolean wantAddTags(String objektDescription) throws IOException {
+        String question = "Wollen Sie Tags zum Objekt " + objektDescription + " hinzufügen? ";
+        return gui.trueBooleanQuestion(question);
+    }
+
+    private static String readNewTags(String objektDescription) throws IOException {
         Tag[] tagsEntered = GUI.getTags(Tag.getAllTags());
         for (Tag tag : tagsEntered) {
-            element = element.concat("," + tag);
+            objektDescription = objektDescription.concat("," + tag);
         }
-        return element;
+        return objektDescription;
     }
 }

@@ -3,45 +3,33 @@ package Controller.Element;
 import Controller.GUI;
 import Entity.Category;
 import Entity.CategoryStatus;
-import Entity.Tag;
 import jobs.TxtHandling;
 
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
 import java.util.List;
 import java.util.Objects;
 
 public class UpdateElement extends HandlingElement {
 
     public UpdateElement(GUI gui) {
-        this.gui = gui;
+        super(gui);
     }
 
-    GUI gui;
-
-    public void updatingElement(String kriterium, List<Category> allOptions) throws IOException {
-        String question = "Wollen Sie ein Element des Typs " + kriterium + " bearbeiten?";
+    public void updateElement(CategoryStatus categoryStatus, List<Category> allElements) throws IOException {
+        String question = "Wollen Sie ein Element des Typs " + categoryStatus.getStatus() + " bearbeiten?";
         if (gui.trueBooleanQuestion(question)) {
-            updateElement(kriterium, allOptions);
+            updateElementOfTypeCategory(categoryStatus, allElements);
         }
     }
 
-    public void updateElement(String kriterium, List<Category> allOptions) throws IOException {
-        String element = handleElement(kriterium, allOptions, "bearbeiten");
-        TxtHandling.deleteElement(element, Objects.requireNonNull(CategoryStatus.getCategoryStatus(kriterium)));
+    public void updateElementOfTypeCategory(CategoryStatus categoryStatus, List<Category> allElements) throws IOException {
+        String element = handleElement(categoryStatus, allElements, "bearbeiten");
+        TxtHandling.deleteElement(element, categoryStatus);
         String newElement = getNewElement();
-        if (CategoryStatus.OBJEKT.isEqualCategory(kriterium)) {
-            TxtHandling.addNewElement(addNewTagsFrage(newElement), Objects.requireNonNull(CategoryStatus.getCategoryStatus(kriterium)));
+        if (CategoryStatus.OBJEKT.isEqualCategory(categoryStatus)) {
+            TxtHandling.addNewElement(AddElement.addTags(newElement), categoryStatus);
         } else {
-            TxtHandling.addNewElement(newElement, Objects.requireNonNull(CategoryStatus.getCategoryStatus(kriterium)));
+            TxtHandling.addNewElement(newElement, categoryStatus);
         }
-    }
-
-    public String addNewTagsFrage(String objekt) throws IOException {
-        String question = "Wollen Sie Tags zum Objekt " + objekt + " hinzufügen?";
-        if (gui.trueBooleanQuestion(question)) {
-            return AddElement.addingTags(objekt);
-        } else return objekt;
     }
 }

@@ -16,10 +16,10 @@ public class GUI {
         System.out.println("Sie können hierzu kreativ werden: " + idea);
     }
 
-    public Category[] getSearchOpportiunities(String kriterium, List<Category> allOptions) throws IOException {
-        String question = "Wollen Sie nach " + kriterium + " suchen?";
+    public Category[] getSearchOpportiunities(String categoryStatus, List<Category> allElements) throws IOException {
+        String question = "Wollen Sie nach " + categoryStatus + " suchen?";
         if(this.trueBooleanQuestion(question)) {
-            return this.getFilters(kriterium, allOptions);
+            return this.getFilters(categoryStatus, allElements);
         } else {
             return new Category[0];
         }
@@ -43,8 +43,8 @@ public class GUI {
         return tastatur.readLine().equals(JA);
     }
 
-    private Category[] getFilters(String kriterium, List<Category> allOptions) throws IOException {
-        String[] filtersString = getFiltersString(kriterium, allOptions);
+    private Category[] getFilters(String categoryStatus, List<Category> allElements) throws IOException {
+        String[] filtersString = getFiltersString(categoryStatus, allElements);
         Category[] filters = new Category[filtersString.length];
         for(int countFilter = 0; countFilter < filtersString.length; countFilter++) {
             filters[countFilter] = new Category(filtersString[countFilter]);
@@ -52,9 +52,9 @@ public class GUI {
         return filters;
     }
 
-    private String[] getFiltersString(String kriterium, List<Category> allOptions) throws IOException {
-        showExistingElements(kriterium, ManageElement.toStringList(allOptions));
-        System.out.println("Geben Sie die gewünschten " + kriterium + " ein: ");
+    private String[] getFiltersString(String categoryStatus, List<Category> allElements) throws IOException {
+        showExistingElements(categoryStatus, ManageElement.toStringList(allElements));
+        System.out.println("Geben Sie die gewünschten " + categoryStatus + " ein: ");
 
         BufferedReader tastatur = new BufferedReader(new InputStreamReader(System.in));
         return tastatur.readLine().split(" ");
@@ -77,8 +77,8 @@ public class GUI {
         return tastatur.readLine().split(" ");
     }
 
-    public static void showExistingElements(String kriterium, List<String> allElements) {
-        System.out.println("Diese Elemente des Typs " + kriterium + " existieren:");
+    public static void showExistingElements(String categoryStatus, List<String> allElements) {
+        System.out.println("Diese Elemente des Typs " + categoryStatus + " existieren:");
         for (String option : allElements) {
             System.out.print(option + " ");
         }

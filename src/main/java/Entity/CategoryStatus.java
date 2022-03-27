@@ -34,7 +34,7 @@ public enum CategoryStatus {
         return null;
     }
 
-    public boolean isEqualCategory(String category) {
-        return category.equals(this.status);
+    public boolean isEqualCategory(CategoryStatus category) {
+        return category.equals(this);
     }
 }

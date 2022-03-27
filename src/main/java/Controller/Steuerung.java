@@ -67,21 +67,21 @@ public class Steuerung {
     }
 
     private static void addElementToElementList(AddElement addElemente) throws IOException {
-        addElemente.addingElement(CategoryStatus.ART.getStatus(), ManageElement.getAllArten());
-        addElemente.addingElement(CategoryStatus.STIMMUNG.getStatus(), ManageElement.getAllStimmungen());
-        addElemente.addingElement(CategoryStatus.OBJEKT.getStatus(), ManageElement.getAllObjekte());
+        addElemente.addElement(CategoryStatus.ART, ManageElement.getAllArten());
+        addElemente.addElement(CategoryStatus.STIMMUNG, ManageElement.getAllStimmungen());
+        addElemente.addElement(CategoryStatus.OBJEKT, ManageElement.getAllObjekte());
     }
 
     private static void deleteElementFromElementList(DeleteElement deleteElemente) throws IOException {
-        deleteElemente.deletingElement(CategoryStatus.ART.getStatus(), ManageElement.getAllArten());
-        deleteElemente.deletingElement(CategoryStatus.STIMMUNG.getStatus(), ManageElement.getAllStimmungen());
-        deleteElemente.deletingElement(CategoryStatus.OBJEKT.getStatus(), ManageElement.getAllObjekte());
+        deleteElemente.deleteElement(CategoryStatus.ART, ManageElement.getAllArten());
+        deleteElemente.deleteElement(CategoryStatus.STIMMUNG, ManageElement.getAllStimmungen());
+        deleteElemente.deleteElement(CategoryStatus.OBJEKT, ManageElement.getAllObjekte());
     }
 
     private static void updateElementInElementList(UpdateElement updateElemente) throws IOException {
-        updateElemente.updatingElement(CategoryStatus.ART.getStatus(), ManageElement.getAllArten());
-        updateElemente.updatingElement(CategoryStatus.STIMMUNG.getStatus(), ManageElement.getAllStimmungen());
-        updateElemente.updatingElement(CategoryStatus.OBJEKT.getStatus(), ManageElement.getAllObjekte());
+        updateElemente.updateElement(CategoryStatus.ART, ManageElement.getAllArten());
+        updateElemente.updateElement(CategoryStatus.STIMMUNG, ManageElement.getAllStimmungen());
+        updateElemente.updateElement(CategoryStatus.OBJEKT, ManageElement.getAllObjekte());
     }
 
     private static void filterObjekteIfTag() {
