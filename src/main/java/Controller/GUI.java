@@ -19,24 +19,6 @@ public class GUI {
         System.out.println("Sie können hierzu kreativ werden: " + idea);
     }
 
-    public Category[] getSearchOpportiunities(CategoryStatus categoryStatus, List<Category> allElements) throws IOException {
-        String question = "Wollen Sie nach " + categoryStatus.getStatusPlural() + " suchen?";
-        if(this.trueBooleanQuestion(question)) {
-            return this.getFilters(categoryStatus, allElements);
-        } else {
-            return new Category[0];
-        }
-    }
-
-    public Tag[] getSearchTags(List<Tag> allTags) throws IOException {
-        String question = "Wollen Sie nach Tags suchen?";
-        if(this.trueBooleanQuestion(question)) {
-            return this.getTags(allTags);
-        } else {
-            return new Tag[0];
-        }
-    }
-
     public boolean trueBooleanQuestion(String question) throws IOException {
         String JA = "j";
         String NEIN = "n";
@@ -46,14 +28,6 @@ public class GUI {
         return tastatur.readLine().equals(JA);
     }
 
-    private Category[] getFilters(CategoryStatus categoryStatus, List<Category> allElements) throws IOException {
-        String[] filtersString = getStringArrayOfElements(categoryStatus, allElements,"Geben Sie die gewünschten " + categoryStatus.getStatusPlural() + " ein: ");
-        Category[] filters = new Category[filtersString.length];
-        for(int countFilter = 0; countFilter < filtersString.length; countFilter++) {
-            filters[countFilter] = new Category(filtersString[countFilter]);
-        }
-        return filters;
-    }
     public String[] getStringArrayOfElements(CategoryStatus categoryStatus, List<Category> allElements, String text) throws IOException {
         showExistingElements(categoryStatus.getStatus(), ManageElement.toStringList(allElements));
         System.out.println(text);
@@ -71,7 +45,7 @@ public class GUI {
         return tags;
     }
 
-    private static String[] getTagsString(List<Tag> allTags) throws IOException {
+    public static String[] getTagsString(List<Tag> allTags) throws IOException {
         showExistingElements("Tag", Tag.tagsToStringList(allTags));
         System.out.println("Geben Sie die gewünschten Tags ein: ");
 
