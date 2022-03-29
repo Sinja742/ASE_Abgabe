@@ -16,17 +16,22 @@ public class Steuerung {
     public static void main(String[] args) throws IOException {
         gui = new GUI();
         new ManageElement();
+        idea = new Idea(gui);
 
-        AddElement addElemente = new AddElement(gui);
-        UpdateElement updateElemente = new UpdateElement(gui);
-        DeleteElement deleteElemente = new DeleteElement(gui);
+        addElemente = new AddElement(gui);
+        updateElemente = new UpdateElement(gui);
+        deleteElemente = new DeleteElement(gui);
 
         while (true) {
-            userIneraction(addElemente, updateElemente, deleteElemente);
+            userIneraction();
         }
     }
 
     private static GUI gui;
+    private static AddElement addElemente;
+    private static UpdateElement updateElemente;
+    private static DeleteElement deleteElemente;
+    private static Idea idea;
 
     private static Category[] artFilter;
     private static Category[] stimmungFilter;
@@ -36,18 +41,18 @@ public class Steuerung {
     private static void userIneraction(AddElement addElemente, UpdateElement updateElemente, DeleteElement deleteElemente) throws IOException {
         try {
             if (gui.trueBooleanQuestion("Wollen Sie nach einer kreativen Idee suchen?")) {
-                searchIdea();
+                idea.searchIdea();
             }
             if (gui.trueBooleanQuestion("Wollen Sie neue Elemente hinzufügen?")) {
-                addElementToElementList(addElemente);
+                addElementToElementList();
                 ManageElement.reloadElements();
             }
             if (gui.trueBooleanQuestion("Wollen Sie Elemente bearbeiten?")) {
-                updateElementInElementList(updateElemente);
+                updateElementInElementList();
                 ManageElement.reloadElements();
             }
             if (gui.trueBooleanQuestion("Wollen Sie Elemente löschen?")) {
-                deleteElementFromElementList(deleteElemente);
+                deleteElementFromElementList();
                 ManageElement.reloadElements();
             }
         } catch (IOException e) {
@@ -55,119 +60,92 @@ public class Steuerung {
         }
     }
 
-    // <<
+        // <<
 
-    private static void searchIdea() throws IOException {
-        try {
-            getAllSearchOpportiunities();
-            gui.showIdea(getIdea());
-        }catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
 
-    private static void getAllSearchOpportiunities() throws IOException {
-        try {
-            artFilter = gui.getSearchOpportiunities(CategoryStatus.ART, ManageElement.getAllArten());
-            stimmungFilter = gui.getSearchOpportiunities(CategoryStatus.STIMMUNG, ManageElement.getAllStimmungen());
-            objektFilter = gui.getSearchOpportiunities(CategoryStatus.OBJEKT, ManageElement.getAllObjekte());
-            tagFilter = gui.getSearchTags(Tag.getAllTags());
-
-            fillEmptyFilter();
-        }catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-    // >>
-
-    private static void addElementToElementList(AddElement addElemente) throws IOException {
-        try {
+        private static void addElementToElementList () {
             addElemente.addElement(CategoryStatus.ART, ManageElement.getAllArten());
             addElemente.addElement(CategoryStatus.STIMMUNG, ManageElement.getAllStimmungen());
             addElemente.addElement(CategoryStatus.OBJEKT, ManageElement.getAllObjekte());
-        }catch (IOException e) {
-            e.printStackTrace();
         }
-    }
 
-    private static void deleteElementFromElementList(DeleteElement deleteElemente) throws IOException {
-        try {
-            deleteElemente.deleteElement(CategoryStatus.ART, ManageElement.getAllArten());
-            deleteElemente.deleteElement(CategoryStatus.STIMMUNG, ManageElement.getAllStimmungen());
-            deleteElemente.deleteElement(CategoryStatus.OBJEKT, ManageElement.getAllObjekte());
-        }catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-    private static void updateElementInElementList(UpdateElement updateElemente) throws IOException {
-        try {
-            updateElemente.updateElement(CategoryStatus.ART, ManageElement.getAllArten());
-            updateElemente.updateElement(CategoryStatus.STIMMUNG, ManageElement.getAllStimmungen());
-            updateElemente.updateElement(CategoryStatus.OBJEKT, ManageElement.getAllObjekte());
-        }catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-    private static void filterObjekteIfTag() {
-        if (!filterEmpty(tagFilter)) {
-            filterObjekte();
-        }
-    }
-
-    private static void filterObjekte() {
-        List<Category> objekte = new ArrayList<>();
-        for (Category category : objektFilter) {
-            if (category.containsTag(tagFilter)) {
-                objekte.add(category);
+        private static void deleteElementFromElementList () {
+            try {
+                deleteElemente.deleteElement(CategoryStatus.ART, ManageElement.getAllArten());
+                deleteElemente.deleteElement(CategoryStatus.STIMMUNG, ManageElement.getAllStimmungen());
+                deleteElemente.deleteElement(CategoryStatus.OBJEKT, ManageElement.getAllObjekte());
+            } catch (IOException e) {
+                e.printStackTrace();
             }
         }
-        System.out.println("Listengröße " + objekte.size());
-        objektFilter = ManageElement.toArray(objekte);
-    }
 
-    private static String getIdea() {
-        filterObjekteIfTag();
-        if (filterEmpty(objektFilter)) {
-            return "\nEs gibt keine Objekte zu den ausgewählten Tags. Bitte weniger Tags setzen für eine Idee.";
-        } else {
-            return randomOptions();
+        private static void updateElementInElementList () {
+            try {
+                updateElemente.updateElement(CategoryStatus.ART, ManageElement.getAllArten());
+                updateElemente.updateElement(CategoryStatus.STIMMUNG, ManageElement.getAllStimmungen());
+                updateElemente.updateElement(CategoryStatus.OBJEKT, ManageElement.getAllObjekte());
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
-    }
 
-    private static String randomOptions() {
-        String idea;
-        idea = randomFilterOption(artFilter);
-        idea = idea.concat(" " + randomFilterOption(stimmungFilter));
-        idea = idea.concat(" " + randomFilterOption(objektFilter));
-
-        return idea;
-    }
-
-    private static String randomFilterOption(Category[] filter) {
-        return filter[(int) (Math.random() * filter.length)].getDescription();
-    }
-
-    private static void fillEmptyFilter() {
-        if (filterEmpty(artFilter)) {
-            artFilter = ManageElement.toArray(ManageElement.getAllArten());
+        private static void filterObjekteIfTag () {
+            if (!filterEmpty(tagFilter)) {
+                filterObjekte();
+            }
         }
-        if (filterEmpty(stimmungFilter)) {
-            stimmungFilter = ManageElement.toArray(ManageElement.getAllStimmungen());
+
+        private static void filterObjekte () {
+            List<Category> objekte = new ArrayList<>();
+            for (Category category : objektFilter) {
+                if (category.containsTag(tagFilter)) {
+                    objekte.add(category);
+                }
+            }
+            System.out.println("Listengröße " + objekte.size());
+            objektFilter = ManageElement.toArray(objekte);
         }
-        if (filterEmpty(objektFilter)) {
-            objektFilter = ManageElement.toArray(ManageElement.getAllObjekte());
+
+        private static String getIdea () {
+            filterObjekteIfTag();
+            if (filterEmpty(objektFilter)) {
+                return "\nEs gibt keine Objekte zu den ausgewählten Tags. Bitte weniger Tags setzen für eine Idee.";
+            } else {
+                return randomOptions();
+            }
         }
-    }
 
-    private static boolean filterEmpty(Category[] filter) {
-        return filter.length == 0;
-    }
+        private static String randomOptions () {
+            String idea;
+            idea = randomFilterOption(artFilter);
+            idea = idea.concat(" " + randomFilterOption(stimmungFilter));
+            idea = idea.concat(" " + randomFilterOption(objektFilter));
 
-    private static boolean filterEmpty(Tag[] filter) {
-        return filter.length == 0;
-    }
+            return idea;
+        }
 
-}
+        private static String randomFilterOption (Category[]filter){
+            return filter[(int) (Math.random() * filter.length)].getDescription();
+        }
+
+        private static void fillEmptyFilter () {
+            if (filterEmpty(artFilter)) {
+                artFilter = ManageElement.toArray(ManageElement.getAllArten());
+            }
+            if (filterEmpty(stimmungFilter)) {
+                stimmungFilter = ManageElement.toArray(ManageElement.getAllStimmungen());
+            }
+            if (filterEmpty(objektFilter)) {
+                objektFilter = ManageElement.toArray(ManageElement.getAllObjekte());
+            }
+        }
+
+        private static boolean filterEmpty (Category[]filter){
+            return filter.length == 0;
+        }
+
+        private static boolean filterEmpty (Tag[]filter){
+            return filter.length == 0;
+        }
+
+    }

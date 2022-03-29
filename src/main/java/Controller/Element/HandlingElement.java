@@ -13,7 +13,7 @@ public class HandlingElement {
         this.gui = gui;
     }
 
-    static GUI gui;
+    protected static GUI gui;
 
     protected String handleElement(CategoryStatus categoryStatus, List<Category> allElements, String action) throws IOException {
         try {
