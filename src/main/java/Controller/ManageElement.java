@@ -48,7 +48,7 @@ public class ManageElement {
     public static List<String> toStringList(List<Category> elementsList) {
         List<String> elementsListString = new ArrayList<>();
         for (Category element : elementsList) {
-            elementsListString.add(element.toString());
+            elementsListString.add(element.getDescription());
         }
 
         return elementsListString;

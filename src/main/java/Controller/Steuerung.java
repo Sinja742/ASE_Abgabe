@@ -3,7 +3,7 @@ package Controller;
 import Controller.Element.AddElement;
 import Controller.Element.DeleteElement;
 import Controller.Element.UpdateElement;
-import Controller.SearchElements.Idea;
+import Controller.SearchElements.SimpleIdea;
 import Entity.CategoryStatus;
 
 import java.io.IOException;
@@ -14,7 +14,6 @@ public class Steuerung {
     public static void main(String[] args) throws IOException {
         gui = new GUI();
         new ManageElement();
-        idea = new Idea(gui);
 
         addElemente = new AddElement(gui);
         updateElemente = new UpdateElement(gui);
@@ -29,11 +28,10 @@ public class Steuerung {
     private static AddElement addElemente;
     private static UpdateElement updateElemente;
     private static DeleteElement deleteElemente;
-    private static Idea idea;
 
     private static void userIneraction() throws IOException {
         if (gui.trueBooleanQuestion("Wollen Sie nach einer kreativen Idee suchen?")) {
-            idea.searchIdea();
+            gui.showIdea((new SimpleIdea(gui)).toString());
         }
         if (gui.trueBooleanQuestion("Wollen Sie neue Elemente hinzufügen?")) {
             addElementToElementList();
