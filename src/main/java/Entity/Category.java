@@ -1,19 +1,22 @@
 package Entity;
 
-import java.util.Objects;
+public abstract class Category {
 
-public class Category {
-    private String description;
+    protected String description;
+//    protected CategoryStatus status;
 
-    public Category(String description) {
+    public Category(String description/*, CategoryStatus status*/) {
         this.description = description;
+//        this.status = status;
     }
 
     public String getDescription() {
         return this.description;
     }
 
-    public boolean containsTag(Tag[] tagFilter) {
-        return false;
-    }
+//    public CategoryStatus getStatus() {
+//        return this.status;
+//    }
+
+    public abstract boolean containsTag(Tag[] tagFilter);
 }

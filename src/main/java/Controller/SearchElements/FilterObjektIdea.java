@@ -2,7 +2,6 @@ package Controller.SearchElements;
 
 import Controller.ManageElement;
 import Entity.Category;
-import Entity.Objekt;
 import Entity.Tag;
 
 import java.util.ArrayList;

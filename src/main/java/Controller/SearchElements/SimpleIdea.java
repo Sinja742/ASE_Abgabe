@@ -2,6 +2,7 @@ package Controller.SearchElements;
 
 import Controller.GUI;
 import Controller.ManageElement;
+import Entity.Objekt;
 import Entity.Category;
 import Entity.CategoryStatus;
 import Entity.Tag;

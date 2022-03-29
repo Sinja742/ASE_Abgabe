@@ -1,11 +1,11 @@
 package Controller.SearchElements;
 
 import Controller.GUI;
-import Entity.Category;
-import Entity.CategoryStatus;
-import Entity.Tag;
+import Controller.ManageElement;
+import Entity.*;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 public class SearchElements {
@@ -38,7 +38,11 @@ public class SearchElements {
         String[] filtersString = gui.getStringArrayOfElements(categoryStatus, allElements,"Geben Sie die gewünschten " + categoryStatus.getStatusPlural() + " ein: ");
         Category[] filters = new Category[filtersString.length];
         for(int countFilter = 0; countFilter < filtersString.length; countFilter++) {
-            filters[countFilter] = new Category(filtersString[countFilter]);
+            if(CategoryStatus.OBJEKT.isEqualCategory(categoryStatus)) {
+                filters[countFilter] = ManageElement.getCategoryToDescription(filtersString[countFilter]);
+            } else {
+                filters[countFilter] = ManageElement.getCategoryToDescription(filtersString[countFilter]);
+            }
         }
         return filters;
     }

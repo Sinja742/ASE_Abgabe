@@ -1,9 +1,6 @@
 package jobs;
 
-import Entity.Category;
-import Entity.Objekt;
-import Entity.CategoryStatus;
-import Entity.Tag;
+import Entity.*;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -43,7 +40,7 @@ public class TxtReader {
             text = entityText.split(",");
 
             for (String s : text) {
-                entityList.add(new Category(s));
+                entityList.add(new SimpleCategory(s));
             }
         }
         return entityList;

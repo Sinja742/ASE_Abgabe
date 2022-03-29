@@ -1,7 +1,6 @@
 package Controller.SearchElements;
 
 import Entity.Category;
-import Entity.CategoryStatus;
 
 import java.util.List;
 

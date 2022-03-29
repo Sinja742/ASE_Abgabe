@@ -8,7 +8,6 @@ import jobs.TxtHandling;
 
 import java.io.IOException;
 import java.util.List;
-import java.util.Objects;
 
 public class AddElement extends HandlingElement {
 

@@ -1,12 +1,12 @@
 package Controller;
 
 import Entity.Category;
-import Entity.Tag;
+import Entity.Objekt;
+import Entity.SimpleCategory;
 import Entity.CategoryStatus;
 import jobs.TxtReader;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class ManageElement {
@@ -35,6 +35,27 @@ public class ManageElement {
 
     public static List<Category> getAllObjekte() {
         return objekte;
+    }
+
+    public static Category getCategoryToDescription(String description) {
+        Category category = searchCategoryToDescription(description, arten);
+        if(category == null) {
+            category = searchCategoryToDescription(description, stimmungen);
+        }
+        if(category == null) {
+            category = searchCategoryToDescription(description, objekte);
+        }
+        return category;
+        //TODO try catch category == null
+    }
+
+    private static Category searchCategoryToDescription(String description, List<Category> elements) {
+        for(Category element : elements) {
+            if(element.getDescription().equals(description)) {
+                return element;
+            }
+        }
+        return null;
     }
 
     public static Category[] toArray(List<Category> elementsList) {
