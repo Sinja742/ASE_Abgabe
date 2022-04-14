@@ -8,7 +8,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class SearchElements {
+public class SearchElements implements SearchElementsInterface{
 
     private final GUI gui;
     private final ManageElement manageElement;

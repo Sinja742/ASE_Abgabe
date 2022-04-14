@@ -7,7 +7,7 @@ import Entity.Tag;
 import java.util.ArrayList;
 import java.util.List;
 
-public class FilterObjektIdea extends Filter {
+public class FilterObjektIdea extends Filter implements FilterInterface{
 
     private Tag[] tagFilter;
 

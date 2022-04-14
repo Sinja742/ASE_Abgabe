@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class Objekt extends Category {
+public class Objekt extends Category implements CategoryInterface{
     private List<Tag> tags;
 
     public Objekt(String description, List<Tag> tags) {
@@ -18,13 +18,10 @@ public class Objekt extends Category {
         this.tags.addAll(Arrays.asList(tags));
     }
 
-    //TODO: Contructor TxtReader
-
     public List<Tag> getTags() {
         return this.tags;
     }
 
-    @Override
     public boolean containsTag(Tag[] filterTags) {
         if (!tags.isEmpty()) {
             for (Tag filterTag : filterTags) {
@@ -38,7 +35,6 @@ public class Objekt extends Category {
         return false;
     }
 
-    @Override
     public String toString() {
         List<String> objektList = new ArrayList<>();
         objektList.add(this.description);

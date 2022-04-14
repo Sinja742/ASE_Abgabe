@@ -9,7 +9,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ManageElement {
+public class ManageElement implements ManageElementInterface{
 
     private List<Category> arten;
     private List<Category> stimmungen;
@@ -24,7 +24,7 @@ public class ManageElement {
         loadElements();
     }
 
-    public void loadElements() {
+    private void loadElements() {
         arten = this.entityBuilder.readEntity(CategoryStatus.ART);
         stimmungen = this.entityBuilder.readEntity(CategoryStatus.STIMMUNG);
         objekte = this.entityBuilder.readEntity(CategoryStatus.OBJEKT);
@@ -73,14 +73,6 @@ public class ManageElement {
     private List<Category> deleteSearchElement(String elementDescription, List<Category> listCategory) {
         listCategory.remove(searchCategoryToDescription(elementDescription, listCategory));
         return listCategory;
-
-//        for(int categoryElementCounter = 0; categoryElementCounter < listCategory.size(); categoryElementCounter++) {
-//            if(listCategory.get(categoryElementCounter).equalsDescription(elementDescription)) {
-//                listCategory.remove(categoryElementCounter);
-//                return listCategory;
-//            }
-//        }
-//        return listCategory;
     }
 
     public Category getCategoryToDescription(String description) {

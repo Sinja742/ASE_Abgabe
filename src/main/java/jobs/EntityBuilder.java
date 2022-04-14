@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 // TODO: Refactoring !!!!!!!!!!!!!
-public class EntityBuilder {
+public class EntityBuilder implements EntityBuilderInterface{
 
     private final TxtHandling handlerTxt;
 

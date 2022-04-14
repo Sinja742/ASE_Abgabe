@@ -6,11 +6,11 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class TxtHandling {
+public class TxtHandling implements TxtHandlingInterface{
 
     File file = new File("Elemente.txt");
 
-    String[] readTxt() {
+    public String[] readTxt() {
         try {
             BufferedReader bfr = new BufferedReader(new FileReader("Elemente.txt"));
             String text = bfr.readLine();

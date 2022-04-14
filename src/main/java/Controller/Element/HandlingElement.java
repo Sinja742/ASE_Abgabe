@@ -4,7 +4,6 @@ import Controller.GUI;
 import Controller.ManageElement;
 import Entity.Category;
 import Entity.CategoryStatus;
-import jobs.TxtHandling;
 
 import java.io.IOException;
 import java.util.List;

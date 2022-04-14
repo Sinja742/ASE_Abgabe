@@ -4,8 +4,6 @@ import Controller.GUI;
 import Controller.ManageElement;
 import Entity.Category;
 import Entity.CategoryStatus;
-import Entity.Objekt;
-import Entity.SimpleCategory;
 
 import java.io.IOException;
 import java.util.List;
