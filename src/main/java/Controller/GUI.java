@@ -24,7 +24,7 @@ public class GUI implements GUIInterface {
         System.out.println("Sie können hierzu kreativ werden: " + idea);
     }
 
-    public boolean trueBooleanQuestion(String question) throws IOException {
+    public boolean trueBooleanQuestion(String question) {
         try {
             String JA = "j";
             String NEIN = "n";
@@ -76,7 +76,7 @@ public class GUI implements GUIInterface {
             return tags;
         }
 
-    public String[] getTagsString(List<Tag> allTags) {
+    public String[] getTagsString() {
         try {
             showExistingElements("Tag", Tag.tagsToStringList(Tag.getAllTags()));
             System.out.println("Geben Sie die gewünschten Tags ein: ");
@@ -88,7 +88,7 @@ public class GUI implements GUIInterface {
         } catch (IOException e) {
             System.out.println("Bei der Verarbeitung ihrer Eingabe ist etwas schief gelaufen. Bitte versuchen Sie es erneut.");
             e.printStackTrace();
-            return getTagsString(allTags);
+            return getTagsString();
         }
         }
 
@@ -110,7 +110,7 @@ public class GUI implements GUIInterface {
         } catch (IOException e) {
             System.out.println("Bei der Verarbeitung ihrer Eingabe ist etwas schief gelaufen. Bitte versuchen Sie es erneut.");
             e.printStackTrace();
-            return getNewElement();
+            return getNewElement(categoryStatus);
         }
         }
     }

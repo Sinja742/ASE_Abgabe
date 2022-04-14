@@ -19,5 +19,5 @@ public interface GUIInterface {
 
     void showExistingElements(String categoryStatus, List<String> allElements);
 
-    String getNewElement(CategoryStatus categoryStatus) throws IOException;
+    String getNewElement(CategoryStatus categoryStatus);
 }
