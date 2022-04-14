@@ -16,7 +16,7 @@ public class SearchElements {
         this.gui = gui;
     }
 
-    public static Category[] getSearchElements(CategoryStatus categoryStatus, List<Category> allElements) throws IOException {
+    public static Category[] getSearchElements(CategoryStatus categoryStatus, List<Category> allElements){
         String question = "Wollen Sie nach " + categoryStatus.getStatusPlural() + " suchen?";
         if(gui.trueBooleanQuestion(question)) {
             return getFilters(categoryStatus, allElements);
@@ -25,7 +25,7 @@ public class SearchElements {
         }
     }
 
-    public static Tag[] getSearchTags(List<Tag> allTags) throws IOException {
+    public static Tag[] getSearchTags(List<Tag> allTags){
         String question = "Wollen Sie nach Tags suchen?";
         if(gui.trueBooleanQuestion(question)) {
             return gui.getTags(allTags);
@@ -34,7 +34,7 @@ public class SearchElements {
         }
     }
 
-    private static Category[] getFilters(CategoryStatus categoryStatus, List<Category> allElements) throws IOException {
+    private static Category[] getFilters(CategoryStatus categoryStatus, List<Category> allElements){
         String[] filtersString = gui.getStringArrayOfElements(categoryStatus, allElements,"Geben Sie die gewünschten " + categoryStatus.getStatusPlural() + " ein: ");
         Category[] filters = new Category[filtersString.length];
         for(int countFilter = 0; countFilter < filtersString.length; countFilter++) {

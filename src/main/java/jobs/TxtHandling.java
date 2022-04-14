@@ -12,24 +12,20 @@ import java.util.stream.Stream;
 
 public class TxtHandling {
 
-    public static void addNewElement(String element, CategoryStatus status) throws IOException {
-        try {
-            String[] allTxtElements = TxtReader.readTxt();
-            assert allTxtElements != null;
-            if (status.equals(CategoryStatus.ART)){
-                allTxtElements[0] = allTxtElements[0] + ","+ element;
-            }else if (status.equals(CategoryStatus.STIMMUNG)){
-                allTxtElements[1] = allTxtElements[1] + ","+ element;
-            }else if (status.equals(CategoryStatus.OBJEKT)){
-                allTxtElements[2] = allTxtElements[2] + ";"+ element;
-            }
-            updateTxtDocument(allTxtElements);
-        }catch (IOException e) {
-            e.printStackTrace();
+    public static void addNewElement(String element, CategoryStatus status){
+        String[] allTxtElements = TxtReader.readTxt();
+        assert allTxtElements != null;
+        if (status.equals(CategoryStatus.ART)){
+            allTxtElements[0] = allTxtElements[0] + ","+ element;
+        }else if (status.equals(CategoryStatus.STIMMUNG)){
+            allTxtElements[1] = allTxtElements[1] + ","+ element;
+        }else if (status.equals(CategoryStatus.OBJEKT)){
+            allTxtElements[2] = allTxtElements[2] + ";"+ element;
         }
+        updateTxtDocument(allTxtElements);
     }
 
-    private static void updateTxtDocument(String[] allElements) throws IOException {
+    private static void updateTxtDocument(String[] allElements){
         try {
             File file = new File("resources/Elemente.txt");
             file.delete();
@@ -43,21 +39,17 @@ public class TxtHandling {
         }
     }
 
-    public static void deleteElement(String element, CategoryStatus status) throws IOException {
-        try {
-            String[] allTextElements = TxtReader.readTxt();
-            assert allTextElements != null;
-            if (status.equals(CategoryStatus.ART)){
-                allTextElements[0] = searchElementToDelete(element, allTextElements[0].split(","));
-            }else if (status.equals(CategoryStatus.STIMMUNG)){
-                allTextElements[1] = searchElementToDelete(element, allTextElements[1].split(","));
-            }else if (status.equals(CategoryStatus.OBJEKT)){
-                allTextElements[2] = searchObjektToDelete(element, allTextElements[2].split(";"));
-            }
-            updateTxtDocument(allTextElements);
-        }catch (IOException e) {
-            e.printStackTrace();
+    public static void deleteElement(String element, CategoryStatus status) {
+        String[] allTextElements = TxtReader.readTxt();
+        assert allTextElements != null;
+        if (status.equals(CategoryStatus.ART)){
+            allTextElements[0] = searchElementToDelete(element, allTextElements[0].split(","));
+        }else if (status.equals(CategoryStatus.STIMMUNG)){
+            allTextElements[1] = searchElementToDelete(element, allTextElements[1].split(","));
+        }else if (status.equals(CategoryStatus.OBJEKT)){
+            allTextElements[2] = searchObjektToDelete(element, allTextElements[2].split(";"));
         }
+        updateTxtDocument(allTextElements);
     }
 
     private static String searchElementToDelete(String element, String[] allTextElements){

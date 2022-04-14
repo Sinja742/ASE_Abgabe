@@ -4,11 +4,11 @@ import Entity.Category;
 import Entity.CategoryStatus;
 import Entity.Tag;
 
+import Error.FalseInputException;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class GUI {
@@ -19,63 +19,32 @@ public class GUI {
         System.out.println("Sie können hierzu kreativ werden: " + idea);
     }
 
-    public Category[] getSearchOpportiunities(CategoryStatus categoryStatus, List<Category> allElements) throws IOException {
-        try {
-            String question = "Wollen Sie nach " + categoryStatus.getStatusPlural() + " suchen?";
-            if (this.trueBooleanQuestion(question)) {
-                return this.getFilters(categoryStatus, allElements);
-            } else {
-                return new Category[0];
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-            return null;
-        }
-    }
-
-    public Tag[] getSearchTags(List<Tag> allTags) throws IOException {
-        try {
-            String question = "Wollen Sie nach Tags suchen?";
-            if (this.trueBooleanQuestion(question)) {
-                return this.getTags(allTags);
-            } else {
-                return new Tag[0];
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-            return null;
-        }
-    }
-
-    public boolean trueBooleanQuestion(String question) throws IOException {
+    // Falsche eingabe abgefangen und neue exception wird geworfen --> Rekursiver aufruf damit eine korrekte eingabe stattfinden kann
+    public boolean trueBooleanQuestion(String question) {
         try {
             String JA = "j";
             String NEIN = "n";
             BufferedReader tastatur = new BufferedReader(new InputStreamReader(System.in));
 
             System.out.print(question + " (" + JA + "/" + NEIN + "): ");
-            return tastatur.readLine().equals(JA);
-        } catch (IOException e) {
-            e.printStackTrace();
-            return false;
-        }
-    }
-
-    private Category[] getFilters(CategoryStatus categoryStatus, List<Category> allElements) throws IOException {
-        try {
-            String[] filtersString = getStringArrayOfElements(categoryStatus, allElements, "Geben Sie die gewünschten " + categoryStatus.getStatusPlural() + " ein: ");
-            Category[] filters = new Category[filtersString.length];
-            for (int countFilter = 0; countFilter < filtersString.length; countFilter++) {
-                filters[countFilter] = new Category(filtersString[countFilter]);
+            if (tastatur.readLine().equals(JA)){
+                return true;
+            }else if (tastatur.readLine().equals(NEIN)){
+                return false;
+            }else {
+                throw new FalseInputException();
             }
-            return filters;
-        } catch (IOException e) {
+        } catch (FalseInputException ex) {
+            System.out.println(ex.getMessage());
+            return trueBooleanQuestion(question);
+        } catch (IOException e){
+            System.out.println("Bei der Verarbeitung ihrer Eingabe ist etwas schief gelaufen. Bitte versuchen Sie es erneut.");
             e.printStackTrace();
-            return null;
+            return trueBooleanQuestion(question);
         }
     }
 
-    public String[] getStringArrayOfElements(CategoryStatus categoryStatus, List<Category> allElements, String text) throws IOException {
+    public String[] getStringArrayOfElements(CategoryStatus categoryStatus, List<Category> allElements, String text) {
         try {
             showExistingElements(categoryStatus.getStatus(), ManageElement.toStringList(allElements));
             System.out.println(text);
@@ -83,26 +52,25 @@ public class GUI {
             BufferedReader tastatur = new BufferedReader(new InputStreamReader(System.in));
             return tastatur.readLine().split(" ");
         } catch (IOException e) {
+            System.out.println("Bei der Verarbeitung ihrer Eingabe ist etwas schief gelaufen. Bitte versuchen Sie es erneut.");
             e.printStackTrace();
-            return null;
+            return getStringArrayOfElements(categoryStatus, allElements, text);
         }
     }
-
-    public static Tag[] getTags(List<Tag> allTags) throws IOException {
-        try {
-            String[] tagsString = getTagsString(allTags);
-            Tag[] tags = new Tag[tagsString.length];
-            for (int countTags = 0; countTags < tagsString.length; countTags++) {
-                tags[countTags] = Tag.getTag(tagsString[countTags]);
-            }
-            return tags;
-        } catch (IOException e) {
-            e.printStackTrace();
-            return null;
+//      TODO: können gleiche tags mehrmals angelegt sein ? --> objekte bearbeiten und neu anlegen
+    public static Tag[] getTags(List<Tag> allTags) {
+        String[] tagsString = getTagsString(allTags);
+        Tag[] tags = new Tag[tagsString.length];
+        for (int countTags = 0; countTags < tagsString.length; countTags++) {
+//            Abfrage ob tag existiert
+//            Was machen wir mit tags die falsch geschrieben sind ?
+            tags[countTags] = Tag.getTag(tagsString[countTags]);
         }
+        return tags;
     }
 
-    private static String[] getTagsString(List<Tag> allTags) throws IOException {
+//
+    private static String[] getTagsString(List<Tag> allTags) {
         try {
             showExistingElements("Tag", Tag.tagsToStringList(allTags));
             System.out.println("Geben Sie die gewünschten Tags ein: ");
@@ -110,8 +78,9 @@ public class GUI {
             BufferedReader tastatur = new BufferedReader(new InputStreamReader(System.in));
             return tastatur.readLine().split(" ");
         } catch (IOException e) {
+            System.out.println("Bei der Verarbeitung ihrer Eingabe ist etwas schief gelaufen. Bitte versuchen Sie es erneut.");
             e.printStackTrace();
-            return null;
+            return getTagsString(allTags);
         }
     }
 
@@ -123,14 +92,15 @@ public class GUI {
         System.out.println();
     }
 
-    public String getNewElement() throws IOException {
+    public String getNewElement() {
         try {
             BufferedReader tastatur = new BufferedReader(new InputStreamReader(System.in));
             System.out.println("Geben Sie den neuen Begriff: ");
             return tastatur.readLine();
         } catch (IOException e) {
+            System.out.println("Bei der Verarbeitung ihrer Eingabe ist etwas schief gelaufen. Bitte versuchen Sie es erneut.");
             e.printStackTrace();
-            return null;
+            return getNewElement();
         }
     }
 }

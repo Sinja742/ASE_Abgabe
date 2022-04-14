@@ -15,23 +15,15 @@ public class DeleteElement extends HandlingElement {
         super(gui);
     }
 
-    public void deleteElement(CategoryStatus categoryStatus, List<Category> allElements) throws IOException {
-        try {
-            String question = "Wollen Sie ein Element des Typs " + categoryStatus.getStatus() + " löschen?";
-            if (gui.trueBooleanQuestion(question)) {
-                deleteElementOfTypeCategory(categoryStatus, allElements);
-            }
-        }catch (IOException e) {
-            e.printStackTrace();
+    public void deleteElement(CategoryStatus categoryStatus, List<Category> allElements){
+        String question = "Wollen Sie ein Element des Typs " + categoryStatus.getStatus() + " löschen?";
+        if (gui.trueBooleanQuestion(question)) {
+            deleteElementOfTypeCategory(categoryStatus, allElements);
         }
     }
 
-    private void deleteElementOfTypeCategory(CategoryStatus categoryStatus, List<Category> allElements) throws IOException {
-        try {
-            String element = handleElement(categoryStatus, allElements, "löschen");
-            TxtHandling.deleteElement(element, categoryStatus);
-        }catch (IOException e) {
-            e.printStackTrace();
-        }
+    private void deleteElementOfTypeCategory(CategoryStatus categoryStatus, List<Category> allElements) {
+        String element = handleElement(categoryStatus, allElements, "löschen");
+        TxtHandling.deleteElement(element, categoryStatus);
     }
 }

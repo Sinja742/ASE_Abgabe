@@ -14,29 +14,21 @@ public class UpdateElement extends HandlingElement {
         super(gui);
     }
 
-    public void updateElement(CategoryStatus categoryStatus, List<Category> allElements) throws IOException {
-        try {
-            String question = "Wollen Sie ein Element des Typs " + categoryStatus.getStatus() + " bearbeiten?";
-            if (gui.trueBooleanQuestion(question)) {
-                updateElementOfTypeCategory(categoryStatus, allElements);
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
+    public void updateElement(CategoryStatus categoryStatus, List<Category> allElements){
+        String question = "Wollen Sie ein Element des Typs " + categoryStatus.getStatus() + " bearbeiten?";
+        if (gui.trueBooleanQuestion(question)) {
+            updateElementOfTypeCategory(categoryStatus, allElements);
         }
     }
 
-    public void updateElementOfTypeCategory(CategoryStatus categoryStatus, List<Category> allElements) throws IOException {
-        try {
-            String element = handleElement(categoryStatus, allElements, "bearbeiten");
-            TxtHandling.deleteElement(element, categoryStatus);
-            String newElement = gui.getNewElement();
-            if (CategoryStatus.OBJEKT.isEqualCategory(categoryStatus)) {
-                TxtHandling.addNewElement(AddElement.addTags(newElement), categoryStatus);
-            } else {
-                TxtHandling.addNewElement(newElement, categoryStatus);
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
+    public void updateElementOfTypeCategory(CategoryStatus categoryStatus, List<Category> allElements){
+        String element = handleElement(categoryStatus, allElements, "bearbeiten");
+        TxtHandling.deleteElement(element, categoryStatus);
+        String newElement = gui.getNewElement();
+        if (CategoryStatus.OBJEKT.isEqualCategory(categoryStatus)) {
+            TxtHandling.addNewElement(AddElement.addTags(newElement), categoryStatus);
+        } else {
+            TxtHandling.addNewElement(newElement, categoryStatus);
         }
     }
 }

@@ -30,7 +30,7 @@ public class Idea {
         gui.showIdea(getIdea());
     }
 
-    private static void getAllSearchElements() throws IOException {
+    private static void getAllSearchElements(){
         artFilter = searchElements.getSearchElements(CategoryStatus.ART, ManageElement.getAllArten());
         stimmungFilter = searchElements.getSearchElements(CategoryStatus.STIMMUNG, ManageElement.getAllStimmungen());
         objektFilter = searchElements.getSearchElements(CategoryStatus.OBJEKT, ManageElement.getAllObjekte());
