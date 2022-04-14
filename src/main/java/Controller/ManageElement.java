@@ -1,40 +1,99 @@
 package Controller;
 
 import Entity.Category;
-import Entity.Tag;
 import Entity.CategoryStatus;
-import jobs.TxtReader;
+import jobs.EntityBuilder;
+import jobs.TxtHandling;
 
+import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
-public class ManageElement {
+public class ManageElement implements ManageElementInterface{
 
-    private static List<Category> arten;
-    private static List<Category> stimmungen;
-    private static List<Category> objekte;
+    private List<Category> arten;
+    private List<Category> stimmungen;
+    private List<Category> objekte;
 
-    ManageElement() {
-        reloadElements();
+    private final EntityBuilder entityBuilder;
+    private final TxtHandling txtHandling;
+
+    public ManageElement(EntityBuilder entityBuilder) {
+        this.entityBuilder = entityBuilder;
+        this.txtHandling = new TxtHandling();
+        loadElements();
     }
 
-    public static void reloadElements() {
-        arten = TxtReader.readEntity(CategoryStatus.ART);
-        stimmungen = TxtReader.readEntity(CategoryStatus.STIMMUNG);
-        objekte = TxtReader.readEntity(CategoryStatus.OBJEKT);
+    private void loadElements() {
+        arten = this.entityBuilder.readEntity(CategoryStatus.ART);
+        stimmungen = this.entityBuilder.readEntity(CategoryStatus.STIMMUNG);
+        objekte = this.entityBuilder.readEntity(CategoryStatus.OBJEKT);
     }
 
-    public static List<Category> getAllArten() {
+    public List<Category> getAllArten() {
         return arten;
     }
 
-    public static List<Category> getAllStimmungen() {
+    public List<Category> getAllStimmungen() {
         return stimmungen;
     }
 
-    public static List<Category> getAllObjekte() {
+    public List<Category> getAllObjekte() {
         return objekte;
+    }
+
+    public void addElement(Category element, CategoryStatus status) throws IOException {
+        if(CategoryStatus.ART.isEqualCategory(status)) {
+            arten.add(element);
+        }
+        if(CategoryStatus.STIMMUNG.isEqualCategory(status)) {
+            stimmungen.add(element);
+        }
+        if(CategoryStatus.OBJEKT.isEqualCategory(status)) {
+            objekte.add(element);
+        }
+
+        this.txtHandling.rewriteTxt(this.arten, this.stimmungen, this.objekte);
+    }
+
+    public void deleteElement(String elementDescription, CategoryStatus status) throws IOException {
+        if(CategoryStatus.ART.isEqualCategory(status)) {
+            this.arten = deleteSearchElement(elementDescription, this.arten);
+        }
+        if(CategoryStatus.STIMMUNG.isEqualCategory(status)) {
+            this.stimmungen = deleteSearchElement(elementDescription, this.stimmungen);
+        }
+        if(CategoryStatus.OBJEKT.isEqualCategory(status)) {
+            this.objekte = deleteSearchElement(elementDescription, this.objekte);
+        }
+
+        this.txtHandling.rewriteTxt(this.arten, this.stimmungen, this.objekte);
+    }
+
+    private List<Category> deleteSearchElement(String elementDescription, List<Category> listCategory) {
+        listCategory.remove(searchCategoryToDescription(elementDescription, listCategory));
+        return listCategory;
+    }
+
+    public Category getCategoryToDescription(String description) {
+        Category category = searchCategoryToDescription(description, arten);
+        if(category == null) {
+            category = searchCategoryToDescription(description, stimmungen);
+        }
+        if(category == null) {
+            category = searchCategoryToDescription(description, objekte);
+        }
+        return category;
+        //TODO try catch category == null
+    }
+
+    private Category searchCategoryToDescription(String description, List<Category> elements) {
+        for(Category element : elements) {
+            if(element.equalsDescription(description)) {
+                return element;
+            }
+        }
+        return null;
     }
 
     public static Category[] toArray(List<Category> elementsList) {
@@ -48,7 +107,7 @@ public class ManageElement {
     public static List<String> toStringList(List<Category> elementsList) {
         List<String> elementsListString = new ArrayList<>();
         for (Category element : elementsList) {
-            elementsListString.add(element.toString());
+            elementsListString.add(element.getDescription());
         }
 
         return elementsListString;

@@ -1,22 +1,24 @@
 package Controller.SearchElements;
 
 import Controller.GUI;
-import Entity.Category;
-import Entity.CategoryStatus;
-import Entity.Tag;
+import Controller.ManageElement;
+import Entity.*;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
-public class SearchElements {
+public class SearchElements implements SearchElementsInterface{
 
-    private static GUI gui;
+    private final GUI gui;
+    private final ManageElement manageElement;
 
-    public SearchElements(GUI gui) {
+    public SearchElements(GUI gui, ManageElement manageElement) {
         this.gui = gui;
+        this.manageElement = manageElement;
     }
 
-    public static Category[] getSearchElements(CategoryStatus categoryStatus, List<Category> allElements){
+    public Category[] getSearchElements(CategoryStatus categoryStatus, List<Category> allElements){
         String question = "Wollen Sie nach " + categoryStatus.getStatusPlural() + " suchen?";
         if(gui.trueBooleanQuestion(question)) {
             return getFilters(categoryStatus, allElements);
@@ -25,7 +27,7 @@ public class SearchElements {
         }
     }
 
-    public static Tag[] getSearchTags(List<Tag> allTags){
+    public Tag[] getSearchTags(List<Tag> allTags) {
         String question = "Wollen Sie nach Tags suchen?";
         if(gui.trueBooleanQuestion(question)) {
             return gui.getTags(allTags);
@@ -34,11 +36,15 @@ public class SearchElements {
         }
     }
 
-    private static Category[] getFilters(CategoryStatus categoryStatus, List<Category> allElements){
+    private Category[] getFilters(CategoryStatus categoryStatus, List<Category> allElements) {
         String[] filtersString = gui.getStringArrayOfElements(categoryStatus, allElements,"Geben Sie die gewünschten " + categoryStatus.getStatusPlural() + " ein: ");
         Category[] filters = new Category[filtersString.length];
         for(int countFilter = 0; countFilter < filtersString.length; countFilter++) {
-            filters[countFilter] = new Category(filtersString[countFilter]);
+            if(CategoryStatus.OBJEKT.isEqualCategory(categoryStatus)) {
+                filters[countFilter] = manageElement.getCategoryToDescription(filtersString[countFilter]);
+            } else {
+                filters[countFilter] = manageElement.getCategoryToDescription(filtersString[countFilter]);
+            }
         }
         return filters;
     }

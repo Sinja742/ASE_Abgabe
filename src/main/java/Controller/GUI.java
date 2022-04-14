@@ -11,9 +11,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.List;
 
-public class GUI {
-
-//    TODO: searchElement / filterElement in eine neue Klasse packen
+public class GUI implements GUIInterface{
 
     public void showIdea(String idea) {
         System.out.println("Sie können hierzu kreativ werden: " + idea);
@@ -57,8 +55,8 @@ public class GUI {
             return getStringArrayOfElements(categoryStatus, allElements, text);
         }
     }
-//      TODO: können gleiche tags mehrmals angelegt sein ? --> objekte bearbeiten und neu anlegen
-    public static Tag[] getTags(List<Tag> allTags) {
+    //      TODO: können gleiche tags mehrmals angelegt sein ? --> objekte bearbeiten und neu anlegen
+    public Tag[] getTags(List<Tag> allTags) throws IOException {
         String[] tagsString = getTagsString(allTags);
         Tag[] tags = new Tag[tagsString.length];
         for (int countTags = 0; countTags < tagsString.length; countTags++) {
@@ -69,11 +67,10 @@ public class GUI {
         return tags;
     }
 
-//
-    private static String[] getTagsString(List<Tag> allTags) {
-        try {
-            showExistingElements("Tag", Tag.tagsToStringList(allTags));
-            System.out.println("Geben Sie die gewünschten Tags ein: ");
+    public String[] getTagsString(List<Tag> allTags){
+        try{
+        showExistingElements("Tag", Tag.tagsToStringList(allTags));
+        System.out.println("Geben Sie die gewünschten Tags ein: ");
 
             BufferedReader tastatur = new BufferedReader(new InputStreamReader(System.in));
             return tastatur.readLine().split(" ");
@@ -84,7 +81,7 @@ public class GUI {
         }
     }
 
-    public static void showExistingElements(String categoryStatus, List<String> allElements) {
+    public void showExistingElements(String categoryStatus, List<String> allElements) {
         System.out.println("Diese Elemente des Typs " + categoryStatus + " existieren:");
         for (String option : allElements) {
             System.out.print(option + " ");

@@ -54,7 +54,7 @@ public enum Tag {
     public static List<String> tagsToStringList(List<Tag> tagsList) {
         List<String> tagsListString = new ArrayList<>();
         for(Tag tag : tagsList) {
-            tagsListString.add(tag.toString());
+            tagsListString.add(tag.getDescription());
         }
 
         return tagsListString;

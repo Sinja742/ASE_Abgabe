@@ -1,7 +1,5 @@
 package Entity;
 
-import java.util.Objects;
-
 public enum CategoryStatus {
 
     ART("Art", "Arten"),
@@ -25,7 +23,7 @@ public enum CategoryStatus {
     }
 
     //TODO: Exceptionhandling
-    public static CategoryStatus getCategoryStatus(String status) {
+    public CategoryStatus getCategoryStatus(String status) {
         for (CategoryStatus categoryStatus : CategoryStatus.values()) {
             if (categoryStatus.getStatus().equals(status)) {
                 return categoryStatus;

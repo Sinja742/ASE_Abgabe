@@ -1,10 +1,8 @@
 package Controller.Element;
 
 import Controller.GUI;
-import Entity.Category;
-import Entity.CategoryStatus;
-import Entity.Tag;
-import jobs.TxtHandling;
+import Controller.ManageElement;
+import Entity.*;
 
 import java.io.IOException;
 import java.util.List;
@@ -12,8 +10,8 @@ import java.util.Objects;
 
 public class AddElement extends HandlingElement {
 
-    public AddElement(GUI gui) {
-        super(gui);
+    public AddElement(GUI gui, ManageElement manageElement) {
+        super(gui, manageElement);
     }
 
     public void addElement(CategoryStatus categoryStatus, List<Category> allElements){
@@ -25,31 +23,30 @@ public class AddElement extends HandlingElement {
 
     private void addNewElementOfTypeCategory(CategoryStatus categoryStatus, List<Category> allElements) {
         String newElement = handleElement(categoryStatus, allElements, "neu anlegen");
+        saveNewElement(newElement, categoryStatus);
+    }
+
+    void saveNewElement(String newElement, CategoryStatus categoryStatus) throws IOException {
         if (CategoryStatus.OBJEKT.isEqualCategory(categoryStatus)) {
-            TxtHandling.addNewElement(addTags(newElement), categoryStatus);
+            manageElement.addElement(new Objekt(newElement, addTags(newElement)), categoryStatus);
         } else {
-            TxtHandling.addNewElement(newElement, categoryStatus);
+            manageElement.addElement(new SimpleCategory(newElement), categoryStatus);
         }
     }
 
-    public static String addTags(String objektDescription){
+    public Tag[] addTags(String objektDescription) {
         if (wantAddTags(objektDescription)) {
-            return readNewTags(objektDescription);
+            return readNewTags();
         }
-        return objektDescription;
+        return new Tag[0];
     }
 
-    private static boolean wantAddTags(String objektDescription){
-
+    private boolean wantAddTags(String objektDescription){
         String question = "Wollen Sie Tags zum Objekt " + objektDescription + " hinzufügen? ";
         return gui.trueBooleanQuestion(question);
     }
 
-    private static String readNewTags(String objektDescription){
-        Tag[] tagsEntered = GUI.getTags(Tag.getAllTags());
-        for (Tag tag : tagsEntered) {
-            objektDescription = objektDescription.concat("," + tag);
-        }
-        return objektDescription;
+    private Tag[] readNewTags() {
+        return gui.getTags(Tag.getAllTags());
     }
 }

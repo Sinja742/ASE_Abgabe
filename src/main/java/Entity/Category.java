@@ -1,9 +1,8 @@
 package Entity;
 
-import java.util.Objects;
+public abstract class Category implements CategoryInterface{
 
-public class Category {
-    private String description;
+    protected String description;
 
     public Category(String description) {
         this.description = description;
@@ -13,7 +12,12 @@ public class Category {
         return this.description;
     }
 
-    public boolean containsTag(Tag[] tagFilter) {
-        return false;
+    public boolean equalsDescription(String description) {
+        return this.description.equals(description);
     }
+
+    public abstract boolean containsTag(Tag[] tagFilter);
+
+    @Override
+    public abstract String toString();
 }
