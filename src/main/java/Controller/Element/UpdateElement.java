@@ -21,6 +21,7 @@ public class UpdateElement extends HandlingElement {
         }
     }
 
+//    Verhaltensmuster
     public void updateElementOfTypeCategory(CategoryStatus categoryStatus, List<Category> allElements) throws IOException {
         String element = handleElement(categoryStatus, allElements, "bearbeiten");
         TxtHandling.deleteElement(element, categoryStatus);

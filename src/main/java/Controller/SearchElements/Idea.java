@@ -19,12 +19,12 @@ public class Idea implements IdeaInterface {
     private Category[] objektFilter;
     private Tag[] tagFilter;
 
+//    Strukturmuster (Idee = Category+Category+Category)
     public Idea(GUI gui) throws IOException {
         SearchElements searchElements = new SearchElements(gui);
         this.searchIdea(searchElements);
     }
 
-    @Override
     public String toString() {
         return this.art.getDescription() + " " + this.stimmung.getDescription() + " " + this.objekt.getDescription();
     }
@@ -41,6 +41,7 @@ public class Idea implements IdeaInterface {
         tagFilter = searchElements.getSearchTags(Tag.getAllTags());
     }
 
+//    Verhaltensmuster
     private void filterIdea() {
         art = new FilterIdea(artFilter, ManageElement.getAllArten()).random();
         stimmung = new FilterIdea(stimmungFilter, ManageElement.getAllStimmungen()).random();

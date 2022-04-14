@@ -4,6 +4,7 @@ import Entity.Category;
 import Entity.Objekt;
 import Entity.SimpleCategory;
 import Entity.CategoryStatus;
+import jobs.EntityBuilder;
 import jobs.TxtReader;
 
 import java.util.ArrayList;
@@ -20,9 +21,9 @@ public class ManageElement {
     }
 
     public static void reloadElements() {
-        arten = TxtReader.readEntity(CategoryStatus.ART);
-        stimmungen = TxtReader.readEntity(CategoryStatus.STIMMUNG);
-        objekte = TxtReader.readEntity(CategoryStatus.OBJEKT);
+        arten = EntityBuilder.readEntity(CategoryStatus.ART);
+        stimmungen = EntityBuilder.readEntity(CategoryStatus.STIMMUNG);
+        objekte = EntityBuilder.readEntity(CategoryStatus.OBJEKT);
     }
 
     public static List<Category> getAllArten() {
