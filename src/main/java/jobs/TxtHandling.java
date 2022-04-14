@@ -1,5 +1,6 @@
 package jobs;
 
+import Entity.Category;
 import Entity.CategoryStatus;
 
 import java.io.File;
@@ -12,8 +13,18 @@ import java.util.stream.Stream;
 
 public class TxtHandling {
 
-    public static void addNewElement(String element, CategoryStatus status) throws IOException {
-        String[] allTxtElements = TxtReader.readTxt();
+    private final TxtReader reader;
+
+    public TxtHandling() {
+        this.reader = new TxtReader();
+    }
+
+    public void rewrite(List<Category> arten, List<Category> stimmungen, List<Category> objekte) {
+
+    }
+
+    public void addNewElement(String element, CategoryStatus status) throws IOException {
+        String[] allTxtElements = this.reader.readTxt();
         assert allTxtElements != null;
         if (status.equals(CategoryStatus.ART)){
             allTxtElements[0] = allTxtElements[0] + ","+ element;
@@ -25,7 +36,7 @@ public class TxtHandling {
         updateTxtDocument(allTxtElements);
     }
 
-    private static void updateTxtDocument(String[] allElements) throws IOException {
+    private void updateTxtDocument(String[] allElements) throws IOException {
         File file = new File("resources/Elemente.txt");
         file.delete();
         file.createNewFile();
@@ -35,8 +46,8 @@ public class TxtHandling {
         out.close();
     }
 
-    public static void deleteElement(String element, CategoryStatus status) throws IOException {
-        String[] allTextElements = TxtReader.readTxt();
+    public void deleteElement(String element, CategoryStatus status) throws IOException {
+        String[] allTextElements = this.reader.readTxt();
         assert allTextElements != null;
         if (status.equals(CategoryStatus.ART)){
             allTextElements[0] = searchElementToDelete(element, allTextElements[0].split(","));
@@ -48,7 +59,7 @@ public class TxtHandling {
         updateTxtDocument(allTextElements);
     }
 
-    private static String searchElementToDelete(String element, String[] allTextElements){
+    private String searchElementToDelete(String element, String[] allTextElements){
        List<String> returnArrayList = Stream.of(allTextElements).collect(Collectors.toList());
         for (String s : allTextElements){
             if (element.equals(s)){
@@ -58,7 +69,7 @@ public class TxtHandling {
         return String.join(",", returnArrayList);
     }
 
-    private static String searchObjektToDelete(String element, String[] allTextElements){
+    private String searchObjektToDelete(String element, String[] allTextElements){
         String[] objektArray;
         List<String> returnArrayList;
         List<String> returnObjektList = new ArrayList<>();

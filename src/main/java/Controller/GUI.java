@@ -32,7 +32,7 @@ public class GUI implements GUIInterface{
         return tastatur.readLine().split(" ");
     }
 
-    public static Tag[] getTags(List<Tag> allTags) throws IOException {
+    public Tag[] getTags(List<Tag> allTags) throws IOException {
         String[] tagsString = getTagsString(allTags);
         Tag[] tags = new Tag[tagsString.length];
         for(int countTags = 0; countTags < tagsString.length; countTags++) {
@@ -41,7 +41,7 @@ public class GUI implements GUIInterface{
         return tags;
     }
 
-    public static String[] getTagsString(List<Tag> allTags) throws IOException {
+    public String[] getTagsString(List<Tag> allTags) throws IOException {
         showExistingElements("Tag", Tag.tagsToStringList(allTags));
         System.out.println("Geben Sie die gewünschten Tags ein: ");
 
@@ -49,7 +49,7 @@ public class GUI implements GUIInterface{
         return tastatur.readLine().split(" ");
     }
 
-    public static void showExistingElements(String categoryStatus, List<String> allElements) {
+    public void showExistingElements(String categoryStatus, List<String> allElements) {
         System.out.println("Diese Elemente des Typs " + categoryStatus + " existieren:");
         for (String option : allElements) {
             System.out.print(option + " ");

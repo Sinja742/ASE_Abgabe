@@ -10,10 +10,12 @@ import java.util.List;
 
 public class SearchElements {
 
-    private GUI gui;
+    private final GUI gui;
+    private final ManageElement manageElement;
 
-    public SearchElements(GUI gui) {
+    public SearchElements(GUI gui, ManageElement manageElement) {
         this.gui = gui;
+        this.manageElement = manageElement;
     }
 
     public Category[] getSearchElements(CategoryStatus categoryStatus, List<Category> allElements) throws IOException {
@@ -39,9 +41,9 @@ public class SearchElements {
         Category[] filters = new Category[filtersString.length];
         for(int countFilter = 0; countFilter < filtersString.length; countFilter++) {
             if(CategoryStatus.OBJEKT.isEqualCategory(categoryStatus)) {
-                filters[countFilter] = ManageElement.getCategoryToDescription(filtersString[countFilter]);
+                filters[countFilter] = manageElement.getCategoryToDescription(filtersString[countFilter]);
             } else {
-                filters[countFilter] = ManageElement.getCategoryToDescription(filtersString[countFilter]);
+                filters[countFilter] = manageElement.getCategoryToDescription(filtersString[countFilter]);
             }
         }
         return filters;

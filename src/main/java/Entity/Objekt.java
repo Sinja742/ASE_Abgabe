@@ -1,5 +1,6 @@
 package Entity;
 
+import java.util.Arrays;
 import java.util.List;
 
 public class Objekt extends Category {
@@ -8,6 +9,11 @@ public class Objekt extends Category {
     public Objekt(String description, List<Tag> tags) {
         super(description);
         this.tags = tags;
+    }
+
+    public Objekt(String description, Tag[] tags) {
+        super(description);
+        this.tags.addAll(Arrays.asList(tags));
     }
 
     //TODO: Contructor TxtReader

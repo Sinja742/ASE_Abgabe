@@ -19,9 +19,12 @@ public class Idea implements IdeaInterface {
     private Category[] objektFilter;
     private Tag[] tagFilter;
 
+    private final ManageElement manageElement;
+
 //    Strukturmuster (Idee = Category+Category+Category)
-    public Idea(GUI gui) throws IOException {
-        SearchElements searchElements = new SearchElements(gui);
+    public Idea(GUI gui, ManageElement manageElement) throws IOException {
+        this.manageElement = manageElement;
+        SearchElements searchElements = new SearchElements(gui, manageElement);
         this.searchIdea(searchElements);
     }
 
@@ -35,17 +38,17 @@ public class Idea implements IdeaInterface {
     }
 
     private void getAllSearchElements(SearchElements searchElements) throws IOException {
-        artFilter = searchElements.getSearchElements(CategoryStatus.ART, ManageElement.getAllArten());
-        stimmungFilter = searchElements.getSearchElements(CategoryStatus.STIMMUNG, ManageElement.getAllStimmungen());
-        objektFilter = searchElements.getSearchElements(CategoryStatus.OBJEKT, ManageElement.getAllObjekte());
+        artFilter = searchElements.getSearchElements(CategoryStatus.ART, manageElement.getAllArten());
+        stimmungFilter = searchElements.getSearchElements(CategoryStatus.STIMMUNG, manageElement.getAllStimmungen());
+        objektFilter = searchElements.getSearchElements(CategoryStatus.OBJEKT, manageElement.getAllObjekte());
         tagFilter = searchElements.getSearchTags(Tag.getAllTags());
     }
 
 //    Verhaltensmuster
     private void filterIdea() {
-        art = new FilterIdea(artFilter, ManageElement.getAllArten()).random();
-        stimmung = new FilterIdea(stimmungFilter, ManageElement.getAllStimmungen()).random();
-        objekt = new FilterObjektIdea(objektFilter, ManageElement.getAllObjekte(), tagFilter).random();
+        art = new FilterIdea(artFilter, manageElement.getAllArten()).random();
+        stimmung = new FilterIdea(stimmungFilter, manageElement.getAllStimmungen()).random();
+        objekt = new FilterObjektIdea(objektFilter, manageElement.getAllObjekte(), tagFilter).random();
     }
 
 }

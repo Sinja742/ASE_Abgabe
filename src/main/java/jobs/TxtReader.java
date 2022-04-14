@@ -7,7 +7,7 @@ import java.io.FileReader;
 import java.util.*;
 
 public class TxtReader {
-    static String[] readTxt() {
+    String[] readTxt() {
         try {
             BufferedReader bfr = new BufferedReader(new FileReader("resources/Elemente.txt"));
             String text = bfr.readLine();

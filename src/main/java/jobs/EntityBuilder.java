@@ -7,8 +7,15 @@ import java.util.List;
 
 // TODO: Refactoring !!!!!!!!!!!!!
 public class EntityBuilder {
+
+    private final TxtReader reader;
+
+    public EntityBuilder() {
+        this.reader = new TxtReader();
+    }
+
 //    Erzeugungsmuster
-    public static List<Category> readEntity(CategoryStatus categoryStatus) {
+    public List<Category> readEntity(CategoryStatus categoryStatus) {
         if (CategoryStatus.OBJEKT.isEqualCategory(categoryStatus)) {
             return getObjekt();
         } else {
@@ -16,9 +23,9 @@ public class EntityBuilder {
         }
     }
 
-    private static List<Category> getEntity(CategoryStatus entityStatus) {
+    private List<Category> getEntity(CategoryStatus entityStatus) {
         List<Category> entityList = new ArrayList<>();
-        String[] text = TxtReader.readTxt();
+        String[] text = this.reader.readTxt();
         String entityText;
         if (text != null) {
             if (entityStatus.equals(CategoryStatus.ART)) {
@@ -35,9 +42,9 @@ public class EntityBuilder {
         return entityList;
     }
 
-    private static List<Category> getObjekt() {
+    private List<Category> getObjekt() {
         List<Category> objektList = new ArrayList<>();
-        String[] text = TxtReader.readTxt();
+        String[] text = this.reader.readTxt();
 
         if (text != null) {
             text = text[2].split(";");
@@ -50,7 +57,7 @@ public class EntityBuilder {
         return objektList;
     }
 
-    private static List<Tag> getTags(String[] objekt) {
+    private List<Tag> getTags(String[] objekt) {
         List<Tag> tagList = new ArrayList<>();
         for(int objektAttribute = 1; objektAttribute < objekt.length; objektAttribute++) {
             tagList.add(Tag.getTag(Integer.parseInt(objekt[objektAttribute])));
