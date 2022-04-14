@@ -5,6 +5,7 @@ import Entity.CategoryStatus;
 import jobs.EntityBuilder;
 import jobs.TxtHandling;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -41,7 +42,7 @@ public class ManageElement {
         return objekte;
     }
 
-    public void addElement(Category element, CategoryStatus status) {
+    public void addElement(Category element, CategoryStatus status) throws IOException {
         if(CategoryStatus.ART.isEqualCategory(status)) {
             arten.add(element);
         }
@@ -52,10 +53,10 @@ public class ManageElement {
             objekte.add(element);
         }
 
-        this.txtHandling.rewrite(this.arten, this.stimmungen, this.objekte);
+        this.txtHandling.rewriteTxt(this.arten, this.stimmungen, this.objekte);
     }
 
-    public void deleteElement(String elementDescription, CategoryStatus status) {
+    public void deleteElement(String elementDescription, CategoryStatus status) throws IOException {
         if(CategoryStatus.ART.isEqualCategory(status)) {
             this.arten = deleteSearchElement(elementDescription, this.arten);
         }
@@ -66,12 +67,11 @@ public class ManageElement {
             this.objekte = deleteSearchElement(elementDescription, this.objekte);
         }
 
-        this.txtHandling.rewrite(this.arten, this.stimmungen, this.objekte);
+        this.txtHandling.rewriteTxt(this.arten, this.stimmungen, this.objekte);
     }
 
     private List<Category> deleteSearchElement(String elementDescription, List<Category> listCategory) {
-        Category element = searchCategoryToDescription(elementDescription, listCategory);
-        listCategory.remove(element);
+        listCategory.remove(searchCategoryToDescription(elementDescription, listCategory));
         return listCategory;
 
 //        for(int categoryElementCounter = 0; categoryElementCounter < listCategory.size(); categoryElementCounter++) {

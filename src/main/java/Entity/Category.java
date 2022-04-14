@@ -17,4 +17,7 @@ public abstract class Category implements CategoryInterface{
     }
 
     public abstract boolean containsTag(Tag[] tagFilter);
+
+    @Override
+    public abstract String toString();
 }

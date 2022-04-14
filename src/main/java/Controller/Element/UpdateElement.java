@@ -27,11 +27,6 @@ public class UpdateElement extends HandlingElement {
     public void updateElementOfTypeCategory(CategoryStatus categoryStatus, List<Category> allElements) throws IOException {
         String element = handleElement(categoryStatus, allElements, "bearbeiten");
         manageElement.deleteElement(element, categoryStatus);
-        String newElement = gui.getNewElement();
-        if (CategoryStatus.OBJEKT.isEqualCategory(categoryStatus)) {
-            manageElement.addElement(new Objekt(newElement, new AddElement(this.gui, this.manageElement).addTags(newElement)), categoryStatus);
-        } else {
-            manageElement.addElement(new SimpleCategory(newElement), categoryStatus);
-        }
+        new AddElement(gui, manageElement).saveNewElement(gui.getNewElement(), categoryStatus);
     }
 }

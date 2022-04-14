@@ -22,6 +22,10 @@ public class AddElement extends HandlingElement {
 
     private void addNewElementOfTypeCategory(CategoryStatus categoryStatus, List<Category> allElements) throws IOException {
         String newElement = handleElement(categoryStatus, allElements, "neu anlegen");
+        saveNewElement(newElement, categoryStatus);
+    }
+
+    void saveNewElement(String newElement, CategoryStatus categoryStatus) throws IOException {
         if (CategoryStatus.OBJEKT.isEqualCategory(categoryStatus)) {
             manageElement.addElement(new Objekt(newElement, addTags(newElement)), categoryStatus);
         } else {

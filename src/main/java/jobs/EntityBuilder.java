@@ -8,10 +8,10 @@ import java.util.List;
 // TODO: Refactoring !!!!!!!!!!!!!
 public class EntityBuilder {
 
-    private final TxtReader reader;
+    private final TxtHandling handlerTxt;
 
     public EntityBuilder() {
-        this.reader = new TxtReader();
+        this.handlerTxt = new TxtHandling();
     }
 
 //    Erzeugungsmuster
@@ -25,7 +25,7 @@ public class EntityBuilder {
 
     private List<Category> getEntity(CategoryStatus entityStatus) {
         List<Category> entityList = new ArrayList<>();
-        String[] text = this.reader.readTxt();
+        String[] text = this.handlerTxt.readTxt();
         String entityText;
         if (text != null) {
             if (entityStatus.equals(CategoryStatus.ART)) {
@@ -44,12 +44,12 @@ public class EntityBuilder {
 
     private List<Category> getObjekt() {
         List<Category> objektList = new ArrayList<>();
-        String[] text = this.reader.readTxt();
+        String[] text = this.handlerTxt.readTxt();
 
         if (text != null) {
-            text = text[2].split(";");
+            text = text[2].split(",");
             for (String s : text) {
-                String[] objekt = s.split(",");
+                String[] objekt = s.split(";");
                 String bezeichnung = objekt[0];
                 objektList.add(new Objekt(bezeichnung, getTags(objekt)));
             }
