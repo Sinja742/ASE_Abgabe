@@ -69,9 +69,11 @@ public class GUI implements GUIInterface{
         System.out.println();
     }
 
-    public String getNewElement() throws IOException {
+    public String getNewElement(CategoryStatus categoryStatus) throws IOException {
         BufferedReader tastatur = new BufferedReader(new InputStreamReader(System.in));
         System.out.println("Geben Sie den neuen Begriff: ");
-        return tastatur.readLine();
+        String eingabe = tastatur.readLine();
+        this.checkInput.elementDoNotExists(eingabe, categoryStatus);
+        return eingabe;
     }
 }

@@ -8,4 +8,6 @@ public interface CheckInputInterface {
 
     void checkTags(String[] tags);
 
+    public void elementDoNotExists(String element, CategoryStatus categoryStatus);
+
 }
