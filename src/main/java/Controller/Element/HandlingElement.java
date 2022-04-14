@@ -7,7 +7,7 @@ import Entity.CategoryStatus;
 import java.io.IOException;
 import java.util.List;
 
-public class HandlingElement {
+public abstract class HandlingElement {
     
     public HandlingElement(GUI gui) {
         this.gui = gui;

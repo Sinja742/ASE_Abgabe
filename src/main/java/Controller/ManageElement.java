@@ -15,7 +15,7 @@ public class ManageElement {
     private static List<Category> stimmungen;
     private static List<Category> objekte;
 
-    ManageElement() {
+    public ManageElement() {
         reloadElements();
     }
 

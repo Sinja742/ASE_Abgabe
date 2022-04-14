@@ -9,7 +9,7 @@ import java.util.List;
 
 public class FilterObjektIdea extends Filter {
 
-    private static Tag[] tagFilter;
+    private Tag[] tagFilter;
 
     public FilterObjektIdea(Category[] categoryElements, List<Category> allElements, Tag[] tagFilter) {
         super(categoryElements, allElements);
@@ -28,13 +28,13 @@ public class FilterObjektIdea extends Filter {
         }
     }
 
-    private static void filterElementsIfTag() {
+    private void filterElementsIfTag() {
         if (tagFilterExists(tagFilter)) {
             filterObjekte();
         }
     }
 
-    private static void filterObjekte() {
+    private void filterObjekte() {
         List<Category> objekte = new ArrayList<>();
         for (Category category : categoryElements) {
             if (category.containsTag(tagFilter)) {  //return false
@@ -44,7 +44,7 @@ public class FilterObjektIdea extends Filter {
         categoryElements = ManageElement.toArray(objekte);
     }
 
-    private static boolean tagFilterExists(Tag[] filter) {
+    private boolean tagFilterExists(Tag[] filter) {
         return filter.length > 0;
     }
 }

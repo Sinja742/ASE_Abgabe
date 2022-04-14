@@ -9,9 +9,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.List;
 
-public class GUI {
-
-//    TODO: searchElement / filterElement in eine neue Klasse packen
+public class GUI implements GUIInterface{
 
     public void showIdea(String idea) {
         System.out.println("Sie können hierzu kreativ werden: " + idea);
