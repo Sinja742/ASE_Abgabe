@@ -32,4 +32,9 @@ public class CheckInput implements CheckInputInterface {
         Tag.getTag(tag);
         //TODO: nicht null!!!
     }
+
+    public void elementDoNotExists(String element, CategoryStatus categoryStatus) {
+        this.manageElement.getCategoryToDescription(element, categoryStatus);
+        //TODO: muss null sein!!!
+    }
 }

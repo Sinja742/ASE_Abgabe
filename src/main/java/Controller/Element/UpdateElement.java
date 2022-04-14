@@ -24,6 +24,6 @@ public class UpdateElement extends HandlingElement {
     public void updateElementOfTypeCategory(CategoryStatus categoryStatus, List<Category> allElements) {
         String element = handleElement(categoryStatus, allElements, "bearbeiten");
         manageElement.deleteElement(element, categoryStatus);
-        new AddElement(gui, manageElement).saveNewElement(gui.getNewElement(), categoryStatus);
+        new AddElement(gui, manageElement).saveNewElement(gui.getNewElement(categoryStatus), categoryStatus);
     }
 }
