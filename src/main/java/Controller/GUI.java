@@ -11,6 +11,14 @@ import java.util.List;
 
 public class GUI implements GUIInterface{
 
+    private final CheckInput checkInput;
+    private final ManageElement manageElement;
+
+    public GUI(ManageElement manageElement) {
+        this.manageElement = manageElement;
+        this.checkInput = new CheckInput(this.manageElement);
+    }
+
     public void showIdea(String idea) {
         System.out.println("Sie können hierzu kreativ werden: " + idea);
     }
@@ -29,11 +37,13 @@ public class GUI implements GUIInterface{
         System.out.println(text);
 
         BufferedReader tastatur = new BufferedReader(new InputStreamReader(System.in));
-        return tastatur.readLine().split(" ");
+        String[] eingabe = tastatur.readLine().split(" ");
+        this.checkInput.checkCategories(eingabe, categoryStatus);
+        return eingabe;
     }
 
-    public Tag[] getTags(List<Tag> allTags) throws IOException {
-        String[] tagsString = getTagsString(allTags);
+    public Tag[] getTags() throws IOException {
+        String[] tagsString = getTagsString();
         Tag[] tags = new Tag[tagsString.length];
         for(int countTags = 0; countTags < tagsString.length; countTags++) {
             tags[countTags] = Tag.getTag(tagsString[countTags]);
@@ -41,12 +51,14 @@ public class GUI implements GUIInterface{
         return tags;
     }
 
-    public String[] getTagsString(List<Tag> allTags) throws IOException {
-        showExistingElements("Tag", Tag.tagsToStringList(allTags));
+    public String[] getTagsString() throws IOException {
+        showExistingElements("Tag", Tag.tagsToStringList(Tag.getAllTags()));
         System.out.println("Geben Sie die gewünschten Tags ein: ");
 
         BufferedReader tastatur = new BufferedReader(new InputStreamReader(System.in));
-        return tastatur.readLine().split(" ");
+        String[] eingabe = tastatur.readLine().split(" ");
+        this.checkInput.checkTags(eingabe);
+        return eingabe;
     }
 
     public void showExistingElements(String categoryStatus, List<String> allElements) {

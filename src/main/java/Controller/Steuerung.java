@@ -13,8 +13,8 @@ import java.io.IOException;
 public class Steuerung {
 
     public static void main(String[] args) throws IOException {
-        gui = new GUI();
         manageElement = new ManageElement(new EntityBuilder());
+        gui = new GUI(manageElement);
 
         addElemente = new AddElement(gui, manageElement);
         updateElemente = new UpdateElement(gui, manageElement);

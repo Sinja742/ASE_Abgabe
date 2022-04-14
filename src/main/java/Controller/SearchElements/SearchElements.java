@@ -27,10 +27,10 @@ public class SearchElements implements SearchElementsInterface{
         }
     }
 
-    public Tag[] getSearchTags(List<Tag> allTags) throws IOException {
+    public Tag[] getSearchTags() throws IOException {
         String question = "Wollen Sie nach Tags suchen?";
         if(gui.trueBooleanQuestion(question)) {
-            return gui.getTags(allTags);
+            return gui.getTags();
         } else {
             return new Tag[0];
         }
@@ -40,11 +40,7 @@ public class SearchElements implements SearchElementsInterface{
         String[] filtersString = gui.getStringArrayOfElements(categoryStatus, allElements,"Geben Sie die gewünschten " + categoryStatus.getStatusPlural() + " ein: ");
         Category[] filters = new Category[filtersString.length];
         for(int countFilter = 0; countFilter < filtersString.length; countFilter++) {
-            if(CategoryStatus.OBJEKT.isEqualCategory(categoryStatus)) {
-                filters[countFilter] = manageElement.getCategoryToDescription(filtersString[countFilter]);
-            } else {
-                filters[countFilter] = manageElement.getCategoryToDescription(filtersString[countFilter]);
-            }
+            filters[countFilter] = manageElement.getCategoryToDescription(filtersString[countFilter], categoryStatus);
         }
         return filters;
     }

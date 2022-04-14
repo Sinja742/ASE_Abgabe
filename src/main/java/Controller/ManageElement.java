@@ -75,16 +75,19 @@ public class ManageElement implements ManageElementInterface{
         return listCategory;
     }
 
-    public Category getCategoryToDescription(String description) {
-        Category category = searchCategoryToDescription(description, arten);
-        if(category == null) {
-            category = searchCategoryToDescription(description, stimmungen);
+    public Category getCategoryToDescription(String description, CategoryStatus categoryStatus) {
+        if(CategoryStatus.ART.isEqualCategory(categoryStatus)) {
+            return searchCategoryToDescription(description, arten);
         }
-        if(category == null) {
-            category = searchCategoryToDescription(description, objekte);
+        if(CategoryStatus.STIMMUNG.isEqualCategory(categoryStatus)) {
+            return searchCategoryToDescription(description, stimmungen);
         }
-        return category;
+        if(CategoryStatus.OBJEKT.isEqualCategory(categoryStatus)) {
+            return searchCategoryToDescription(description, objekte);
+        }
+        return null;
         //TODO try catch category == null
+        //Fehler, in Rechtschreibung und oder Syntax
     }
 
     private Category searchCategoryToDescription(String description, List<Category> elements) {

@@ -14,9 +14,9 @@ public interface GUIInterface {
 
     String[] getStringArrayOfElements(CategoryStatus categoryStatus, List<Category> allElements, String text) throws IOException;
 
-    Tag[] getTags(List<Tag> allTags) throws IOException;
+    Tag[] getTags() throws IOException;
 
-    String[] getTagsString(List<Tag> allTags) throws IOException;
+    String[] getTagsString() throws IOException;
 
     void showExistingElements(String categoryStatus, List<String> allElements);
 
