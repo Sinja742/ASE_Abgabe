@@ -2,15 +2,31 @@ package Entity;
 
 import java.util.List;
 
-public class Objekt extends Entity{
-    private List<String> tags;
+public class Objekt extends Category {
+    private List<Tag> tags;
 
-    public Objekt(String bezeichnung, List<String> tags) {
-        super(bezeichnung);
+    public Objekt(String description, List<Tag> tags) {
+        super(description);
         this.tags = tags;
     }
 
-    public List<String> getTags() {
+    //TODO: Contructor TxtReader
+
+    public List<Tag> getTags() {
         return this.tags;
+    }
+
+    @Override
+    public boolean containsTag(Tag[] filterTags) {
+        if(!tags.isEmpty()) {
+            for (Tag filterTag : filterTags) {
+                for (Tag tag : this.tags) {
+                    if (tag.equals(filterTag)) {
+                        return true;
+                    }
+                }
+            }
+        }
+        return false;
     }
 }

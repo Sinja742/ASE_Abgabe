@@ -1,17 +1,17 @@
 package jobs;
 
-import Entity.Entity;
-import Entity.Objekt;
-import Entity.EntityStatus;
+import Entity.*;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.util.*;
 
 public class TxtReader {
-    public static String[] readYml() {
+    public static String[] readTxt() {
         try {
-            String text = new BufferedReader(new FileReader("Elemente.txt")).readLine();
+            BufferedReader bfr = new BufferedReader(new FileReader("resources/Elemente.txt"));
+            String text = bfr.readLine();
+            bfr.close();
             return text.split("&&");
         } catch (Exception e) {
             e.getMessage();
@@ -19,25 +19,20 @@ public class TxtReader {
         }
     }
 
-    public static List<Entity> readEntity(EntityStatus entityStatus) {
-        if (isObjekt(entityStatus)) {
-            return getObjekt(entityStatus);
+    public static List<Category> readEntity(CategoryStatus categoryStatus) {
+        if (CategoryStatus.OBJEKT.isEqualCategory(categoryStatus)) {
+            return getObjekt();
         } else {
-            return getEntity(entityStatus);
+            return getEntity(categoryStatus);
         }
-        //return (isObjekt(entityStatus) ? getObjekt() : getEntity(entityStatus));
     }
 
-    private static boolean isObjekt(EntityStatus entityStatus) {
-        return entityStatus.equals(EntityStatus.OBJEKT);
-    }
-
-    private static List<Entity> getEntity(EntityStatus entityStatus) {
-        List<Entity> entityList = new ArrayList<>();
-        String[] text = readYml();
+    private static List<Category> getEntity(CategoryStatus entityStatus) {
+        List<Category> entityList = new ArrayList<>();
+        String[] text = readTxt();
         String entityText;
         if (text != null) {
-            if (entityStatus.equals(EntityStatus.ART)) {
+            if (entityStatus.equals(CategoryStatus.ART)) {
                 entityText = text[0];
             } else {
                 entityText = text[1];
@@ -45,29 +40,32 @@ public class TxtReader {
             text = entityText.split(",");
 
             for (String s : text) {
-                entityList.add(new Entity(s));
+                entityList.add(new SimpleCategory(s));
             }
         }
         return entityList;
     }
 
-    public static List<Entity> getObjekt(EntityStatus entityStatus) {
-        List<Entity> objektList = new ArrayList<>();
-        String[] text = readYml();
+    public static List<Category> getObjekt() {
+        List<Category> objektList = new ArrayList<>();
+        String[] text = readTxt();
 
         if (text != null) {
             text = text[2].split(";");
             for (String s : text) {
-                List<String> tagList = new ArrayList<>();
                 String[] objekt = s.split(",");
-                for (String value : objekt) {
-                    tagList.add(value);
-                }
-                String bezeichnung = tagList.get(0);
-                tagList.remove(0);
-                objektList.add(new Objekt(bezeichnung, tagList));
+                String bezeichnung = objekt[0];
+                objektList.add(new Objekt(bezeichnung, getTags(objekt)));
             }
         }
         return objektList;
+    }
+
+    public static List<Tag> getTags(String[] objekt) {
+        List<Tag> tagList = new ArrayList<>();
+        for(int objektAttribute = 1; objektAttribute < objekt.length; objektAttribute++) {
+            tagList.add(Tag.getTag(Integer.parseInt(objekt[objektAttribute])));
+        }
+        return tagList;
     }
 }
