@@ -6,7 +6,6 @@ import Entity.*;
 
 import java.io.IOException;
 import java.util.List;
-import java.util.Objects;
 
 public class AddElement extends HandlingElement {
 
@@ -14,14 +13,14 @@ public class AddElement extends HandlingElement {
         super(gui, manageElement);
     }
 
-    public void addElement(CategoryStatus categoryStatus, List<Category> allElements){
+    public void addElement(CategoryStatus categoryStatus, List<Category> allElements) throws IOException {
         String question = "Wollen Sie ein Element des Typs " + categoryStatus.getStatus() + " hinzufügen? ";
         if (gui.trueBooleanQuestion(question)) {
             addNewElementOfTypeCategory(categoryStatus, allElements);
         }
     }
 
-    private void addNewElementOfTypeCategory(CategoryStatus categoryStatus, List<Category> allElements) {
+    private void addNewElementOfTypeCategory(CategoryStatus categoryStatus, List<Category> allElements) throws IOException {
         String newElement = handleElement(categoryStatus, allElements, "neu anlegen");
         saveNewElement(newElement, categoryStatus);
     }
@@ -34,7 +33,7 @@ public class AddElement extends HandlingElement {
         }
     }
 
-    public Tag[] addTags(String objektDescription) {
+    public Tag[] addTags(String objektDescription) throws IOException {
         if (wantAddTags(objektDescription)) {
             return readNewTags();
         }
@@ -46,7 +45,7 @@ public class AddElement extends HandlingElement {
         return gui.trueBooleanQuestion(question);
     }
 
-    private Tag[] readNewTags() {
+    private Tag[] readNewTags() throws IOException {
         return gui.getTags(Tag.getAllTags());
     }
 }

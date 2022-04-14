@@ -17,5 +17,5 @@ public interface ManageElementInterface {
 
     void deleteElement(String elementDescription, CategoryStatus status) throws IOException;
 
-    Category getCategoryToDescription(String description);
+    Category getCategoryToDescription(String description, CategoryStatus categoryStatus);
 }

@@ -14,14 +14,14 @@ public class DeleteElement extends HandlingElement {
         super(gui, manageElement);
     }
 
-    public void deleteElement(CategoryStatus categoryStatus, List<Category> allElements){
+    public void deleteElement(CategoryStatus categoryStatus, List<Category> allElements) throws IOException {
         String question = "Wollen Sie ein Element des Typs " + categoryStatus.getStatus() + " löschen?";
         if (gui.trueBooleanQuestion(question)) {
             deleteElementOfTypeCategory(categoryStatus, allElements);
         }
     }
 
-    private void deleteElementOfTypeCategory(CategoryStatus categoryStatus, List<Category> allElements) {
+    private void deleteElementOfTypeCategory(CategoryStatus categoryStatus, List<Category> allElements) throws IOException {
         String element = handleElement(categoryStatus, allElements, "löschen");
         manageElement.deleteElement(element, categoryStatus);
     }

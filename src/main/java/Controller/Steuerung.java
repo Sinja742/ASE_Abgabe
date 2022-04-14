@@ -49,7 +49,7 @@ public class Steuerung {
         }
     }
 
-    private static void addElementToElementList(){
+    private static void addElementToElementList() throws IOException {
         addElemente.addElement(CategoryStatus.ART, manageElement.getAllArten());
         addElemente.addElement(CategoryStatus.STIMMUNG, manageElement.getAllStimmungen());
         addElemente.addElement(CategoryStatus.OBJEKT, manageElement.getAllObjekte());

@@ -14,7 +14,7 @@ public class UpdateElement extends HandlingElement {
         super(gui, manageElement);
     }
 
-    public void updateElement(CategoryStatus categoryStatus, List<Category> allElements){
+    public void updateElement(CategoryStatus categoryStatus, List<Category> allElements) throws IOException {
         String question = "Wollen Sie ein Element des Typs " + categoryStatus.getStatus() + " bearbeiten?";
         if (gui.trueBooleanQuestion(question)) {
             updateElementOfTypeCategory(categoryStatus, allElements);
@@ -22,7 +22,7 @@ public class UpdateElement extends HandlingElement {
     }
 
 //    Verhaltensmuster Update = delete + new
-    public void updateElementOfTypeCategory(CategoryStatus categoryStatus, List<Category> allElements){
+    public void updateElementOfTypeCategory(CategoryStatus categoryStatus, List<Category> allElements) throws IOException {
         String element = handleElement(categoryStatus, allElements, "bearbeiten");
         manageElement.deleteElement(element, categoryStatus);
         new AddElement(gui, manageElement).saveNewElement(gui.getNewElement(), categoryStatus);
