@@ -2,6 +2,6 @@ package Controller.SearchElements;
 
 public interface Idea {
 
-    public String toString();
+    String toString();
 
 }
