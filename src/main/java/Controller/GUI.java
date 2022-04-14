@@ -3,7 +3,6 @@ package Controller;
 import Entity.Category;
 import Entity.CategoryStatus;
 import Entity.Tag;
-
 import Error.FalseInputException;
 
 import java.io.BufferedReader;
@@ -11,13 +10,12 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.List;
 
-public class GUI implements GUIInterface{
+public class GUI implements GUIInterface {
 
     public void showIdea(String idea) {
         System.out.println("Sie können hierzu kreativ werden: " + idea);
     }
 
-    // Falsche eingabe abgefangen und neue exception wird geworfen --> Rekursiver aufruf damit eine korrekte eingabe stattfinden kann
     public boolean trueBooleanQuestion(String question) {
         try {
             String JA = "j";
@@ -25,17 +23,17 @@ public class GUI implements GUIInterface{
             BufferedReader tastatur = new BufferedReader(new InputStreamReader(System.in));
 
             System.out.print(question + " (" + JA + "/" + NEIN + "): ");
-            if (tastatur.readLine().equals(JA)){
+            if (tastatur.readLine().equals(JA)) {
                 return true;
-            }else if (tastatur.readLine().equals(NEIN)){
+            } else if (tastatur.readLine().equals(NEIN)) {
                 return false;
-            }else {
+            } else {
                 throw new FalseInputException();
             }
         } catch (FalseInputException ex) {
             System.out.println(ex.getMessage());
             return trueBooleanQuestion(question);
-        } catch (IOException e){
+        } catch (IOException e) {
             System.out.println("Bei der Verarbeitung ihrer Eingabe ist etwas schief gelaufen. Bitte versuchen Sie es erneut.");
             e.printStackTrace();
             return trueBooleanQuestion(question);
@@ -55,8 +53,9 @@ public class GUI implements GUIInterface{
             return getStringArrayOfElements(categoryStatus, allElements, text);
         }
     }
+
     //      TODO: können gleiche tags mehrmals angelegt sein ? --> objekte bearbeiten und neu anlegen
-    public Tag[] getTags(List<Tag> allTags) throws IOException {
+    public Tag[] getTags(List<Tag> allTags) {
         String[] tagsString = getTagsString(allTags);
         Tag[] tags = new Tag[tagsString.length];
         for (int countTags = 0; countTags < tagsString.length; countTags++) {
@@ -67,10 +66,10 @@ public class GUI implements GUIInterface{
         return tags;
     }
 
-    public String[] getTagsString(List<Tag> allTags){
-        try{
-        showExistingElements("Tag", Tag.tagsToStringList(allTags));
-        System.out.println("Geben Sie die gewünschten Tags ein: ");
+    public String[] getTagsString(List<Tag> allTags) {
+        try {
+            showExistingElements("Tag", Tag.tagsToStringList(allTags));
+            System.out.println("Geben Sie die gewünschten Tags ein: ");
 
             BufferedReader tastatur = new BufferedReader(new InputStreamReader(System.in));
             return tastatur.readLine().split(" ");

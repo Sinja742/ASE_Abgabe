@@ -17,12 +17,12 @@ public class TxtHandling implements TxtHandlingInterface{
             bfr.close();
             return text.split("&&");
         } catch (Exception e) {
-            e.getMessage();
+            e.printStackTrace();
             return null;
         }
     }
 
-    public void rewriteTxt(List<Category> arten, List<Category> stimmungen, List<Category> objekte) throws IOException {
+    public void rewriteTxt(List<Category> arten, List<Category> stimmungen, List<Category> objekte){
         deleteFile();
         writeFile(joinLists(arten, stimmungen, objekte));
     }
@@ -31,11 +31,17 @@ public class TxtHandling implements TxtHandlingInterface{
         file.delete();
     }
 
-    private void writeFile(String allElements) throws IOException {
-        file.createNewFile();
-        PrintWriter out = new PrintWriter(file.getName());
-        out.println(allElements);
-        out.close();
+    private void writeFile(String allElements) {
+        try{
+            file.createNewFile();
+            PrintWriter out = new PrintWriter(file.getName());
+            out.println(allElements);
+            out.close();
+        }catch (IOException e){
+            System.out.println("Beim schreiben in die Elemente.txt Datei ist etwas schief gelaufen.");
+            e.printStackTrace();
+        }
+
     }
 
     private String toTxtString(List<Category> elementlist){

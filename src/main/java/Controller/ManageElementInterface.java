@@ -3,7 +3,6 @@ package Controller;
 import Entity.Category;
 import Entity.CategoryStatus;
 
-import java.io.IOException;
 import java.util.List;
 
 public interface ManageElementInterface {
@@ -13,9 +12,9 @@ public interface ManageElementInterface {
 
     List<Category> getAllObjekte();
 
-    void addElement(Category element, CategoryStatus status) throws IOException;
+    void addElement(Category element, CategoryStatus status);
 
-    void deleteElement(String elementDescription, CategoryStatus status) throws IOException;
+    void deleteElement(String elementDescription, CategoryStatus status);
 
     Category getCategoryToDescription(String description, CategoryStatus categoryStatus);
 }

@@ -5,11 +5,10 @@ import Entity.CategoryStatus;
 import jobs.EntityBuilder;
 import jobs.TxtHandling;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ManageElement implements ManageElementInterface{
+public class ManageElement implements ManageElementInterface {
 
     private List<Category> arten;
     private List<Category> stimmungen;
@@ -42,28 +41,28 @@ public class ManageElement implements ManageElementInterface{
         return objekte;
     }
 
-    public void addElement(Category element, CategoryStatus status) throws IOException {
-        if(CategoryStatus.ART.isEqualCategory(status)) {
+    public void addElement(Category element, CategoryStatus status) {
+        if (CategoryStatus.ART.isEqualCategory(status)) {
             arten.add(element);
         }
-        if(CategoryStatus.STIMMUNG.isEqualCategory(status)) {
+        if (CategoryStatus.STIMMUNG.isEqualCategory(status)) {
             stimmungen.add(element);
         }
-        if(CategoryStatus.OBJEKT.isEqualCategory(status)) {
+        if (CategoryStatus.OBJEKT.isEqualCategory(status)) {
             objekte.add(element);
         }
 
         this.txtHandling.rewriteTxt(this.arten, this.stimmungen, this.objekte);
     }
 
-    public void deleteElement(String elementDescription, CategoryStatus status) throws IOException {
-        if(CategoryStatus.ART.isEqualCategory(status)) {
+    public void deleteElement(String elementDescription, CategoryStatus status) {
+        if (CategoryStatus.ART.isEqualCategory(status)) {
             this.arten = deleteSearchElement(elementDescription, this.arten);
         }
-        if(CategoryStatus.STIMMUNG.isEqualCategory(status)) {
+        if (CategoryStatus.STIMMUNG.isEqualCategory(status)) {
             this.stimmungen = deleteSearchElement(elementDescription, this.stimmungen);
         }
-        if(CategoryStatus.OBJEKT.isEqualCategory(status)) {
+        if (CategoryStatus.OBJEKT.isEqualCategory(status)) {
             this.objekte = deleteSearchElement(elementDescription, this.objekte);
         }
 
@@ -76,13 +75,13 @@ public class ManageElement implements ManageElementInterface{
     }
 
     public Category getCategoryToDescription(String description, CategoryStatus categoryStatus) {
-        if(CategoryStatus.ART.isEqualCategory(categoryStatus)) {
+        if (CategoryStatus.ART.isEqualCategory(categoryStatus)) {
             return searchCategoryToDescription(description, arten);
         }
-        if(CategoryStatus.STIMMUNG.isEqualCategory(categoryStatus)) {
+        if (CategoryStatus.STIMMUNG.isEqualCategory(categoryStatus)) {
             return searchCategoryToDescription(description, stimmungen);
         }
-        if(CategoryStatus.OBJEKT.isEqualCategory(categoryStatus)) {
+        if (CategoryStatus.OBJEKT.isEqualCategory(categoryStatus)) {
             return searchCategoryToDescription(description, objekte);
         }
         return null;
@@ -90,8 +89,8 @@ public class ManageElement implements ManageElementInterface{
     }
 
     private Category searchCategoryToDescription(String description, List<Category> elements) {
-        for(Category element : elements) {
-            if(element.equalsDescription(description)) {
+        for (Category element : elements) {
+            if (element.equalsDescription(description)) {
                 return element;
             }
         }

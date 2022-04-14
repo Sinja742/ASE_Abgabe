@@ -4,7 +4,6 @@ import Controller.GUI;
 import Controller.ManageElement;
 import Entity.*;
 
-import java.io.IOException;
 import java.util.List;
 
 public class AddElement extends HandlingElement {
@@ -13,19 +12,19 @@ public class AddElement extends HandlingElement {
         super(gui, manageElement);
     }
 
-    public void addElement(CategoryStatus categoryStatus, List<Category> allElements) throws IOException {
+    public void addElement(CategoryStatus categoryStatus, List<Category> allElements) {
         String question = "Wollen Sie ein Element des Typs " + categoryStatus.getStatus() + " hinzufügen? ";
         if (gui.trueBooleanQuestion(question)) {
             addNewElementOfTypeCategory(categoryStatus, allElements);
         }
     }
 
-    private void addNewElementOfTypeCategory(CategoryStatus categoryStatus, List<Category> allElements) throws IOException {
+    private void addNewElementOfTypeCategory(CategoryStatus categoryStatus, List<Category> allElements) {
         String newElement = handleElement(categoryStatus, allElements, "neu anlegen");
         saveNewElement(newElement, categoryStatus);
     }
 
-    void saveNewElement(String newElement, CategoryStatus categoryStatus) throws IOException {
+    void saveNewElement(String newElement, CategoryStatus categoryStatus) {
         if (CategoryStatus.OBJEKT.isEqualCategory(categoryStatus)) {
             manageElement.addElement(new Objekt(newElement, addTags(newElement)), categoryStatus);
         } else {
@@ -33,19 +32,19 @@ public class AddElement extends HandlingElement {
         }
     }
 
-    public Tag[] addTags(String objektDescription) throws IOException {
+    public Tag[] addTags(String objektDescription) {
         if (wantAddTags(objektDescription)) {
             return readNewTags();
         }
         return new Tag[0];
     }
 
-    private boolean wantAddTags(String objektDescription){
+    private boolean wantAddTags(String objektDescription) {
         String question = "Wollen Sie Tags zum Objekt " + objektDescription + " hinzufügen? ";
         return gui.trueBooleanQuestion(question);
     }
 
-    private Tag[] readNewTags() throws IOException {
+    private Tag[] readNewTags() {
         return gui.getTags(Tag.getAllTags());
     }
 }

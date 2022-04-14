@@ -7,8 +7,6 @@ import Controller.SearchElements.Idea;
 import Entity.CategoryStatus;
 import jobs.EntityBuilder;
 
-import java.io.IOException;
-
 public class Steuerung {
 
     public static void main(String[] args) {
@@ -31,37 +29,33 @@ public class Steuerung {
     private static DeleteElement deleteElemente;
 
     private static void userIneraction() {
-        try {
-            if (gui.trueBooleanQuestion("Wollen Sie nach einer kreativen Idee suchen?")) {
-                gui.showIdea((new Idea(gui, manageElement)).toString());
-            }
-            if (gui.trueBooleanQuestion("Wollen Sie neue Elemente hinzufügen?")) {
-                addElementToElementList();
-            }
-            if (gui.trueBooleanQuestion("Wollen Sie Elemente bearbeiten?")) {
-                updateElementInElementList();
-            }
-            if (gui.trueBooleanQuestion("Wollen Sie Elemente löschen?")) {
-                deleteElementFromElementList();
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
+        if (gui.trueBooleanQuestion("Wollen Sie nach einer kreativen Idee suchen?")) {
+            gui.showIdea((new Idea(gui, manageElement)).toString());
+        }
+        if (gui.trueBooleanQuestion("Wollen Sie neue Elemente hinzufügen?")) {
+            addElementToElementList();
+        }
+        if (gui.trueBooleanQuestion("Wollen Sie Elemente bearbeiten?")) {
+            updateElementInElementList();
+        }
+        if (gui.trueBooleanQuestion("Wollen Sie Elemente löschen?")) {
+            deleteElementFromElementList();
         }
     }
 
-    private static void addElementToElementList() throws IOException {
+    private static void addElementToElementList() {
         addElemente.addElement(CategoryStatus.ART, manageElement.getAllArten());
         addElemente.addElement(CategoryStatus.STIMMUNG, manageElement.getAllStimmungen());
         addElemente.addElement(CategoryStatus.OBJEKT, manageElement.getAllObjekte());
     }
 
-    private static void deleteElementFromElementList() throws IOException {
+    private static void deleteElementFromElementList() {
         deleteElemente.deleteElement(CategoryStatus.ART, manageElement.getAllArten());
         deleteElemente.deleteElement(CategoryStatus.STIMMUNG, manageElement.getAllStimmungen());
         deleteElemente.deleteElement(CategoryStatus.OBJEKT, manageElement.getAllObjekte());
     }
 
-    private static void updateElementInElementList() throws IOException {
+    private static void updateElementInElementList() {
         updateElemente.updateElement(CategoryStatus.ART, manageElement.getAllArten());
         updateElemente.updateElement(CategoryStatus.STIMMUNG, manageElement.getAllStimmungen());
         updateElemente.updateElement(CategoryStatus.OBJEKT, manageElement.getAllObjekte());

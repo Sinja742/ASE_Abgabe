@@ -6,8 +6,6 @@ import Entity.Category;
 import Entity.CategoryStatus;
 import Entity.Tag;
 
-import java.io.IOException;
-
 public class Idea implements IdeaInterface {
 
     private Category art;
@@ -22,7 +20,7 @@ public class Idea implements IdeaInterface {
     private final ManageElement manageElement;
 
     //    Strukturmuster (Idee = Category+Category+Category)
-    public Idea(GUI gui, ManageElement manageElement) throws IOException {
+    public Idea(GUI gui, ManageElement manageElement) {
         this.manageElement = manageElement;
         SearchElements searchElements = new SearchElements(gui, manageElement);
         this.searchIdea(searchElements);
@@ -32,12 +30,12 @@ public class Idea implements IdeaInterface {
         return this.art.getDescription() + " " + this.stimmung.getDescription() + " " + this.objekt.getDescription();
     }
 
-    private void searchIdea(SearchElements searchElements) throws IOException {
+    private void searchIdea(SearchElements searchElements) {
         getAllSearchElements(searchElements);
         filterIdea();
     }
 
-    private void getAllSearchElements(SearchElements searchElements) throws IOException {
+    private void getAllSearchElements(SearchElements searchElements) {
         artFilter = searchElements.getSearchElements(CategoryStatus.ART, manageElement.getAllArten());
         stimmungFilter = searchElements.getSearchElements(CategoryStatus.STIMMUNG, manageElement.getAllStimmungen());
         objektFilter = searchElements.getSearchElements(CategoryStatus.OBJEKT, manageElement.getAllObjekte());
