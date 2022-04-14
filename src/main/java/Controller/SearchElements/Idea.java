@@ -39,7 +39,7 @@ public class Idea implements IdeaInterface {
         artFilter = searchElements.getSearchElements(CategoryStatus.ART, manageElement.getAllArten());
         stimmungFilter = searchElements.getSearchElements(CategoryStatus.STIMMUNG, manageElement.getAllStimmungen());
         objektFilter = searchElements.getSearchElements(CategoryStatus.OBJEKT, manageElement.getAllObjekte());
-        tagFilter = searchElements.getSearchTags(Tag.getAllTags());
+        tagFilter = searchElements.getSearchTags();
     }
 
     //    Verhaltensmuster

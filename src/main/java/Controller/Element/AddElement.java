@@ -45,6 +45,6 @@ public class AddElement extends HandlingElement {
     }
 
     private Tag[] readNewTags() {
-        return gui.getTags(Tag.getAllTags());
+        return gui.getTags();
     }
 }

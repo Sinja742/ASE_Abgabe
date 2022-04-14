@@ -18,10 +18,6 @@ public class Objekt extends Category implements CategoryInterface{
         this.tags.addAll(Arrays.asList(tags));
     }
 
-    public List<Tag> getTags() {
-        return this.tags;
-    }
-
     public boolean containsTag(Tag[] filterTags) {
         if (!tags.isEmpty()) {
             for (Tag filterTag : filterTags) {

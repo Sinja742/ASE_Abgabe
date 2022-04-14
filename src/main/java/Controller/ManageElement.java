@@ -86,6 +86,7 @@ public class ManageElement implements ManageElementInterface {
         }
         return null;
         //TODO try catch category == null
+        //Fehler, in Rechtschreibung und oder Syntax
     }
 
     private Category searchCategoryToDescription(String description, List<Category> elements) {

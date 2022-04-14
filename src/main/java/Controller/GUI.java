@@ -12,6 +12,14 @@ import java.util.List;
 
 public class GUI implements GUIInterface {
 
+    private final CheckInput checkInput;
+    private final ManageElement manageElement;
+
+    public GUI(ManageElement manageElement) {
+        this.manageElement = manageElement;
+        this.checkInput = new CheckInput(this.manageElement);
+    }
+
     public void showIdea(String idea) {
         System.out.println("Sie können hierzu kreativ werden: " + idea);
     }
@@ -46,7 +54,9 @@ public class GUI implements GUIInterface {
             System.out.println(text);
 
             BufferedReader tastatur = new BufferedReader(new InputStreamReader(System.in));
-            return tastatur.readLine().split(" ");
+            String[] eingabe = tastatur.readLine().split(" ");
+            this.checkInput.checkCategories(eingabe, categoryStatus);
+            return eingabe;
         } catch (IOException e) {
             System.out.println("Bei der Verarbeitung ihrer Eingabe ist etwas schief gelaufen. Bitte versuchen Sie es erneut.");
             e.printStackTrace();
@@ -55,8 +65,8 @@ public class GUI implements GUIInterface {
     }
 
     //      TODO: können gleiche tags mehrmals angelegt sein ? --> objekte bearbeiten und neu anlegen
-    public Tag[] getTags(List<Tag> allTags) {
-        String[] tagsString = getTagsString(allTags);
+    public Tag[] getTags() {
+        String[] tagsString = getTagsString();
         Tag[] tags = new Tag[tagsString.length];
         for (int countTags = 0; countTags < tagsString.length; countTags++) {
 //            Abfrage ob tag existiert
@@ -68,11 +78,13 @@ public class GUI implements GUIInterface {
 
     public String[] getTagsString(List<Tag> allTags) {
         try {
-            showExistingElements("Tag", Tag.tagsToStringList(allTags));
+            showExistingElements("Tag", Tag.tagsToStringList(Tag.getAllTags()));
             System.out.println("Geben Sie die gewünschten Tags ein: ");
 
             BufferedReader tastatur = new BufferedReader(new InputStreamReader(System.in));
-            return tastatur.readLine().split(" ");
+            String[] eingabe = tastatur.readLine().split(" ");
+            this.checkInput.checkTags(eingabe);
+            return eingabe;
         } catch (IOException e) {
             System.out.println("Bei der Verarbeitung ihrer Eingabe ist etwas schief gelaufen. Bitte versuchen Sie es erneut.");
             e.printStackTrace();

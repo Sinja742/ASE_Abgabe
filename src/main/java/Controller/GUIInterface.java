@@ -13,9 +13,9 @@ public interface GUIInterface {
 
     String[] getStringArrayOfElements(CategoryStatus categoryStatus, List<Category> allElements, String text);
 
-    Tag[] getTags(List<Tag> allTags);
+    Tag[] getTags();
 
-    String[] getTagsString(List<Tag> allTags);
+    String[] getTagsString();
 
     void showExistingElements(String categoryStatus, List<String> allElements);
 
