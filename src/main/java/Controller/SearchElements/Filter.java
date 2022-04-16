@@ -20,19 +20,19 @@ public abstract class Filter implements FilterInterface{
         return filterCategoryElements();
     }
 
-    protected void fillCategoryElementsIfEmpty() {
+    void fillCategoryElementsIfEmpty() {
         if (noFilterElements(categoryElements)) {
             categoryElements = ManageElement.toArray(allElements);
         }
     }
 
-    protected abstract Category filterCategoryElements();
+    abstract Category filterCategoryElements();
 
-    protected Category getRandomElement() {
+    Category getRandomElement() {
         return categoryElements[(int) (Math.random() * categoryElements.length)];
     }
 
-    protected boolean noFilterElements(Category[] filter) {
+    boolean noFilterElements(Category[] filter) {
         return filter.length == 0;
     }
 
