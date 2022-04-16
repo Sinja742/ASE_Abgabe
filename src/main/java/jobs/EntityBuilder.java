@@ -2,24 +2,20 @@ package jobs;
 
 import Entity.*;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 
-public class TxtReader {
-    public static String[] readTxt() {
-        try {
-            BufferedReader bfr = new BufferedReader(new FileReader("resources/Elemente.txt"));
-            String text = bfr.readLine();
-            bfr.close();
-            return text.split("&&");
-        } catch (Exception e) {
-            e.getMessage();
-            return null;
-        }
+// TODO: Refactoring !!!!!!!!!!!!!
+public class EntityBuilder implements EntityBuilderInterface{
+
+    private final TxtHandling handlerTxt;
+
+    public EntityBuilder() {
+        this.handlerTxt = new TxtHandling();
     }
 
-    public static List<Category> readEntity(CategoryStatus categoryStatus) {
+//    Erzeugungsmuster
+    public List<Category> readEntity(CategoryStatus categoryStatus) {
         if (CategoryStatus.OBJEKT.isEqualCategory(categoryStatus)) {
             return getObjekt();
         } else {
@@ -27,9 +23,9 @@ public class TxtReader {
         }
     }
 
-    private static List<Category> getEntity(CategoryStatus entityStatus) {
+    private List<Category> getEntity(CategoryStatus entityStatus) {
         List<Category> entityList = new ArrayList<>();
-        String[] text = readTxt();
+        String[] text = this.handlerTxt.readTxt();
         String entityText;
         if (text != null) {
             if (entityStatus.equals(CategoryStatus.ART)) {
@@ -46,14 +42,14 @@ public class TxtReader {
         return entityList;
     }
 
-    public static List<Category> getObjekt() {
+    private List<Category> getObjekt() {
         List<Category> objektList = new ArrayList<>();
-        String[] text = readTxt();
+        String[] text = this.handlerTxt.readTxt();
 
         if (text != null) {
-            text = text[2].split(";");
+            text = text[2].split(",");
             for (String s : text) {
-                String[] objekt = s.split(",");
+                String[] objekt = s.split(";");
                 String bezeichnung = objekt[0];
                 objektList.add(new Objekt(bezeichnung, getTags(objekt)));
             }
@@ -61,7 +57,7 @@ public class TxtReader {
         return objektList;
     }
 
-    public static List<Tag> getTags(String[] objekt) {
+    private List<Tag> getTags(String[] objekt) {
         List<Tag> tagList = new ArrayList<>();
         for(int objektAttribute = 1; objektAttribute < objekt.length; objektAttribute++) {
             tagList.add(Tag.getTag(Integer.parseInt(objekt[objektAttribute])));

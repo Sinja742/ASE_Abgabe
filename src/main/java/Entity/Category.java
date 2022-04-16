@@ -12,5 +12,12 @@ public abstract class Category implements CategoryInterface{
         return this.description;
     }
 
+    public boolean equalsDescription(String description) {
+        return this.description.equals(description);
+    }
+
     public abstract boolean containsTag(Tag[] tagFilter);
+
+    @Override
+    public abstract String toString();
 }

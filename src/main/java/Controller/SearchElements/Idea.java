@@ -6,8 +6,6 @@ import Entity.Category;
 import Entity.CategoryStatus;
 import Entity.Tag;
 
-import java.io.IOException;
-
 public class Idea implements IdeaInterface {
 
     private Category art;
@@ -19,32 +17,39 @@ public class Idea implements IdeaInterface {
     private Category[] objektFilter;
     private Tag[] tagFilter;
 
-    public Idea(GUI gui) throws IOException {
-        SearchElements searchElements = new SearchElements(gui);
+    private final ManageElement manageElement;
+
+    //    Strukturmuster (Idee = Category+Category+Category)
+    public Idea(GUI gui, ManageElement manageElement) {
+        this.manageElement = manageElement;
+        SearchElements searchElements = new SearchElements(gui, manageElement);
         this.searchIdea(searchElements);
     }
 
-    @Override
     public String toString() {
-        return this.art.getDescription() + " " + this.stimmung.getDescription() + " " + this.objekt.getDescription();
+        if (this.objekt != null){
+            return this.art.getDescription() + " " + this.stimmung.getDescription() + " " + this.objekt.getDescription();
+        }
+        return "";
     }
 
-    private void searchIdea(SearchElements searchElements) throws IOException {
+    private void searchIdea(SearchElements searchElements) {
         getAllSearchElements(searchElements);
         filterIdea();
     }
 
-    private void getAllSearchElements(SearchElements searchElements) throws IOException {
-        artFilter = searchElements.getSearchElements(CategoryStatus.ART, ManageElement.getAllArten());
-        stimmungFilter = searchElements.getSearchElements(CategoryStatus.STIMMUNG, ManageElement.getAllStimmungen());
-        objektFilter = searchElements.getSearchElements(CategoryStatus.OBJEKT, ManageElement.getAllObjekte());
-        tagFilter = searchElements.getSearchTags(Tag.getAllTags());
+    private void getAllSearchElements(SearchElements searchElements) {
+        artFilter = searchElements.getSearchElements(CategoryStatus.ART, manageElement.getAllArten());
+        stimmungFilter = searchElements.getSearchElements(CategoryStatus.STIMMUNG, manageElement.getAllStimmungen());
+        objektFilter = searchElements.getSearchElements(CategoryStatus.OBJEKT, manageElement.getAllObjekte());
+        tagFilter = searchElements.getSearchTags();
     }
 
+    //    Verhaltensmuster
     private void filterIdea() {
-        art = new FilterIdea(artFilter, ManageElement.getAllArten()).random();
-        stimmung = new FilterIdea(stimmungFilter, ManageElement.getAllStimmungen()).random();
-        objekt = new FilterObjektIdea(objektFilter, ManageElement.getAllObjekte(), tagFilter).random();
+        art = new FilterIdea(artFilter, manageElement.getAllArten()).random();
+        stimmung = new FilterIdea(stimmungFilter, manageElement.getAllStimmungen()).random();
+        objekt = new FilterObjektIdea(objektFilter, manageElement.getAllObjekte(), tagFilter).random();
     }
 
 }
