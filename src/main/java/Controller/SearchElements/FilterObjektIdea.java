@@ -4,7 +4,6 @@ import Controller.ManageElement;
 import Entity.Category;
 import Entity.Tag;
 
-import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 
