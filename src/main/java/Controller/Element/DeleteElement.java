@@ -22,6 +22,11 @@ public class DeleteElement extends HandlingElement {
 
     private void deleteElementOfTypeCategory(CategoryStatus categoryStatus, List<Category> allElements) {
         String element = handleElement(categoryStatus, allElements, "löschen");
-        manageElement.deleteElement(element, categoryStatus);
+        if (!this.checkInput.checkCategoriesExist(new String[]{element}, categoryStatus)) {
+            deleteElementOfTypeCategory(categoryStatus, allElements);
+        } else {
+            manageElement.deleteElement(element, categoryStatus);
+        }
+
     }
 }

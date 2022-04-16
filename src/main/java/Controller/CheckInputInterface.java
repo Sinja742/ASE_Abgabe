@@ -4,10 +4,10 @@ import Entity.CategoryStatus;
 
 public interface CheckInputInterface {
 
-    void checkCategories(String[] elements, CategoryStatus categoryStatus);
+    boolean checkCategoriesExist(String[] elements, CategoryStatus categoryStatus);
 
-    void checkTags(String[] tags);
+    boolean checkTagsExist(String[] tags);
 
-    public void elementDoNotExists(String element, CategoryStatus categoryStatus);
+    boolean elementDoNotExists(String element, CategoryStatus categoryStatus);
 
 }

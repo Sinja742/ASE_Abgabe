@@ -3,6 +3,9 @@ package Controller;
 import Entity.CategoryStatus;
 import Entity.Tag;
 
+import Error.ElementIsNullException;
+import Error.FalseInputException;
+
 public class CheckInput implements CheckInputInterface {
 
     private final ManageElement manageElement;
@@ -11,30 +14,60 @@ public class CheckInput implements CheckInputInterface {
         this.manageElement = manageElement;
     }
 
-    public void checkCategories(String[] elements, CategoryStatus categoryStatus) {
+    public boolean checkCategoriesExist(String[] elements, CategoryStatus categoryStatus) {
         for (String element : elements) {
-            this.checkCategory(element, categoryStatus);
+            if (!this.checkCategory(element, categoryStatus)) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    private boolean checkCategory(String element, CategoryStatus categoryStatus) {
+        try {
+            if (this.manageElement.getCategoryToDescription(element, categoryStatus) == null) {
+                throw new FalseInputException();
+            } else {
+                return true;
+            }
+        } catch (FalseInputException e) {
+            System.out.println(e.getMessage());
+            return false;
         }
     }
 
-    private void checkCategory(String element, CategoryStatus categoryStatus) {
-        this.manageElement.getCategoryToDescription(element, categoryStatus);
-        //TODO: nicht null!!!
+    public boolean checkTagsExist(String[] tags) {
+        for (String tag : tags) {
+            if (!this.checkTag(tag)) {
+                return false;
+            }
+        }
+        return true;
     }
 
-    public void checkTags(String[] tags) {
-        for(String tag : tags) {
-            this.checkTag(tag);
+    private boolean checkTag(String tag) {
+        try {
+            if (Tag.getTag(tag) == null) {
+                throw new FalseInputException();
+            } else {
+                return true;
+            }
+        } catch (FalseInputException e) {
+            System.out.println(e.getMessage());
+            return false;
         }
     }
 
-    private void checkTag(String tag) {
-        Tag.getTag(tag);
-        //TODO: nicht null!!!
-    }
-
-    public void elementDoNotExists(String element, CategoryStatus categoryStatus) {
-        this.manageElement.getCategoryToDescription(element, categoryStatus);
-        //TODO: muss null sein!!!
+    public boolean elementDoNotExists(String element, CategoryStatus categoryStatus) {
+        try {
+            if (this.manageElement.getCategoryToDescription(element, categoryStatus) != null) {
+                throw new Exception();
+            } else {
+                return true;
+            }
+        } catch (Exception e) {
+            System.out.println("Das Element existiert bereits");
+            return false;
+        }
     }
 }

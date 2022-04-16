@@ -21,7 +21,11 @@ public class AddElement extends HandlingElement {
 
     private void addNewElementOfTypeCategory(CategoryStatus categoryStatus, List<Category> allElements) {
         String newElement = handleElement(categoryStatus, allElements, "neu anlegen");
-        saveNewElement(newElement, categoryStatus);
+        if (!this.checkInput.elementDoNotExists(newElement, categoryStatus)) {
+            addNewElementOfTypeCategory(categoryStatus, allElements);
+        } else {
+            saveNewElement(newElement, categoryStatus);
+        }
     }
 
     void saveNewElement(String newElement, CategoryStatus categoryStatus) {

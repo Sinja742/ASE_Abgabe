@@ -22,16 +22,6 @@ public enum CategoryStatus {
         return this.statusPlural;
     }
 
-    //TODO: Exceptionhandling
-    public CategoryStatus getCategoryStatus(String status) {
-        for (CategoryStatus categoryStatus : CategoryStatus.values()) {
-            if (categoryStatus.getStatus().equals(status)) {
-                return categoryStatus;
-            }
-        }
-        return null;
-    }
-
     public boolean isEqualCategory(CategoryStatus category) {
         return category.equals(this);
     }

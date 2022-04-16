@@ -27,7 +27,10 @@ public class Idea implements IdeaInterface {
     }
 
     public String toString() {
-        return this.art.getDescription() + " " + this.stimmung.getDescription() + " " + this.objekt.getDescription();
+        if (this.objekt != null){
+            return this.art.getDescription() + " " + this.stimmung.getDescription() + " " + this.objekt.getDescription();
+        }
+        return "";
     }
 
     private void searchIdea(SearchElements searchElements) {

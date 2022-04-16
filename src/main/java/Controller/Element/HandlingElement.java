@@ -1,5 +1,6 @@
 package Controller.Element;
 
+import Controller.CheckInput;
 import Controller.GUI;
 import Controller.ManageElement;
 import Entity.Category;
@@ -12,10 +13,12 @@ public abstract class HandlingElement {
     public HandlingElement(GUI gui, ManageElement manageElement) {
         this.gui = gui;
         this.manageElement = manageElement;
+        this.checkInput = new CheckInput(this.manageElement);
     }
 
     protected GUI gui;
     protected ManageElement manageElement;
+    protected final CheckInput checkInput;
 
     protected String handleElement(CategoryStatus categoryStatus, List<Category> allElements, String action) {
         String text = "Geben Sie den Begriff für " + categoryStatus + " ein, den Sie " + action + " wollen: ";

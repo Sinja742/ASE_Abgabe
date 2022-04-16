@@ -1,5 +1,6 @@
 package Controller.SearchElements;
 
+import Controller.CheckInput;
 import Controller.GUI;
 import Controller.ManageElement;
 import Entity.Category;
@@ -12,10 +13,12 @@ public class SearchElements implements SearchElementsInterface {
 
     private final GUI gui;
     private final ManageElement manageElement;
+    private final CheckInput checkInput;
 
     public SearchElements(GUI gui, ManageElement manageElement) {
         this.gui = gui;
         this.manageElement = manageElement;
+        this.checkInput = new CheckInput(this.manageElement);
     }
 
     public Category[] getSearchElements(CategoryStatus categoryStatus, List<Category> allElements) {
@@ -38,6 +41,9 @@ public class SearchElements implements SearchElementsInterface {
 
     private Category[] getFilters(CategoryStatus categoryStatus, List<Category> allElements) {
         String[] filtersString = gui.getStringArrayOfElements(categoryStatus, allElements, "Geben Sie die gewünschten " + categoryStatus.getStatusPlural() + " ein: ");
+        if (!this.checkInput.checkCategoriesExist(filtersString,categoryStatus)){
+            return getFilters(categoryStatus,allElements);
+        }
         Category[] filters = new Category[filtersString.length];
         for(int countFilter = 0; countFilter < filtersString.length; countFilter++) {
             filters[countFilter] = manageElement.getCategoryToDescription(filtersString[countFilter], categoryStatus);

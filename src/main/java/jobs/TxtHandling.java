@@ -17,6 +17,7 @@ public class TxtHandling implements TxtHandlingInterface{
             bfr.close();
             return text.split("&&");
         } catch (Exception e) {
+            System.out.println("ERROR: Beim lesen der Elemente.txt Datei ist etwas schief gelaufen.");
             e.printStackTrace();
             return null;
         }
@@ -38,7 +39,7 @@ public class TxtHandling implements TxtHandlingInterface{
             out.println(allElements);
             out.close();
         }catch (IOException e){
-            System.out.println("Beim schreiben in die Elemente.txt Datei ist etwas schief gelaufen.");
+            System.out.println("ERROR: Beim schreiben in die Elemente.txt Datei ist etwas schief gelaufen.");
             e.printStackTrace();
         }
 

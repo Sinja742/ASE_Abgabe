@@ -4,6 +4,7 @@ import Controller.ManageElement;
 import Entity.Category;
 import Entity.Tag;
 
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,8 +23,7 @@ public class FilterObjektIdea extends Filter implements FilterInterface{
         if (!noFilterElements(categoryElements)) {
             return getRandomElement();
         } else {
-            //TODO: try catch throw exception what ever
-            System.out.println("\nEs gibt keine Objekte zu den ausgewählten Tags. Bitte weniger Tags setzen für eine Idee.");
+            System.out.println("Es gibt keine Objekte zu den ausgewählten Tags. Bitte weniger Tags setzen für eine Idee." );
             return null;
         }
     }

@@ -31,9 +31,10 @@ public class GUI implements GUIInterface {
             BufferedReader tastatur = new BufferedReader(new InputStreamReader(System.in));
 
             System.out.print(question + " (" + JA + "/" + NEIN + "): ");
-            if (tastatur.readLine().equals(JA)) {
+            String eingabe = tastatur.readLine();
+            if (eingabe.equals(JA)) {
                 return true;
-            } else if (tastatur.readLine().equals(NEIN)) {
+            } else if (eingabe.equals(NEIN)) {
                 return false;
             } else {
                 throw new FalseInputException();
@@ -42,11 +43,10 @@ public class GUI implements GUIInterface {
             System.out.println(ex.getMessage());
             return trueBooleanQuestion(question);
         } catch (IOException e) {
-            System.out.println("Bei der Verarbeitung ihrer Eingabe ist etwas schief gelaufen. Bitte versuchen Sie es erneut.");
-            e.printStackTrace();
+            throwProcessingError(e);
             return trueBooleanQuestion(question);
         }
-        }
+    }
 
     public String[] getStringArrayOfElements(CategoryStatus categoryStatus, List<Category> allElements, String text) {
         try {
@@ -54,27 +54,21 @@ public class GUI implements GUIInterface {
             System.out.println(text);
 
             BufferedReader tastatur = new BufferedReader(new InputStreamReader(System.in));
-            String[] eingabe = tastatur.readLine().split(" ");
-            this.checkInput.checkCategories(eingabe, categoryStatus);
-            return eingabe;
+            return tastatur.readLine().split(" ");
         } catch (IOException e) {
-            System.out.println("Bei der Verarbeitung ihrer Eingabe ist etwas schief gelaufen. Bitte versuchen Sie es erneut.");
-            e.printStackTrace();
+            throwProcessingError(e);
             return getStringArrayOfElements(categoryStatus, allElements, text);
         }
-        }
+    }
 
-    //      TODO: können gleiche tags mehrmals angelegt sein ? --> objekte bearbeiten und neu anlegen
     public Tag[] getTags() {
-            String[] tagsString = getTagsString();
-            Tag[] tags = new Tag[tagsString.length];
+        String[] tagsString = getTagsString();
+        Tag[] tags = new Tag[tagsString.length];
         for (int countTags = 0; countTags < tagsString.length; countTags++) {
-//            Abfrage ob tag existiert
-//            Was machen wir mit tags die falsch geschrieben sind ?
-                tags[countTags] = Tag.getTag(tagsString[countTags]);
-            }
-            return tags;
+            tags[countTags] = Tag.getTag(tagsString[countTags]);
         }
+        return tags;
+    }
 
     public String[] getTagsString() {
         try {
@@ -83,34 +77,37 @@ public class GUI implements GUIInterface {
 
             BufferedReader tastatur = new BufferedReader(new InputStreamReader(System.in));
             String[] eingabe = tastatur.readLine().split(" ");
-            this.checkInput.checkTags(eingabe);
+            if (!this.checkInput.checkTagsExist(eingabe)) {
+                return getTagsString();
+            }
             return eingabe;
         } catch (IOException e) {
-            System.out.println("Bei der Verarbeitung ihrer Eingabe ist etwas schief gelaufen. Bitte versuchen Sie es erneut.");
-            e.printStackTrace();
+            throwProcessingError(e);
             return getTagsString();
         }
-        }
+    }
 
-        public void showExistingElements (String categoryStatus, List < String > allElements){
-            System.out.println("Diese Elemente des Typs " + categoryStatus + " existieren:");
-            for (String option : allElements) {
-                System.out.print(option + " ");
-            }
-            System.out.println();
+    public void showExistingElements(String categoryStatus, List<String> allElements) {
+        System.out.println("Diese Elemente des Typs " + categoryStatus + " existieren:");
+        for (String option : allElements) {
+            System.out.print(option + " ");
         }
+        System.out.println();
+    }
 
     public String getNewElement(CategoryStatus categoryStatus) {
         try {
             BufferedReader tastatur = new BufferedReader(new InputStreamReader(System.in));
             System.out.println("Geben Sie den neuen Begriff: ");
-            String eingabe = tastatur.readLine();
-            this.checkInput.elementDoNotExists(eingabe, categoryStatus);
-            return eingabe;
+            return tastatur.readLine();
         } catch (IOException e) {
-            System.out.println("Bei der Verarbeitung ihrer Eingabe ist etwas schief gelaufen. Bitte versuchen Sie es erneut.");
-            e.printStackTrace();
+            throwProcessingError(e);
             return getNewElement(categoryStatus);
         }
-        }
     }
+
+    private void throwProcessingError(IOException e) {
+        System.out.println("ERROR: Bei der Verarbeitung ihrer Eingabe ist etwas schief gelaufen. Bitte versuchen Sie es erneut.");
+        e.printStackTrace();
+    }
+}
