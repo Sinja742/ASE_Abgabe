@@ -1,0 +1,1 @@
+art1,art2,art3&&stimmung1,stimmung2,stimmun3&&objekt1;1;2,objekt2;3;4,objekt3;3;1

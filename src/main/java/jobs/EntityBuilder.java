@@ -23,7 +23,7 @@ public class EntityBuilder implements EntityBuilderInterface{
         }
     }
 
-    private List<Category> getEntity(CategoryStatus entityStatus) {
+    List<Category> getEntity(CategoryStatus entityStatus) {
         List<Category> entityList = new ArrayList<>();
         String[] text = this.handlerTxt.readTxt();
         String entityText;
@@ -42,7 +42,7 @@ public class EntityBuilder implements EntityBuilderInterface{
         return entityList;
     }
 
-    private List<Category> getObjekt() {
+    List<Category> getObjekt() {
         List<Category> objektList = new ArrayList<>();
         String[] text = this.handlerTxt.readTxt();
 
@@ -57,7 +57,7 @@ public class EntityBuilder implements EntityBuilderInterface{
         return objektList;
     }
 
-    private List<Tag> getTags(String[] objekt) {
+    List<Tag> getTags(String[] objekt) {
         List<Tag> tagList = new ArrayList<>();
         for(int objektAttribute = 1; objektAttribute < objekt.length; objektAttribute++) {
             tagList.add(Tag.getTag(Integer.parseInt(objekt[objektAttribute])));
