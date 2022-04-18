@@ -4,7 +4,6 @@ import Controller.ManageElement;
 import Entity.Category;
 import Entity.Tag;
 
-import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,7 +17,7 @@ public class FilterObjektIdea extends Filter implements FilterInterface{
     }
 
     @Override
-    protected Category filterCategoryElements() {
+    Category filterCategoryElements() {
         filterElementsIfTag();
         if (!noFilterElements(categoryElements)) {
             return getRandomElement();
@@ -28,13 +27,13 @@ public class FilterObjektIdea extends Filter implements FilterInterface{
         }
     }
 
-    private void filterElementsIfTag() {
+    void filterElementsIfTag() {
         if (tagFilterExists(tagFilter)) {
             filterObjekte();
         }
     }
 
-    private void filterObjekte() {
+    void filterObjekte() {
         List<Category> objekte = new ArrayList<>();
         for (Category category : categoryElements) {
             if (category.containsTag(tagFilter)) {  //return false
@@ -44,7 +43,7 @@ public class FilterObjektIdea extends Filter implements FilterInterface{
         categoryElements = ManageElement.toArray(objekte);
     }
 
-    private boolean tagFilterExists(Tag[] filter) {
+    boolean tagFilterExists(Tag[] filter) {
         return filter.length > 0;
     }
 }

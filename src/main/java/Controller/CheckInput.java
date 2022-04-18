@@ -3,7 +3,6 @@ package Controller;
 import Entity.CategoryStatus;
 import Entity.Tag;
 
-import Error.ElementIsNullException;
 import Error.FalseInputException;
 
 public class CheckInput implements CheckInputInterface {
@@ -23,7 +22,7 @@ public class CheckInput implements CheckInputInterface {
         return true;
     }
 
-    private boolean checkCategory(String element, CategoryStatus categoryStatus) {
+    boolean checkCategory(String element, CategoryStatus categoryStatus) {
         try {
             if (this.manageElement.getCategoryToDescription(element, categoryStatus) == null) {
                 throw new FalseInputException();
@@ -45,7 +44,7 @@ public class CheckInput implements CheckInputInterface {
         return true;
     }
 
-    private boolean checkTag(String tag) {
+    boolean checkTag(String tag) {
         try {
             if (Tag.getTag(tag) == null) {
                 throw new FalseInputException();

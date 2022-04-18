@@ -33,12 +33,12 @@ public class Idea implements IdeaInterface {
         return "";
     }
 
-    private void searchIdea(SearchElements searchElements) {
+    void searchIdea(SearchElements searchElements) {
         getAllSearchElements(searchElements);
         filterIdea();
     }
 
-    private void getAllSearchElements(SearchElements searchElements) {
+    void getAllSearchElements(SearchElements searchElements) {
         artFilter = searchElements.getSearchElements(CategoryStatus.ART, manageElement.getAllArten());
         stimmungFilter = searchElements.getSearchElements(CategoryStatus.STIMMUNG, manageElement.getAllStimmungen());
         objektFilter = searchElements.getSearchElements(CategoryStatus.OBJEKT, manageElement.getAllObjekte());
@@ -46,7 +46,7 @@ public class Idea implements IdeaInterface {
     }
 
     //    Verhaltensmuster
-    private void filterIdea() {
+    void filterIdea() {
         art = new FilterIdea(artFilter, manageElement.getAllArten()).random();
         stimmung = new FilterIdea(stimmungFilter, manageElement.getAllStimmungen()).random();
         objekt = new FilterObjektIdea(objektFilter, manageElement.getAllObjekte(), tagFilter).random();
