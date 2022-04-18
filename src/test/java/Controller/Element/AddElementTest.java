@@ -11,45 +11,47 @@ import static org.mockito.Mockito.when;
 
 class AddElementTest {
 
-    GUI gui = mock(GUI.class);
-    ManageElement manageElement = mock(ManageElement.class);
+    GUI guiMock = mock(GUI.class);
+    ManageElement manageElementMock = mock(ManageElement.class);
 
-    AddElement addElement = new AddElement(gui, manageElement);
+    AddElement addElement = new AddElement(guiMock, manageElementMock);
 
     @Test
     void addTags_True() {
-        when(addElement.wantAddTags("test")).thenReturn(true);
-        when(addElement.readNewTags()).thenReturn(new Tag[]{Tag.FANTASIE});
+        when(this.guiMock.trueBooleanQuestion("Wollen Sie Tags zum Objekt Test hinzufügen? ")).thenReturn(true);
+        when(this.guiMock.getTags()).thenReturn(new Tag[]{Tag.FANTASIE});
 
         Tag[] returnTagArray = addElement.addTags("Test");
 
         assertEquals(1,returnTagArray.length);
-        assertEquals(new Tag[]{Tag.FANTASIE},returnTagArray);
+        assertEquals("Fantasie",returnTagArray[0].getDescription());
     }
 
     @Test
     void addTags_False() {
-        when(addElement.wantAddTags("test")).thenReturn(false);
+        when(this.guiMock.trueBooleanQuestion("Wollen Sie Tags zum Objekt Test hinzufügen? ")).thenReturn(false);
 
         Tag[] returnTagArray = addElement.addTags("Test");
 
-        assertEquals(new Tag[0],returnTagArray);
+        assertEquals(0,returnTagArray.length);
     }
 
     @Test
     void wantAddTags_True(){
-        when(gui.trueBooleanQuestion("Test")).thenReturn(true);
+        String objektDescription = "Test";
+        when(this.guiMock.trueBooleanQuestion("Wollen Sie Tags zum Objekt " + objektDescription + " hinzufügen? ")).thenReturn(true);
 
-        boolean returnBoolean = addElement.wantAddTags("Test");
+        boolean returnBoolean = addElement.wantAddTags(objektDescription);
 
         assertTrue(returnBoolean);
     }
 
     @Test
     void wantAddTags_False(){
-        when(gui.trueBooleanQuestion("Test")).thenReturn(false);
+        String objektDescription = "Test";
+        when(this.guiMock.trueBooleanQuestion("Wollen Sie Tags zum Objekt " + objektDescription + " hinzufügen? ")).thenReturn(false);
 
-        boolean returnBoolean = addElement.wantAddTags("Test");
+        boolean returnBoolean = addElement.wantAddTags(objektDescription);
 
         assertFalse(returnBoolean);
     }
