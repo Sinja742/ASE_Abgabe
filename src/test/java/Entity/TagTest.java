@@ -14,17 +14,31 @@ import static org.mockito.Mockito.mock;
 class TagTest {
 
     @Test
-    void getTag_Id() {
+    void getTag_Id_True() {
         Tag returnTag = Tag.getTag(4);
 
         assertEquals(Tag.TIER,returnTag);
     }
 
     @Test
-    void getTag_Decsription() {
+    void getTag_Id_False() {
+        Tag returnTag = Tag.getTag(9);
+
+        assertNull(returnTag);
+    }
+
+    @Test
+    void getTag_Decsription_True() {
         Tag returnTag = Tag.getTag("Tier");
 
         assertEquals(Tag.TIER,returnTag);
+    }
+
+    @Test
+    void getTag_Decsription_False() {
+        Tag returnTag = Tag.getTag("Holz");
+
+        assertNull(returnTag);
     }
 
     @Test
