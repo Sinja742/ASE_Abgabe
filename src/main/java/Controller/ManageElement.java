@@ -23,6 +23,13 @@ public class ManageElement implements ManageElementInterface {
         loadElements();
     }
 
+//    //Testing
+//    public ManageElement(EntityBuilder entityBuilder, TxtHandling txtHandling) {
+//        this.entityBuilder = entityBuilder;
+//        this.txtHandling = txtHandling;
+//        loadElements();
+//    }
+
     private void loadElements() {
         arten = this.entityBuilder.readEntity(CategoryStatus.ART);
         stimmungen = this.entityBuilder.readEntity(CategoryStatus.STIMMUNG);

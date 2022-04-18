@@ -23,7 +23,7 @@ class CheckInputTest {
         //When
         when(manageElement.getCategoryToDescription("Element", CategoryStatus.ART)).thenReturn(new SimpleCategory("Element"));
 
-        Boolean exists = checkInput.checkCategoriesExist(elements, CategoryStatus.ART);
+        boolean exists = checkInput.checkCategoriesExist(elements, CategoryStatus.ART);
 
         //Then
         assertTrue(exists);
@@ -38,7 +38,7 @@ class CheckInputTest {
         //When
         when(manageElement.getCategoryToDescription("Element", CategoryStatus.ART)).thenReturn(null);
 
-        Boolean exists = checkInput.checkCategoriesExist(elements, CategoryStatus.ART);
+        boolean exists = checkInput.checkCategoriesExist(elements, CategoryStatus.ART);
 
         //Then
         assertFalse(exists);
@@ -53,7 +53,7 @@ class CheckInputTest {
         //When
         when(manageElement.getCategoryToDescription(element, CategoryStatus.ART)).thenReturn(new SimpleCategory(element));
 
-        Boolean exists = checkInput.checkCategory(element, CategoryStatus.ART);
+        boolean exists = checkInput.checkCategory(element, CategoryStatus.ART);
 
         //Then
         assertTrue(exists);
@@ -68,7 +68,7 @@ class CheckInputTest {
         //When
         when(manageElement.getCategoryToDescription(element, CategoryStatus.ART)).thenReturn(null);
 
-        Boolean exists = checkInput.checkCategory(element, CategoryStatus.ART);
+        boolean exists = checkInput.checkCategory(element, CategoryStatus.ART);
 
         //Then
         assertFalse(exists);
@@ -81,7 +81,7 @@ class CheckInputTest {
         String[] tags = {"Tier"};
 
         //When
-        Boolean exists = checkInput.checkTagsExist(tags);
+        boolean exists = checkInput.checkTagsExist(tags);
 
         //Then
         assertTrue(exists);
@@ -94,7 +94,7 @@ class CheckInputTest {
         String[] tags = {"Tag"};
 
         //When
-        Boolean exists = checkInput.checkTagsExist(tags);
+        boolean exists = checkInput.checkTagsExist(tags);
 
         //Then
         assertFalse(exists);
@@ -107,7 +107,7 @@ class CheckInputTest {
         String tag = "Tier";
 
         //When
-        Boolean exists = checkInput.checkTag(tag);
+        boolean exists = checkInput.checkTag(tag);
 
         //Then
         assertTrue(exists);
@@ -120,7 +120,7 @@ class CheckInputTest {
         String tag = "Tag";
 
         //When
-        Boolean exists = checkInput.checkTag(tag);
+        boolean exists = checkInput.checkTag(tag);
 
         //Then
         assertFalse(exists);
@@ -135,7 +135,7 @@ class CheckInputTest {
         //When
         when(manageElement.getCategoryToDescription(element, CategoryStatus.ART)).thenReturn(null);
 
-        Boolean exists = checkInput.elementDoNotExists(element, CategoryStatus.ART);
+        boolean exists = checkInput.elementDoNotExists(element, CategoryStatus.ART);
 
         //Then
         assertTrue(exists);
@@ -150,7 +150,7 @@ class CheckInputTest {
         //When
         when(manageElement.getCategoryToDescription(element, CategoryStatus.ART)).thenReturn(new SimpleCategory(element));
 
-        Boolean exists = checkInput.elementDoNotExists(element, CategoryStatus.ART);
+        boolean exists = checkInput.elementDoNotExists(element, CategoryStatus.ART);
 
         //Then
         assertFalse(exists);
