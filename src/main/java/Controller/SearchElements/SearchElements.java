@@ -39,7 +39,7 @@ public class SearchElements implements SearchElementsInterface {
         }
     }
 
-    private Category[] getFilters(CategoryStatus categoryStatus, List<Category> allElements) {
+    Category[] getFilters(CategoryStatus categoryStatus, List<Category> allElements) {
         String[] filtersString = gui.getStringArrayOfElements(categoryStatus, allElements, "Geben Sie die gewünschten " + categoryStatus.getStatusPlural() + " ein: ");
         if (!this.checkInput.checkCategoriesExist(filtersString,categoryStatus)){
             return getFilters(categoryStatus,allElements);
