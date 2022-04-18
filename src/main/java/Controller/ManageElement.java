@@ -23,6 +23,13 @@ public class ManageElement implements ManageElementInterface {
         loadElements();
     }
 
+    //Testing
+    public ManageElement(EntityBuilder entityBuilder, TxtHandling txtHandling) {
+        this.entityBuilder = entityBuilder;
+        this.txtHandling = txtHandling;
+        loadElements();
+    }
+
     private void loadElements() {
         arten = this.entityBuilder.readEntity(CategoryStatus.ART);
         stimmungen = this.entityBuilder.readEntity(CategoryStatus.STIMMUNG);
@@ -69,7 +76,7 @@ public class ManageElement implements ManageElementInterface {
         this.txtHandling.rewriteTxt(this.arten, this.stimmungen, this.objekte);
     }
 
-    private List<Category> deleteSearchElement(String elementDescription, List<Category> listCategory) {
+    List<Category> deleteSearchElement(String elementDescription, List<Category> listCategory) {
         listCategory.remove(searchCategoryToDescription(elementDescription, listCategory));
         return listCategory;
     }
@@ -87,7 +94,7 @@ public class ManageElement implements ManageElementInterface {
         return null;
     }
 
-    private Category searchCategoryToDescription(String description, List<Category> elements) {
+    Category searchCategoryToDescription(String description, List<Category> elements) {
         for (Category element : elements) {
             if (element.equalsDescription(description)) {
                 return element;

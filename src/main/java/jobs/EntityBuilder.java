@@ -14,6 +14,10 @@ public class EntityBuilder implements EntityBuilderInterface{
         this.handlerTxt = new TxtHandling();
     }
 
+    public EntityBuilder(TxtHandling handlerTxt) {
+        this.handlerTxt = handlerTxt;
+    }
+
 //    Erzeugungsmuster
     public List<Category> readEntity(CategoryStatus categoryStatus) {
         if (CategoryStatus.OBJEKT.isEqualCategory(categoryStatus)) {
