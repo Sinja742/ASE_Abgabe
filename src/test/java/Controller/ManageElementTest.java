@@ -5,7 +5,6 @@ import Entity.CategoryStatus;
 import Entity.SimpleCategory;
 import jobs.EntityBuilder;
 import jobs.TxtHandling;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
@@ -20,10 +19,10 @@ import static org.mockito.Mockito.when;
 class ManageElementTest {
 
 //    private final ManageElement manageElement = mock(ManageElement.class);
-    private final TxtHandling txtHandling = mock(TxtHandling.class);
+    private final TxtHandling txtHandlingMock = mock(TxtHandling.class);
 //    private final EntityBuilder entityBuilder = new EntityBuilder(txtHandling);
-    private final EntityBuilder entityBuilder = mock(EntityBuilder.class);
-    ManageElement manageElement = new ManageElement(this.entityBuilder, this.txtHandling);
+    private final EntityBuilder entityBuilderMock = mock(EntityBuilder.class);
+    ManageElement manageElement = new ManageElement(this.entityBuilderMock, this.txtHandlingMock);
 
     @Test
     void addElementEmptyList() {
@@ -32,9 +31,9 @@ class ManageElementTest {
         List<Category> arten = new ArrayList<>();
 
         //When
-        when(entityBuilder.readEntity(CategoryStatus.ART)).thenReturn(arten);
-        when(entityBuilder.readEntity(CategoryStatus.STIMMUNG)).thenReturn(null);
-        when(entityBuilder.readEntity(CategoryStatus.OBJEKT)).thenReturn(null);
+        when(entityBuilderMock.readEntity(CategoryStatus.ART)).thenReturn(arten);
+        when(entityBuilderMock.readEntity(CategoryStatus.STIMMUNG)).thenReturn(null);
+        when(entityBuilderMock.readEntity(CategoryStatus.OBJEKT)).thenReturn(null);
 
         manageElement.addElement(element, CategoryStatus.ART);
 
@@ -45,13 +44,13 @@ class ManageElementTest {
 //    @Test
 //    void addElementFillList() {
 //        //Given
-//        ManageElement manageElement = new ManageElement(this.entityBuilderMock, this.txtHandling);
+//        ManageElement manageElement = new ManageElement(this.entityBuilderMock, this.txtHandlingMock);
 //        Category element = new SimpleCategory("Element");
 ////        List<Category> arten = new ArrayList<>();
 ////        arten.add(new SimpleCategory("ExistingElement"));
 //
 //        //When
-//        when(txtHandling.readTxt()).thenReturn(new String[] {"ExistingElement","",""});
+//        when(txtHandlingMock.readTxt()).thenReturn(new String[] {"ExistingElement","",""});
 ////        when(entityBuilder.readEntity(CategoryStatus.ART)).thenReturn(arten);
 ////        when(entityBuilder.readEntity(CategoryStatus.STIMMUNG)).thenReturn(null);
 ////        when(entityBuilder.readEntity(CategoryStatus.OBJEKT)).thenReturn(null);

@@ -13,8 +13,6 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class FilterObjektIdeaTest {
 
-//    private final FilterObjektIdea filterObjektIdea = mock(FilterObjektIdea.class);
-
     @Test
     void randomOneAllElementsNullCategory() {
         //Given

@@ -14,9 +14,6 @@ import static org.mockito.Mockito.when;
 
 class FilterIdeaTest {
 
-    //private final FilterIdea filterIdea = mock(FilterIdea.class);
-    //when(Klasse.Methode()).thenReturn(retrunWert);
-
     @Test
     void randomOneAllElementsNullCategory() {
         //Given
