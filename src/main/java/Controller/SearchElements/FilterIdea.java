@@ -11,7 +11,7 @@ public class FilterIdea extends Filter implements FilterInterface{
     }
 
     @Override
-    protected Category filterCategoryElements() {
+    Category filterCategoryElements() {
         return getRandomElement();
     }
 

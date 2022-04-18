@@ -5,6 +5,7 @@ import Entity.CategoryStatus;
 import jobs.EntityBuilder;
 import jobs.TxtHandling;
 
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,6 +21,13 @@ public class ManageElement implements ManageElementInterface {
     public ManageElement(EntityBuilder entityBuilder) {
         this.entityBuilder = entityBuilder;
         this.txtHandling = new TxtHandling();
+        loadElements();
+    }
+
+    //Testing
+    public ManageElement(EntityBuilder entityBuilder, TxtHandling txtHandling) {
+        this.entityBuilder = entityBuilder;
+        this.txtHandling = txtHandling;
         loadElements();
     }
 
@@ -69,7 +77,7 @@ public class ManageElement implements ManageElementInterface {
         this.txtHandling.rewriteTxt(this.arten, this.stimmungen, this.objekte);
     }
 
-    private List<Category> deleteSearchElement(String elementDescription, List<Category> listCategory) {
+    List<Category> deleteSearchElement(String elementDescription, List<Category> listCategory) {
         listCategory.remove(searchCategoryToDescription(elementDescription, listCategory));
         return listCategory;
     }
@@ -87,7 +95,7 @@ public class ManageElement implements ManageElementInterface {
         return null;
     }
 
-    private Category searchCategoryToDescription(String description, List<Category> elements) {
+    Category searchCategoryToDescription(String description, List<Category> elements) {
         for (Category element : elements) {
             if (element.equalsDescription(description)) {
                 return element;

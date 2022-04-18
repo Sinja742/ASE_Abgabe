@@ -7,6 +7,8 @@ import Controller.SearchElements.Idea;
 import Entity.CategoryStatus;
 import jobs.EntityBuilder;
 
+import java.io.FileNotFoundException;
+
 public class Steuerung {
 
     public static void main(String[] args) {

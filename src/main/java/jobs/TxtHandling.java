@@ -9,12 +9,24 @@ import java.util.List;
 public class TxtHandling implements TxtHandlingInterface{
 
     File file = new File("Elemente.txt");
+    BufferedReader bfr;
+
+    public TxtHandling(){
+        try{
+            bfr = new BufferedReader(new FileReader("Elemente.txt"));
+        }catch (FileNotFoundException e){
+            e.printStackTrace();
+        }
+    }
+
+    public TxtHandling(BufferedReader bfr) {
+        this.bfr = bfr;
+    }
 
     public String[] readTxt() {
         try {
-            BufferedReader bfr = new BufferedReader(new FileReader("Elemente.txt"));
-            String text = bfr.readLine();
-            bfr.close();
+            String text = this.bfr.readLine();
+            this.bfr.close();
             return text.split("&&");
         } catch (Exception e) {
             System.out.println("ERROR: Beim lesen der Elemente.txt Datei ist etwas schief gelaufen.");
@@ -45,7 +57,7 @@ public class TxtHandling implements TxtHandlingInterface{
 
     }
 
-    private String toTxtString(List<Category> elementlist){
+    String toTxtString(List<Category> elementlist){
         List<String> returnStringList = new ArrayList<>();
         for (Category element : elementlist) {
             returnStringList.add(element.toString());
@@ -53,7 +65,7 @@ public class TxtHandling implements TxtHandlingInterface{
         return String.join(",",returnStringList);
     }
 
-    private String joinLists(List<Category> arten, List<Category> stimmungen, List<Category> objekte){
+    String joinLists(List<Category> arten, List<Category> stimmungen, List<Category> objekte){
         String elementsList = toTxtString(arten);
         elementsList = elementsList.concat("&&");
         elementsList = elementsList.concat(toTxtString(stimmungen));

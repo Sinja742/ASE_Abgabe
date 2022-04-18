@@ -43,12 +43,12 @@ public class AddElement extends HandlingElement {
         return new Tag[0];
     }
 
-    private boolean wantAddTags(String objektDescription) {
+    boolean wantAddTags(String objektDescription) {
         String question = "Wollen Sie Tags zum Objekt " + objektDescription + " hinzufügen? ";
         return gui.trueBooleanQuestion(question);
     }
 
-    private Tag[] readNewTags() {
+    Tag[] readNewTags() {
         return gui.getTags();
     }
 }
