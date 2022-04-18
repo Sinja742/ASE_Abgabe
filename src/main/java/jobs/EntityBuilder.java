@@ -2,16 +2,20 @@ package jobs;
 
 import Entity.*;
 
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
 
-// TODO: Refactoring !!!!!!!!!!!!!
 public class EntityBuilder implements EntityBuilderInterface{
 
     private final TxtHandling handlerTxt;
 
     public EntityBuilder() {
         this.handlerTxt = new TxtHandling();
+    }
+
+    public EntityBuilder(TxtHandling handlerTxt){
+        this.handlerTxt = handlerTxt;
     }
 
 //    Erzeugungsmuster

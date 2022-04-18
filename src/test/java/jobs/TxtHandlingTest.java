@@ -9,6 +9,7 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
 import java.io.BufferedReader;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -21,7 +22,10 @@ import static org.mockito.Mockito.when;
 class TxtHandlingTest {
 
     BufferedReader bfr = mock(BufferedReader.class);
-    TxtHandling handlerTxt = new TxtHandling();
+    TxtHandling handlerTxt = new TxtHandling(bfr);
+
+    TxtHandlingTest() {
+    }
 
     @Test
     void readTxt() throws IOException {
