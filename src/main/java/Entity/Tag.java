@@ -46,9 +46,7 @@ public enum Tag {
         return null;
     }
     public static List<Tag> getAllTags() {
-        List<Tag> tagList = new ArrayList<>();
-        tagList.addAll(Arrays.asList(Tag.values()));
-        return tagList;
+        return new ArrayList<>(Arrays.asList(Tag.values()));
     }
 
     public static List<String> tagsToStringList(List<Tag> tagsList) {
@@ -60,12 +58,4 @@ public enum Tag {
         return tagsListString;
     }
 
-    //    public static Tag[] tagsToArray(List<Tag> tagsList) {
-//        Tag[] tags = new Tag[tagsList.size()];
-//        for(int countTags = 0; countTags < tagsList.size(); countTags++) {
-//            tags[countTags] = tagsList.get(countTags);
-//        }
-//        return tags;
-//    }
-//
 }

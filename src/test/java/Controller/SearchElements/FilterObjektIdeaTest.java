@@ -8,12 +8,9 @@ import org.junit.jupiter.api.Test;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.junit.Assert.assertTrue;
 import static org.junit.jupiter.api.Assertions.*;
 
 class FilterObjektIdeaTest {
-
-//    private final FilterObjektIdea filterObjektIdea = mock(FilterObjektIdea.class);
 
     @Test
     void randomOneAllElementsNullCategory() {
@@ -31,7 +28,7 @@ class FilterObjektIdeaTest {
         assertEquals("Element1", category.getDescription());
     }
 
-    @org.junit.jupiter.api.Test
+    @Test
     void randomTwoAllElementsOneCategory() {
         //Given
         Category[] categoryElement = {new Objekt("Element1", new Tag[0])};
@@ -48,7 +45,7 @@ class FilterObjektIdeaTest {
         assertEquals("Element1", category.getDescription());
     }
 
-    @org.junit.jupiter.api.Test
+    @Test
     void randomTwoAllElementsTwoCategory() {
         //Given
         Category[] categoryElement = {new Objekt("Element1", new Tag[0]), new Objekt("Element2", new Tag[0])};
@@ -88,7 +85,7 @@ class FilterObjektIdeaTest {
         Category category = filterObjektIdea.filterCategoryElements();
 
         //Then
-        assertEquals(null, category);
+        assertNull(category);
     }
 
     @Test

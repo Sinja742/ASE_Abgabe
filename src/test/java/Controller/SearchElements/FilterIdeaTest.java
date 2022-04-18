@@ -7,15 +7,11 @@ import org.junit.jupiter.api.Test;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.junit.Assert.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 
 class FilterIdeaTest {
-
-    //private final FilterIdea filterIdea = mock(FilterIdea.class);
-    //when(Klasse.Methode()).thenReturn(retrunWert);
 
     @Test
     void randomOneAllElementsNullCategory() {
@@ -33,7 +29,7 @@ class FilterIdeaTest {
         assertEquals("Element1", category.getDescription());
     }
 
-    @org.junit.jupiter.api.Test
+    @Test
     void randomTwoAllElementsOneCategory() {
         //Given
         Category[] categoryElement = {new SimpleCategory("Element1")};
@@ -50,7 +46,7 @@ class FilterIdeaTest {
         assertEquals("Element1", category.getDescription());
     }
 
-    @org.junit.jupiter.api.Test
+    @Test
     void randomTwoAllElementsTwoCategory() {
         //Given
         Category[] categoryElement = {new SimpleCategory("Element1"), new SimpleCategory("Element2")};
