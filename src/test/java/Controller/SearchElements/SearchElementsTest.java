@@ -32,7 +32,9 @@ class SearchElementsTest {
 
         //When
         when(this.gui.trueBooleanQuestion("Wollen Sie nach Arten suchen?")).thenReturn(true);
-        when(this.searchElements.getFilters(CategoryStatus.ART, allElements)).thenReturn(new Category[]{new SimpleCategory("Category")});
+        when(this.gui.getStringArrayOfElements(CategoryStatus.ART, allElements, "Geben Sie die gewünschten Arten ein: ")).thenReturn(new String[] {"Category"});
+        when(this.checkInput.checkCategoriesExist(new String[] {"Category"}, CategoryStatus.ART)).thenReturn(true);
+        when(this.manageElement.getCategoryToDescription("Category", CategoryStatus.ART)).thenReturn(new SimpleCategory("Category"));
 
         Category[] category = searchElements.getSearchElements(CategoryStatus.ART, allElements);
 
