@@ -8,7 +8,6 @@ import org.junit.jupiter.api.Test;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.junit.Assert.assertTrue;
 import static org.junit.jupiter.api.Assertions.*;
 
 class FilterObjektIdeaTest {
@@ -86,7 +85,7 @@ class FilterObjektIdeaTest {
         Category category = filterObjektIdea.filterCategoryElements();
 
         //Then
-        assertEquals(null, category);
+        assertNull(category);
     }
 
     @Test
