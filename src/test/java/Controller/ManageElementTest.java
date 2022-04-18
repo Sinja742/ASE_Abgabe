@@ -23,11 +23,11 @@ class ManageElementTest {
     private final TxtHandling txtHandling = mock(TxtHandling.class);
 //    private final EntityBuilder entityBuilder = new EntityBuilder(txtHandling);
     private final EntityBuilder entityBuilder = mock(EntityBuilder.class);
+    ManageElement manageElement = new ManageElement(this.entityBuilder, this.txtHandling);
 
     @Test
     void addElementEmptyList() {
         //Given
-        ManageElement manageElement = new ManageElement(this.entityBuilder);
         Category element = new SimpleCategory("Element");
         List<Category> arten = new ArrayList<>();
 
@@ -65,7 +65,6 @@ class ManageElementTest {
     @Test
     void deleteSearchElementEmptyList() {
         //Given
-        ManageElement manageElement = new ManageElement(this.entityBuilder);
         String description = "element";
         List<Category> elements = new ArrayList<>();
 
@@ -79,7 +78,6 @@ class ManageElementTest {
     @Test
     void deleteSearchElementEmptyString() {
         //Given
-        ManageElement manageElement = new ManageElement(this.entityBuilder);
         String description = null;
         List<Category> elements = new ArrayList<>();
         elements.add(new SimpleCategory("element"));
@@ -94,7 +92,6 @@ class ManageElementTest {
     @Test
     void deleteSearchElementSuccess() {
         //Given
-        ManageElement manageElement = new ManageElement(this.entityBuilder);
         String description = "element";
         List<Category> elements = new ArrayList<>();
         elements.add(new SimpleCategory("element"));
@@ -109,7 +106,6 @@ class ManageElementTest {
     @Test
     void deleteSearchElementFailure() {
         //Given
-        ManageElement manageElement = new ManageElement(this.entityBuilder);
         String description = "element";
         List<Category> elements = new ArrayList<>();
         elements.add(new SimpleCategory("element1"));
@@ -124,7 +120,6 @@ class ManageElementTest {
     @Test
     void searchCategoryToDescriptionEmptyList() {
         //Given
-        ManageElement manageElement = new ManageElement(this.entityBuilder);
         String description = "element";
         List<Category> elements = new ArrayList<>();
 
@@ -138,7 +133,6 @@ class ManageElementTest {
     @Test
     void searchCategoryToDescriptionEmptyString() {
         //Given
-        ManageElement manageElement = new ManageElement(this.entityBuilder);
         String description = null;
         List<Category> elements = new ArrayList<>();
         elements.add(new SimpleCategory("element"));
@@ -153,7 +147,6 @@ class ManageElementTest {
     @Test
     void searchCategoryToDescriptionSuccess() {
         //Given
-        ManageElement manageElement = new ManageElement(this.entityBuilder);
         String description = "element";
         List<Category> elements = new ArrayList<>();
         elements.add(new SimpleCategory("element"));
@@ -168,7 +161,6 @@ class ManageElementTest {
     @Test
     void searchCategoryToDescriptionFailure() {
         //Given
-        ManageElement manageElement = new ManageElement(this.entityBuilder);
         String description = "element";
         List<Category> elements = new ArrayList<>();
         elements.add(new SimpleCategory("element1"));
