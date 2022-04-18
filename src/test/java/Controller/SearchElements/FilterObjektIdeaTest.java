@@ -28,7 +28,7 @@ class FilterObjektIdeaTest {
         assertEquals("Element1", category.getDescription());
     }
 
-    @org.junit.jupiter.api.Test
+    @Test
     void randomTwoAllElementsOneCategory() {
         //Given
         Category[] categoryElement = {new Objekt("Element1", new Tag[0])};
@@ -45,7 +45,7 @@ class FilterObjektIdeaTest {
         assertEquals("Element1", category.getDescription());
     }
 
-    @org.junit.jupiter.api.Test
+    @Test
     void randomTwoAllElementsTwoCategory() {
         //Given
         Category[] categoryElement = {new Objekt("Element1", new Tag[0]), new Objekt("Element2", new Tag[0])};
