@@ -9,24 +9,11 @@ import java.util.List;
 public class TxtHandling implements TxtHandlingInterface{
 
     File file = new File("Elemente.txt");
-    BufferedReader bfr;
-
-    public TxtHandling(){
-        try{
-            bfr = new BufferedReader(new FileReader("Elemente.txt"));
-        }catch (FileNotFoundException e){
-            e.printStackTrace();
-        }
-    }
-
-    public TxtHandling(BufferedReader bfr) {
-        this.bfr = bfr;
-    }
 
     public String[] readTxt() {
         try {
-            String text = this.bfr.readLine();
-            this.bfr.close();
+            BufferedReader bfr = new BufferedReader(new FileReader("Elemente.txt"));
+            String text = bfr.readLine();
             return text.split("&&");
         } catch (Exception e) {
             System.out.println("ERROR: Beim lesen der Elemente.txt Datei ist etwas schief gelaufen.");
