@@ -25,4 +25,13 @@ class ObjektTest {
 
         assertFalse(returnBoolean);
     }
+
+    @Test
+    void toStringTest(){
+        Objekt testObjekt = new Objekt("Test",new Tag[]{Tag.FANTASIE,Tag.TIER});
+
+        String returnString = testObjekt.toString();
+
+        assertEquals("Test;3;4", returnString);
+    }
 }
