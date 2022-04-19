@@ -14,6 +14,36 @@ class TxtHandlingTest {
     TxtHandling handlerTxt = new TxtHandling();
 
     @Test
+    void getCorrectArrayCorrect() {
+        //Given
+        String[] text = {"Art1,Art2", "Strimmung1,Stimmung2", "Objekt1,Objekt2"};
+
+        //When
+        String[] correctTextArray = handlerTxt.getCorrectArray(text);
+
+        //Then
+        assertEquals(text.length, correctTextArray.length);
+        assertEquals(text[0], correctTextArray[0]);
+        assertEquals(text[1], correctTextArray[1]);
+        assertEquals(text[2], correctTextArray[2]);
+    }
+
+    @Test
+    void getCorrectArrayFalse() {
+        //Given
+        String[] text = {"Art1,Art2", "Strimmung1,Stimmung2"};
+
+        //When
+        String[] correctTextArray = handlerTxt.getCorrectArray(text);
+
+        //Then
+        assertEquals(3, correctTextArray.length);
+        assertEquals(text[0], correctTextArray[0]);
+        assertEquals(text[1], correctTextArray[1]);
+        assertEquals("", correctTextArray[2]);
+    }
+
+    @Test
     void toTxtString(){
         List<Category> testArten = new ArrayList<>();
         testArten.add(new SimpleCategory("art1"));

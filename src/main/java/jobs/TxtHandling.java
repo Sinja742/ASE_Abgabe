@@ -14,12 +14,22 @@ public class TxtHandling implements TxtHandlingInterface{
         try {
             BufferedReader bfr = new BufferedReader(new FileReader("Elemente.txt"));
             String text = bfr.readLine();
-            return text.split("&&");
+            return getCorrectArray(text.split("&&"));
         } catch (Exception e) {
             System.out.println("ERROR: Beim lesen der Elemente.txt Datei ist etwas schief gelaufen.");
             e.printStackTrace();
             return null;
         }
+    }
+
+    String[] getCorrectArray(String[] text) {
+        if(text.length == 3) {
+            return text;
+        }
+        String[] correctArray = new String[3];
+        System.arraycopy(text, 0, correctArray, 0, text.length);
+        correctArray[2] = "";
+        return correctArray;
     }
 
     public void rewriteTxt(List<Category> arten, List<Category> stimmungen, List<Category> objekte){
