@@ -14,6 +14,7 @@ public class EntityBuilder implements EntityBuilderInterface{
         this.handlerTxt = new TxtHandling();
     }
 
+    //Testing
     public EntityBuilder(TxtHandling handlerTxt) {
         this.handlerTxt = handlerTxt;
     }

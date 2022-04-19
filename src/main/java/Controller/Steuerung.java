@@ -11,7 +11,7 @@ public class Steuerung {
 
     public static void main(String[] args) {
         manageElement = new ManageElement(new EntityBuilder());
-        gui = new GUI(manageElement);
+        gui = new GUI(new CheckInput(manageElement));
 
         addElemente = new AddElement(gui, manageElement);
         updateElemente = new UpdateElement(gui, manageElement);
