@@ -13,9 +13,9 @@ public class Steuerung {
         manageElement = new ManageElement(new EntityBuilder());
         gui = new GUI(new CheckInput(manageElement));
 
-        addElemente = new AddElement(gui, manageElement);
-        updateElemente = new UpdateElement(gui, manageElement);
-        deleteElemente = new DeleteElement(gui, manageElement);
+        addElemente = new AddElement(manageElement);
+        updateElemente = new UpdateElement(manageElement);
+        deleteElemente = new DeleteElement(manageElement);
 
         while (true) {
             userIneraction();
@@ -30,7 +30,7 @@ public class Steuerung {
 
     private static void userIneraction() {
         if (gui.trueBooleanQuestion("Wollen Sie nach einer kreativen Idee suchen?")) {
-            gui.showIdea((new Idea(gui, manageElement)).toString());
+            gui.showIdea((new Idea(manageElement)).toString());
         }
         if (gui.trueBooleanQuestion("Wollen Sie neue Elemente hinzufügen?")) {
             addElementToElementList();

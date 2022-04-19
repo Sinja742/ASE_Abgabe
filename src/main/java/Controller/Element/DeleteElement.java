@@ -9,8 +9,8 @@ import java.util.List;
 
 public class DeleteElement extends HandlingElement {
 
-    public DeleteElement(GUI gui, ManageElement manageElement) {
-        super(gui, manageElement);
+    public DeleteElement(ManageElement manageElement) {
+        super(manageElement);
     }
 
     public void deleteElement(CategoryStatus categoryStatus, List<Category> allElements) {

@@ -18,23 +18,24 @@ import static org.mockito.Mockito.when;
 
 class SearchElementsTest {
 
-    private final GUI gui = mock(GUI.class);
-    private final SearchElements searchElements = mock(SearchElements.class);
-    private final CheckInput checkInput = mock(CheckInput.class);
-    private final ManageElement manageElement = mock(ManageElement.class);
+    private final GUI guiMock = mock(GUI.class);
+    private final SearchElements searchElementsMock = mock(SearchElements.class);
+    private final CheckInput checkInputMock = mock(CheckInput.class);
+    private final ManageElement manageElementMock = mock(ManageElement.class);
+
+    private SearchElements searchElements = new SearchElements(this.guiMock, this.manageElementMock);
 
     @Test
     void getSearchElementsTrue() {
         //Given
         List<Category> allElements = new ArrayList<>();
         allElements.add(new SimpleCategory("Category"));
-        SearchElements searchElements = new SearchElements(this.gui, this.manageElement);
 
         //When
-        when(this.gui.trueBooleanQuestion("Wollen Sie nach Arten suchen?")).thenReturn(true);
-        when(this.gui.getStringArrayOfElements(CategoryStatus.ART, allElements, "Geben Sie die gewünschten Arten ein: ")).thenReturn(new String[] {"Category"});
-        when(this.checkInput.checkCategoriesExist(new String[] {"Category"}, CategoryStatus.ART)).thenReturn(true);
-        when(this.manageElement.getCategoryToDescription("Category", CategoryStatus.ART)).thenReturn(new SimpleCategory("Category"));
+        when(this.guiMock.trueBooleanQuestion("Wollen Sie nach Arten suchen?")).thenReturn(true);
+        when(this.guiMock.getStringArrayOfElements(CategoryStatus.ART, allElements, "Geben Sie die gewünschten Arten ein: ")).thenReturn(new String[] {"Category"});
+        when(this.checkInputMock.checkCategoriesExist(new String[] {"Category"}, CategoryStatus.ART)).thenReturn(true);
+        when(this.manageElementMock.getCategoryToDescription("Category", CategoryStatus.ART)).thenReturn(new SimpleCategory("Category"));
 
         Category[] category = searchElements.getSearchElements(CategoryStatus.ART, allElements);
 
@@ -45,11 +46,10 @@ class SearchElementsTest {
     @Test
     void getSearchElementsFalse() {
         //Given
-        SearchElements searchElements = new SearchElements(this.gui, null);
 
         //When
-        when(this.gui.trueBooleanQuestion("Wollen Sie nach Arten suchen?")).thenReturn(false);
-        when(this.searchElements.getFilters(CategoryStatus.ART, null)).thenReturn(new Category[0]);
+        when(this.guiMock.trueBooleanQuestion("Wollen Sie nach Arten suchen?")).thenReturn(false);
+        when(this.searchElementsMock.getFilters(CategoryStatus.ART, null)).thenReturn(new Category[0]);
 
         Category[] category = searchElements.getSearchElements(CategoryStatus.ART, null);
 
@@ -60,11 +60,10 @@ class SearchElementsTest {
     @Test
     void getSearchTagsTrue() {
         //Given
-        SearchElements searchElements = new SearchElements(this.gui, null);
 
         //When
-        when(this.gui.trueBooleanQuestion("Wollen Sie nach Tags suchen?")).thenReturn(true);
-        when(this.gui.getTags()).thenReturn(new Tag[] {Tag.TIER});
+        when(this.guiMock.trueBooleanQuestion("Wollen Sie nach Tags suchen?")).thenReturn(true);
+        when(this.guiMock.getTags()).thenReturn(new Tag[] {Tag.TIER});
 
         Tag[] tags = searchElements.getSearchTags();
 
@@ -75,11 +74,10 @@ class SearchElementsTest {
     @Test
     void getSearchTagsFalse() {
         //Given
-        SearchElements searchElements = new SearchElements(this.gui, null);
 
         //When
-        when(this.gui.trueBooleanQuestion("Wollen Sie nach Tags suchen?")).thenReturn(false);
-        when(this.gui.getTags()).thenReturn(new Tag[0]);
+        when(this.guiMock.trueBooleanQuestion("Wollen Sie nach Tags suchen?")).thenReturn(false);
+        when(this.guiMock.getTags()).thenReturn(new Tag[0]);
 
         Tag[] tags = searchElements.getSearchTags();
 
@@ -90,12 +88,11 @@ class SearchElementsTest {
     @Test
     void getFilters() {
         //Given
-        SearchElements searchElements = new SearchElements(this.gui, this.manageElement);
 
         //When
-        when(this.gui.getStringArrayOfElements(CategoryStatus.ART, null, "Geben Sie die gewünschten Arten ein: ")).thenReturn(new String[] {"CategoryDescription"});
-        when(this.checkInput.checkCategoriesExist(new String[] {"CategoryDescription"}, CategoryStatus.ART)).thenReturn(true);
-        when(this.manageElement.getCategoryToDescription("CategoryDescription", CategoryStatus.ART)).thenReturn(new SimpleCategory("CategoryDescription"));
+        when(this.guiMock.getStringArrayOfElements(CategoryStatus.ART, null, "Geben Sie die gewünschten Arten ein: ")).thenReturn(new String[] {"CategoryDescription"});
+        when(this.checkInputMock.checkCategoriesExist(new String[] {"CategoryDescription"}, CategoryStatus.ART)).thenReturn(true);
+        when(this.manageElementMock.getCategoryToDescription("CategoryDescription", CategoryStatus.ART)).thenReturn(new SimpleCategory("CategoryDescription"));
 
         Category[] filters = searchElements.getFilters(CategoryStatus.ART, null);
 

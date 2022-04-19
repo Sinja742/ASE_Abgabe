@@ -8,6 +8,11 @@ import java.util.List;
 
 public class AddElement extends HandlingElement {
 
+    public AddElement(ManageElement manageElement) {
+        super(manageElement);
+    }
+
+    //Testing
     public AddElement(GUI gui, ManageElement manageElement) {
         super(gui, manageElement);
     }

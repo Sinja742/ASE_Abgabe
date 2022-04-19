@@ -15,10 +15,17 @@ public class SearchElements implements SearchElementsInterface {
     private final ManageElement manageElement;
     private final CheckInput checkInput;
 
-    public SearchElements(GUI gui, ManageElement manageElement) {
-        this.gui = gui;
+    public SearchElements(ManageElement manageElement) {
         this.manageElement = manageElement;
         this.checkInput = new CheckInput(this.manageElement);
+        this.gui = new GUI(this.checkInput);
+    }
+
+    //Testing
+    public SearchElements(GUI gui, ManageElement manageElement) {
+        this.manageElement = manageElement;
+        this.checkInput = new CheckInput(this.manageElement);
+        this.gui = gui;
     }
 
     public Category[] getSearchElements(CategoryStatus categoryStatus, List<Category> allElements) {

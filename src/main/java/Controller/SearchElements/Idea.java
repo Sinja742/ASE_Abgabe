@@ -20,9 +20,9 @@ public class Idea implements IdeaInterface {
     private final ManageElement manageElement;
 
     //    Strukturmuster (Idee = Category+Category+Category)
-    public Idea(GUI gui, ManageElement manageElement) {
+    public Idea(ManageElement manageElement) {
         this.manageElement = manageElement;
-        SearchElements searchElements = new SearchElements(gui, manageElement);
+        SearchElements searchElements = new SearchElements(manageElement);
         this.searchIdea(searchElements);
     }
 

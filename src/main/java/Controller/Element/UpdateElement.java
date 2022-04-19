@@ -9,8 +9,8 @@ import java.util.List;
 
 public class UpdateElement extends HandlingElement {
 
-    public UpdateElement(GUI gui, ManageElement manageElement) {
-        super(gui, manageElement);
+    public UpdateElement(ManageElement manageElement) {
+        super(manageElement);
     }
 
     public void updateElement(CategoryStatus categoryStatus, List<Category> allElements) {
@@ -41,6 +41,6 @@ public class UpdateElement extends HandlingElement {
 
     private void finalUpdate(CategoryStatus categoryStatus,String newElement,String element){
         manageElement.deleteElement(element, categoryStatus);
-        new AddElement(gui, manageElement).saveNewElement(newElement, categoryStatus);
+        new AddElement(manageElement).saveNewElement(newElement, categoryStatus);
     }
 }
