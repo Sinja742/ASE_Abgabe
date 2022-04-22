@@ -1,6 +1,5 @@
 package Controller.SearchElements;
 
-import Controller.GUI;
 import Controller.ManageElement;
 import Entity.Category;
 import Entity.CategoryStatus;

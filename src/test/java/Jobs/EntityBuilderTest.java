@@ -1,4 +1,4 @@
-package jobs;
+package Jobs;
 
 import Entity.*;
 import org.junit.jupiter.api.Test;

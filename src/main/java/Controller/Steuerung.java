@@ -5,7 +5,7 @@ import Controller.Element.DeleteElement;
 import Controller.Element.UpdateElement;
 import Controller.SearchElements.Idea;
 import Entity.CategoryStatus;
-import jobs.EntityBuilder;
+import Jobs.EntityBuilder;
 
 public class Steuerung {
 

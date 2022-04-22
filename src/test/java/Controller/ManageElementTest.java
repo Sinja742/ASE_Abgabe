@@ -3,8 +3,8 @@ package Controller;
 import Entity.Category;
 import Entity.CategoryStatus;
 import Entity.SimpleCategory;
-import jobs.EntityBuilder;
-import jobs.TxtHandling;
+import Jobs.EntityBuilder;
+import Jobs.TxtHandling;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
