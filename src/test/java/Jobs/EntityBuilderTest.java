@@ -1,6 +1,7 @@
 package Jobs;
 
 import Entity.*;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
@@ -12,8 +13,14 @@ import static org.mockito.Mockito.*;
 
 class EntityBuilderTest {
 
-    TxtHandling handlerTxtMock = mock(TxtHandling.class);
-    EntityBuilder entityBuilder = new EntityBuilder(handlerTxtMock);
+    TxtHandling handlerTxtMock;
+    EntityBuilder entityBuilder;
+
+    @BeforeEach
+    void setUp() {
+        handlerTxtMock = mock(TxtHandling.class);
+        entityBuilder = new EntityBuilder(handlerTxtMock);
+    }
 
     @Test
     void readEntity_Objekt() {

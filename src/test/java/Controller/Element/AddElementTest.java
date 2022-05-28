@@ -3,6 +3,7 @@ package Controller.Element;
 import Controller.GUI;
 import Controller.ManageElement;
 import Entity.Tag;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -11,10 +12,16 @@ import static org.mockito.Mockito.when;
 
 class AddElementTest {
 
-    GUI guiMock = mock(GUI.class);
-    ManageElement manageElementMock = mock(ManageElement.class);
+    GUI guiMock;
+    ManageElement manageElementMock;
+    AddElement addElement;
 
-    AddElement addElement = new AddElement(guiMock, manageElementMock);
+    @BeforeEach
+    void setUp() {
+        guiMock = mock(GUI.class);
+        manageElementMock = mock(ManageElement.class);
+        addElement = new AddElement(guiMock, manageElementMock);
+    }
 
     @Test
     void addTags_True() {

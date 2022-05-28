@@ -1,12 +1,14 @@
 package Controller.SearchElements;
 
 import Controller.CheckInput;
+import Controller.Element.AddElement;
 import Controller.GUI;
 import Controller.ManageElement;
 import Entity.Category;
 import Entity.CategoryStatus;
 import Entity.SimpleCategory;
 import Entity.Tag;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
@@ -18,12 +20,22 @@ import static org.mockito.Mockito.when;
 
 class SearchElementsTest {
 
-    private final GUI guiMock = mock(GUI.class);
-    private final SearchElements searchElementsMock = mock(SearchElements.class);
-    private final CheckInput checkInputMock = mock(CheckInput.class);
-    private final ManageElement manageElementMock = mock(ManageElement.class);
+    private GUI guiMock;
+    private SearchElements searchElementsMock;
+    private CheckInput checkInputMock;
+    private ManageElement manageElementMock;
 
-    private SearchElements searchElements = new SearchElements(this.guiMock, this.manageElementMock);
+    private SearchElements searchElements;
+
+    @BeforeEach
+    void setUp() {
+        guiMock = mock(GUI.class);
+        manageElementMock = mock(ManageElement.class);
+        checkInputMock = mock(CheckInput.class);
+        searchElementsMock = mock(SearchElements.class);
+
+        searchElements = new SearchElements(this.guiMock, this.manageElementMock);
+    }
 
     @Test
     void getSearchElementsTrue() {

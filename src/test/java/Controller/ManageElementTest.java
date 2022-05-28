@@ -5,6 +5,7 @@ import Entity.CategoryStatus;
 import Entity.SimpleCategory;
 import Jobs.EntityBuilder;
 import Jobs.TxtHandling;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
@@ -18,11 +19,14 @@ import static org.mockito.Mockito.when;
 
 class ManageElementTest {
 
-//    private final ManageElement manageElement = mock(ManageElement.class);
-    private final TxtHandling txtHandlingMock = mock(TxtHandling.class);
-//    private final EntityBuilder entityBuilder = new EntityBuilder(txtHandling);
-    private final EntityBuilder entityBuilderMock = mock(EntityBuilder.class);
-    ManageElement manageElement = new ManageElement(this.entityBuilderMock, this.txtHandlingMock);
+    private EntityBuilder entityBuilderMock;
+    ManageElement manageElement;
+
+    @BeforeEach
+    void setUp() {
+        entityBuilderMock = mock(EntityBuilder.class);
+        manageElement = new ManageElement(this.entityBuilderMock, mock(TxtHandling.class));
+    }
 
     @Test
     void addElementEmptyList() {

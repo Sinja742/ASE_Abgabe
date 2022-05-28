@@ -2,6 +2,7 @@ package Controller;
 
 import Entity.CategoryStatus;
 import Entity.SimpleCategory;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -11,9 +12,14 @@ import static org.mockito.Mockito.when;
 
 class CheckInputTest {
 
-    private final ManageElement manageElementMock = mock(ManageElement.class);
+    private ManageElement manageElementMock;
+    private CheckInput checkInput;
 
-    private CheckInput checkInput = new CheckInput(this.manageElementMock);
+    @BeforeEach
+    void setUp() {
+        manageElementMock = mock(ManageElement.class);
+        checkInput = new CheckInput(this.manageElementMock);
+    }
 
     @Test
     void checkCategoriesExistSuccess() {

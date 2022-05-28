@@ -2,6 +2,7 @@ package Jobs;
 
 import Entity.Category;
 import Entity.SimpleCategory;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
@@ -11,7 +12,12 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class TxtHandlingTest {
 
-    TxtHandling handlerTxt = new TxtHandling();
+    TxtHandling handlerTxt;
+
+    @BeforeEach
+    void setUp() {
+        handlerTxt = new Jobs.TxtHandling();
+    }
 
     @Test
     void getCorrectArrayCorrect() {
