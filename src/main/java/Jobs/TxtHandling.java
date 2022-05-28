@@ -6,7 +6,7 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class TxtHandling implements TxtHandlingInterface{
+public class TxtHandling implements TxtHandlingInterface {
 
     File file = new File("Elemente.txt");
 
@@ -23,7 +23,7 @@ public class TxtHandling implements TxtHandlingInterface{
     }
 
     String[] getCorrectArray(String[] text) {
-        if(text.length == 3) {
+        if (text.length == 3) {
             return text;
         }
         String[] correctArray = new String[3];
@@ -32,7 +32,7 @@ public class TxtHandling implements TxtHandlingInterface{
         return correctArray;
     }
 
-    public void rewriteTxt(List<Category> arten, List<Category> stimmungen, List<Category> objekte){
+    public void rewriteTxt(List<Category> arten, List<Category> stimmungen, List<Category> objekte) {
         deleteFile();
         writeFile(joinLists(arten, stimmungen, objekte));
     }
@@ -42,27 +42,27 @@ public class TxtHandling implements TxtHandlingInterface{
     }
 
     private void writeFile(String allElements) {
-        try{
+        try {
             file.createNewFile();
             PrintWriter out = new PrintWriter(file.getName());
             out.println(allElements);
             out.close();
-        }catch (IOException e){
+        } catch (IOException e) {
             System.out.println("ERROR: Beim schreiben in die Elemente.txt Datei ist etwas schief gelaufen.");
             e.printStackTrace();
         }
 
     }
 
-    String toTxtString(List<Category> elementlist){
+    String toTxtString(List<Category> elementlist) {
         List<String> returnStringList = new ArrayList<>();
         for (Category element : elementlist) {
             returnStringList.add(element.toString());
         }
-        return String.join(",",returnStringList);
+        return String.join(",", returnStringList);
     }
 
-    String joinLists(List<Category> arten, List<Category> stimmungen, List<Category> objekte){
+    String joinLists(List<Category> arten, List<Category> stimmungen, List<Category> objekte) {
         String elementsList = toTxtString(arten);
         elementsList = elementsList.concat("&&");
         elementsList = elementsList.concat(toTxtString(stimmungen));

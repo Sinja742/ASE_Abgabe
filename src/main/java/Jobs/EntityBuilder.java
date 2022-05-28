@@ -5,7 +5,7 @@ import Entity.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class EntityBuilder implements EntityBuilderInterface{
+public class EntityBuilder implements EntityBuilderInterface {
 
     private final TxtHandling handlerTxt;
 
@@ -17,8 +17,7 @@ public class EntityBuilder implements EntityBuilderInterface{
     public EntityBuilder(TxtHandling handlerTxt) {
         this.handlerTxt = handlerTxt;
     }
-
-//    Erzeugungsmuster
+    
     public List<Category> readEntity(CategoryStatus categoryStatus) {
         if (CategoryStatus.OBJEKT.isEqualCategory(categoryStatus)) {
             return getObjekt();
@@ -63,7 +62,7 @@ public class EntityBuilder implements EntityBuilderInterface{
 
     List<Tag> getTags(String[] objekt) {
         List<Tag> tagList = new ArrayList<>();
-        for(int objektAttribute = 1; objektAttribute < objekt.length; objektAttribute++) {
+        for (int objektAttribute = 1; objektAttribute < objekt.length; objektAttribute++) {
             tagList.add(Tag.getTag(Integer.parseInt(objekt[objektAttribute])));
         }
         return tagList;

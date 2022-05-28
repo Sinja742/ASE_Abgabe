@@ -29,8 +29,8 @@ public enum Tag {
     }
 
     public static Tag getTag(int id) {
-        for(Tag tag : Tag.values()) {
-            if(tag.getId() == id) {
+        for (Tag tag : Tag.values()) {
+            if (tag.getId() == id) {
                 return tag;
             }
         }
@@ -38,20 +38,21 @@ public enum Tag {
     }
 
     public static Tag getTag(String description) {
-        for(Tag tag : Tag.values()) {
-            if(tag.getDescription().equals(description)) {
+        for (Tag tag : Tag.values()) {
+            if (tag.getDescription().equals(description)) {
                 return tag;
             }
         }
         return null;
     }
+
     public static List<Tag> getAllTags() {
         return new ArrayList<>(Arrays.asList(Tag.values()));
     }
 
     public static List<String> tagsToStringList(List<Tag> tagsList) {
         List<String> tagsListString = new ArrayList<>();
-        for(Tag tag : tagsList) {
+        for (Tag tag : tagsList) {
             tagsListString.add(tag.getDescription());
         }
 

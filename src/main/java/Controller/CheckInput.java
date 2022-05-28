@@ -2,7 +2,6 @@ package Controller;
 
 import Entity.CategoryStatus;
 import Entity.Tag;
-
 import Error.FalseInputException;
 
 public class CheckInput implements CheckInputInterface {

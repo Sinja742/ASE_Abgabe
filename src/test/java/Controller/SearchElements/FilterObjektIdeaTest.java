@@ -65,7 +65,7 @@ class FilterObjektIdeaTest {
     @Test
     void filterCategoryElementsSuccess() {
         //Given
-        Category[] categoryElements = {new Objekt("Objekt", new Tag[] {Tag.TIER})};
+        Category[] categoryElements = {new Objekt("Objekt", new Tag[]{Tag.TIER})};
         FilterObjektIdea filterObjektIdea = new FilterObjektIdea(categoryElements, null, new Tag[0]);
 
         //When
@@ -91,7 +91,7 @@ class FilterObjektIdeaTest {
     @Test
     void filterObjekteSuccess() {
         //Given
-        Category[] categoryElements = {new Objekt("Objekt1", new Tag[] {Tag.TIER})};
+        Category[] categoryElements = {new Objekt("Objekt1", new Tag[]{Tag.TIER})};
         Tag[] tagFilter = {Tag.TIER};
         FilterObjektIdea filterObjektIdea = new FilterObjektIdea(categoryElements, null, tagFilter);
 
@@ -105,7 +105,7 @@ class FilterObjektIdeaTest {
     @Test
     void filterObjekteFailure() {
         //Given
-        Category[] categoryElements = {new Objekt("Objekt1", new Tag[] {Tag.TIER})};
+        Category[] categoryElements = {new Objekt("Objekt1", new Tag[]{Tag.TIER})};
         Tag[] tagFilter = {Tag.ABSTRAKT};
         FilterObjektIdea filterObjektIdea = new FilterObjektIdea(categoryElements, null, tagFilter);
 

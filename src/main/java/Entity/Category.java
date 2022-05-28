@@ -1,6 +1,6 @@
 package Entity;
 
-public abstract class Category implements CategoryInterface{
+public abstract class Category implements CategoryInterface {
 
     protected String description;
 

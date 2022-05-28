@@ -45,26 +45,6 @@ class ManageElementTest {
         assertEquals(element.getDescription(), manageElement.getAllArten().get(0).getDescription());
     }
 
-//    @Test
-//    void addElementFillList() {
-//        //Given
-//        ManageElement manageElement = new ManageElement(this.entityBuilderMock, this.txtHandlingMock);
-//        Category element = new SimpleCategory("Element");
-////        List<Category> arten = new ArrayList<>();
-////        arten.add(new SimpleCategory("ExistingElement"));
-//
-//        //When
-//        when(txtHandlingMock.readTxt()).thenReturn(new String[] {"ExistingElement","",""});
-////        when(entityBuilder.readEntity(CategoryStatus.ART)).thenReturn(arten);
-////        when(entityBuilder.readEntity(CategoryStatus.STIMMUNG)).thenReturn(null);
-////        when(entityBuilder.readEntity(CategoryStatus.OBJEKT)).thenReturn(null);
-//
-//        manageElement.addElement(element, CategoryStatus.ART);
-//
-//        //Then
-//        assertEquals(2, manageElement.getAllArten().size());
-//    }
-
     @Test
     void deleteSearchElementEmptyList() {
         //Given

@@ -50,7 +50,7 @@ class TxtHandlingTest {
     }
 
     @Test
-    void toTxtString(){
+    void toTxtString() {
         List<Category> testArten = new ArrayList<>();
         testArten.add(new SimpleCategory("art1"));
         testArten.add(new SimpleCategory("art2"));
@@ -62,7 +62,7 @@ class TxtHandlingTest {
     }
 
     @Test
-    void joinList(){
+    void joinList() {
         List<Category> testArten = new ArrayList<>();
         testArten.add(new SimpleCategory("art1"));
         testArten.add(new SimpleCategory("art2"));
@@ -76,8 +76,8 @@ class TxtHandlingTest {
         testObjekt.add(new SimpleCategory("objekt2;2"));
         testObjekt.add(new SimpleCategory("objekt3;3"));
 
-        String returnString = handlerTxt.joinLists(testArten,testStimmungen,testObjekt);
+        String returnString = handlerTxt.joinLists(testArten, testStimmungen, testObjekt);
 
-        assertEquals("art1,art2,art3&&stimmung1,stimmung2,stimmung3&&objekt1;1,objekt2;2,objekt3;3",returnString);
+        assertEquals("art1,art2,art3&&stimmung1,stimmung2,stimmung3&&objekt1;1,objekt2;2,objekt3;3", returnString);
     }
 }

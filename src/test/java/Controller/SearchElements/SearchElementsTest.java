@@ -1,7 +1,6 @@
 package Controller.SearchElements;
 
 import Controller.CheckInput;
-import Controller.Element.AddElement;
 import Controller.GUI;
 import Controller.ManageElement;
 import Entity.Category;
@@ -14,7 +13,7 @@ import org.junit.jupiter.api.Test;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
@@ -45,8 +44,8 @@ class SearchElementsTest {
 
         //When
         when(this.guiMock.trueBooleanQuestion("Wollen Sie nach Arten suchen?")).thenReturn(true);
-        when(this.guiMock.getStringArrayOfElements(CategoryStatus.ART, allElements, "Geben Sie die gewünschten Arten ein: ")).thenReturn(new String[] {"Category"});
-        when(this.checkInputMock.checkCategoriesExist(new String[] {"Category"}, CategoryStatus.ART)).thenReturn(true);
+        when(this.guiMock.getStringArrayOfElements(CategoryStatus.ART, allElements, "Geben Sie die gewünschten Arten ein: ")).thenReturn(new String[]{"Category"});
+        when(this.checkInputMock.checkCategoriesExist(new String[]{"Category"}, CategoryStatus.ART)).thenReturn(true);
         when(this.manageElementMock.getCategoryToDescription("Category", CategoryStatus.ART)).thenReturn(new SimpleCategory("Category"));
 
         Category[] category = searchElements.getSearchElements(CategoryStatus.ART, allElements);
@@ -75,7 +74,7 @@ class SearchElementsTest {
 
         //When
         when(this.guiMock.trueBooleanQuestion("Wollen Sie nach Tags suchen?")).thenReturn(true);
-        when(this.guiMock.getTags()).thenReturn(new Tag[] {Tag.TIER});
+        when(this.guiMock.getTags()).thenReturn(new Tag[]{Tag.TIER});
 
         Tag[] tags = searchElements.getSearchTags();
 
@@ -102,8 +101,8 @@ class SearchElementsTest {
         //Given
 
         //When
-        when(this.guiMock.getStringArrayOfElements(CategoryStatus.ART, null, "Geben Sie die gewünschten Arten ein: ")).thenReturn(new String[] {"CategoryDescription"});
-        when(this.checkInputMock.checkCategoriesExist(new String[] {"CategoryDescription"}, CategoryStatus.ART)).thenReturn(true);
+        when(this.guiMock.getStringArrayOfElements(CategoryStatus.ART, null, "Geben Sie die gewünschten Arten ein: ")).thenReturn(new String[]{"CategoryDescription"});
+        when(this.checkInputMock.checkCategoriesExist(new String[]{"CategoryDescription"}, CategoryStatus.ART)).thenReturn(true);
         when(this.manageElementMock.getCategoryToDescription("CategoryDescription", CategoryStatus.ART)).thenReturn(new SimpleCategory("CategoryDescription"));
 
         Category[] filters = searchElements.getFilters(CategoryStatus.ART, null);
