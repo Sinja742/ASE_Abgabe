@@ -3,6 +3,7 @@ package Controller.Element;
 import Controller.GUI;
 import Controller.ManageElement;
 import Entity.Tag;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -11,10 +12,16 @@ import static org.mockito.Mockito.when;
 
 class AddElementTest {
 
-    GUI guiMock = mock(GUI.class);
-    ManageElement manageElementMock = mock(ManageElement.class);
+    GUI guiMock;
+    ManageElement manageElementMock;
+    AddElement addElement;
 
-    AddElement addElement = new AddElement(guiMock, manageElementMock);
+    @BeforeEach
+    void setUp() {
+        guiMock = mock(GUI.class);
+        manageElementMock = mock(ManageElement.class);
+        addElement = new AddElement(guiMock, manageElementMock);
+    }
 
     @Test
     void addTags_True() {
@@ -23,8 +30,8 @@ class AddElementTest {
 
         Tag[] returnTagArray = addElement.addTags("Test");
 
-        assertEquals(1,returnTagArray.length);
-        assertEquals("Fantasie",returnTagArray[0].getDescription());
+        assertEquals(1, returnTagArray.length);
+        assertEquals("Fantasie", returnTagArray[0].getDescription());
     }
 
     @Test
@@ -33,11 +40,11 @@ class AddElementTest {
 
         Tag[] returnTagArray = addElement.addTags("Test");
 
-        assertEquals(0,returnTagArray.length);
+        assertEquals(0, returnTagArray.length);
     }
 
     @Test
-    void wantAddTags_True(){
+    void wantAddTags_True() {
         String objektDescription = "Test";
         when(this.guiMock.trueBooleanQuestion("Wollen Sie Tags zum Objekt " + objektDescription + " hinzufügen? ")).thenReturn(true);
 
@@ -47,7 +54,7 @@ class AddElementTest {
     }
 
     @Test
-    void wantAddTags_False(){
+    void wantAddTags_False() {
         String objektDescription = "Test";
         when(this.guiMock.trueBooleanQuestion("Wollen Sie Tags zum Objekt " + objektDescription + " hinzufügen? ")).thenReturn(false);
 

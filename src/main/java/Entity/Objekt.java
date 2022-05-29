@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class Objekt extends Category implements CategoryInterface{
+public class Objekt extends Category implements CategoryInterface {
     private List<Tag> tags;
 
     public Objekt(String description, List<Tag> tags) {

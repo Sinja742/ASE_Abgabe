@@ -2,10 +2,9 @@ package Controller;
 
 import Entity.Category;
 import Entity.CategoryStatus;
-import jobs.EntityBuilder;
-import jobs.TxtHandling;
+import Jobs.EntityBuilder;
+import Jobs.TxtHandling;
 
-import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
 

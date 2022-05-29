@@ -5,7 +5,7 @@ import Entity.Category;
 
 import java.util.List;
 
-public abstract class Filter implements FilterInterface{
+public abstract class Filter implements FilterInterface {
 
     protected Category[] categoryElements;
     protected List<Category> allElements;

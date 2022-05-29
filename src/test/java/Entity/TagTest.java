@@ -2,14 +2,10 @@ package Entity;
 
 import org.junit.jupiter.api.Test;
 
-import javax.swing.text.html.parser.TagElement;
-
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.Mockito.mock;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class TagTest {
 
@@ -17,7 +13,7 @@ class TagTest {
     void getTag_Id_True() {
         Tag returnTag = Tag.getTag(4);
 
-        assertEquals(Tag.TIER,returnTag);
+        assertEquals(Tag.TIER, returnTag);
     }
 
     @Test
@@ -31,7 +27,7 @@ class TagTest {
     void getTag_Decsription_True() {
         Tag returnTag = Tag.getTag("Tier");
 
-        assertEquals(Tag.TIER,returnTag);
+        assertEquals(Tag.TIER, returnTag);
     }
 
     @Test
@@ -48,7 +44,7 @@ class TagTest {
 
         List<String> returnTagStringList = Tag.tagsToStringList(testTagList);
 
-        assertEquals(1,returnTagStringList.size());
-        assertEquals(returnTestStringList,returnTagStringList);
+        assertEquals(1, returnTagStringList.size());
+        assertEquals(returnTestStringList, returnTagStringList);
     }
 }
