@@ -10,7 +10,26 @@ public enum Tag {
     FANTASIE(3, "Fantasie"),
     TIER(4, "Tier"),
     ABSTRAKT(5, "Abstrakt"),
-    MODERN(6, "Modern");
+    MODERN(6, "Modern"),
+    GEBAEUDE(7, "Gebäude"),
+    STADT(8, "Stadt"),
+    TECHNIK(9, "Technik"),
+    HYPERREALISMUS(10, "Hyperrealismus"),
+    REALISMUS(11, "Realismus"),
+    SURREALISMUS(12, "Surrealismus"),
+    ABSTRAHIERT(13, "Abstrahiert"),
+    FIGURATIV(14, "Figurativ"),
+    ILLUSTRATION(15, "Illustration"),
+    NAIV(16, "Naiv"),
+    KLASSIK(17, "Klassik"),
+    SYMBOLISMUS(18, "Symbolismus"),
+    EXPRESSIONISMUS(19, "Expressionismus"),
+    POINTILISMUS(20, "Pointilismus"),
+    IMPRESSIONISMUS(21, "Impressionismus"),
+    SCI_FI(22, "Sci-Fi"),
+    HISTORIE(23, "Historie"),
+    MANGA(24, "Manga"),
+    COMIC(25, "Comic");
 
     private final int id;
     private final String description;
