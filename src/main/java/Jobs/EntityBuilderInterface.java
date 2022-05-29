@@ -1,4 +1,4 @@
-package jobs;
+package Jobs;
 
 import Entity.Category;
 import Entity.CategoryStatus;

@@ -13,11 +13,9 @@ import java.util.List;
 public class GUI implements GUIInterface {
 
     private final CheckInput checkInput;
-    private final ManageElement manageElement;
 
-    public GUI(ManageElement manageElement) {
-        this.manageElement = manageElement;
-        this.checkInput = new CheckInput(this.manageElement);
+    public GUI(CheckInput checkInput) {
+        this.checkInput = checkInput;
     }
 
     public void showIdea(String idea) {

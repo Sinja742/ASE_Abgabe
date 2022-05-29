@@ -3,8 +3,9 @@ package Controller;
 import Entity.Category;
 import Entity.CategoryStatus;
 import Entity.SimpleCategory;
-import jobs.EntityBuilder;
-import jobs.TxtHandling;
+import Jobs.EntityBuilder;
+import Jobs.TxtHandling;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
@@ -18,11 +19,14 @@ import static org.mockito.Mockito.when;
 
 class ManageElementTest {
 
-//    private final ManageElement manageElement = mock(ManageElement.class);
-    private final TxtHandling txtHandlingMock = mock(TxtHandling.class);
-//    private final EntityBuilder entityBuilder = new EntityBuilder(txtHandling);
-    private final EntityBuilder entityBuilderMock = mock(EntityBuilder.class);
-    ManageElement manageElement = new ManageElement(this.entityBuilderMock, this.txtHandlingMock);
+    private EntityBuilder entityBuilderMock;
+    ManageElement manageElement;
+
+    @BeforeEach
+    void setUp() {
+        entityBuilderMock = mock(EntityBuilder.class);
+        manageElement = new ManageElement(this.entityBuilderMock, mock(TxtHandling.class));
+    }
 
     @Test
     void addElementEmptyList() {
@@ -40,26 +44,6 @@ class ManageElementTest {
         //Then
         assertEquals(element.getDescription(), manageElement.getAllArten().get(0).getDescription());
     }
-
-//    @Test
-//    void addElementFillList() {
-//        //Given
-//        ManageElement manageElement = new ManageElement(this.entityBuilderMock, this.txtHandlingMock);
-//        Category element = new SimpleCategory("Element");
-////        List<Category> arten = new ArrayList<>();
-////        arten.add(new SimpleCategory("ExistingElement"));
-//
-//        //When
-//        when(txtHandlingMock.readTxt()).thenReturn(new String[] {"ExistingElement","",""});
-////        when(entityBuilder.readEntity(CategoryStatus.ART)).thenReturn(arten);
-////        when(entityBuilder.readEntity(CategoryStatus.STIMMUNG)).thenReturn(null);
-////        when(entityBuilder.readEntity(CategoryStatus.OBJEKT)).thenReturn(null);
-//
-//        manageElement.addElement(element, CategoryStatus.ART);
-//
-//        //Then
-//        assertEquals(2, manageElement.getAllArten().size());
-//    }
 
     @Test
     void deleteSearchElementEmptyList() {

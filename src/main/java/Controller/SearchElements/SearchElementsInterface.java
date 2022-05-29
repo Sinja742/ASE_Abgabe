@@ -9,5 +9,5 @@ import java.util.List;
 public interface SearchElementsInterface {
     Category[] getSearchElements(CategoryStatus categoryStatus, List<Category> allElements);
 
-    Tag[] getSearchTags() ;
+    Tag[] getSearchTags();
 }

@@ -1,6 +1,5 @@
 package Controller.SearchElements;
 
-import Controller.GUI;
 import Controller.ManageElement;
 import Entity.Category;
 import Entity.CategoryStatus;
@@ -19,15 +18,14 @@ public class Idea implements IdeaInterface {
 
     private final ManageElement manageElement;
 
-    //    Strukturmuster (Idee = Category+Category+Category)
-    public Idea(GUI gui, ManageElement manageElement) {
+    public Idea(ManageElement manageElement) {
         this.manageElement = manageElement;
-        SearchElements searchElements = new SearchElements(gui, manageElement);
+        SearchElements searchElements = new SearchElements(manageElement);
         this.searchIdea(searchElements);
     }
 
     public String toString() {
-        if (this.objekt != null){
+        if (this.objekt != null) {
             return this.art.getDescription() + " " + this.stimmung.getDescription() + " " + this.objekt.getDescription();
         }
         return "";
@@ -45,7 +43,6 @@ public class Idea implements IdeaInterface {
         tagFilter = searchElements.getSearchTags();
     }
 
-    //    Verhaltensmuster
     void filterIdea() {
         art = new FilterIdea(artFilter, manageElement.getAllArten()).random();
         stimmung = new FilterIdea(stimmungFilter, manageElement.getAllStimmungen()).random();

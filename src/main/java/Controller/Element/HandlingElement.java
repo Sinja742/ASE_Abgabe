@@ -10,6 +10,13 @@ import java.util.List;
 
 public abstract class HandlingElement {
 
+    public HandlingElement(ManageElement manageElement) {
+        this.manageElement = manageElement;
+        this.checkInput = new CheckInput(this.manageElement);
+        this.gui = new GUI(this.checkInput);
+    }
+
+    //Testing
     public HandlingElement(GUI gui, ManageElement manageElement) {
         this.gui = gui;
         this.manageElement = manageElement;

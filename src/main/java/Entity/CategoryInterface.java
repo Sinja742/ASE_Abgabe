@@ -5,5 +5,7 @@ public interface CategoryInterface {
 
     boolean containsTag(Tag[] tagFilter);
 
+    boolean equalsDescription(String description);
+
     String toString();
 }

@@ -1,6 +1,6 @@
 package Entity;
 
-public class SimpleCategory extends Category implements CategoryInterface{
+public class SimpleCategory extends Category implements CategoryInterface {
 
     public SimpleCategory(String description) {
         super(description);
@@ -10,7 +10,7 @@ public class SimpleCategory extends Category implements CategoryInterface{
         return false;
     }
 
-    public String toString(){
+    public String toString() {
         return this.description;
     }
 }

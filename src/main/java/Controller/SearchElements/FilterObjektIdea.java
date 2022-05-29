@@ -7,7 +7,7 @@ import Entity.Tag;
 import java.util.ArrayList;
 import java.util.List;
 
-public class FilterObjektIdea extends Filter implements FilterInterface{
+public class FilterObjektIdea extends Filter implements FilterInterface {
 
     private Tag[] tagFilter;
 
@@ -22,7 +22,7 @@ public class FilterObjektIdea extends Filter implements FilterInterface{
         if (!noFilterElements(categoryElements)) {
             return getRandomElement();
         } else {
-            System.out.println("Es gibt keine Objekte zu den ausgewählten Tags. Bitte weniger Tags setzen für eine Idee." );
+            System.out.println("Es gibt keine Objekte zu den ausgewählten Tags. Bitte weniger Tags setzen für eine Idee.");
             return null;
         }
     }
@@ -36,7 +36,7 @@ public class FilterObjektIdea extends Filter implements FilterInterface{
     void filterObjekte() {
         List<Category> objekte = new ArrayList<>();
         for (Category category : categoryElements) {
-            if (category.containsTag(tagFilter)) {  //return false
+            if (category.containsTag(tagFilter)) {
                 objekte.add(category);
             }
         }

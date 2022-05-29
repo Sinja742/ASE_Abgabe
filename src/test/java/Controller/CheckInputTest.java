@@ -2,6 +2,7 @@ package Controller;
 
 import Entity.CategoryStatus;
 import Entity.SimpleCategory;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -11,16 +12,22 @@ import static org.mockito.Mockito.when;
 
 class CheckInputTest {
 
-    private final ManageElement manageElement = mock(ManageElement.class);
+    private ManageElement manageElementMock;
+    private CheckInput checkInput;
+
+    @BeforeEach
+    void setUp() {
+        manageElementMock = mock(ManageElement.class);
+        checkInput = new CheckInput(this.manageElementMock);
+    }
 
     @Test
     void checkCategoriesExistSuccess() {
         //Given
-        CheckInput checkInput = new CheckInput(this.manageElement);
         String[] elements = {"Element"};
 
         //When
-        when(manageElement.getCategoryToDescription("Element", CategoryStatus.ART)).thenReturn(new SimpleCategory("Element"));
+        when(manageElementMock.getCategoryToDescription("Element", CategoryStatus.ART)).thenReturn(new SimpleCategory("Element"));
 
         boolean exists = checkInput.checkCategoriesExist(elements, CategoryStatus.ART);
 
@@ -31,11 +38,10 @@ class CheckInputTest {
     @Test
     void checkCategoriesExistFailure() {
         //Given
-        CheckInput checkInput = new CheckInput(this.manageElement);
         String[] elements = {"Element"};
 
         //When
-        when(manageElement.getCategoryToDescription("Element", CategoryStatus.ART)).thenReturn(null);
+        when(manageElementMock.getCategoryToDescription("Element", CategoryStatus.ART)).thenReturn(null);
 
         boolean exists = checkInput.checkCategoriesExist(elements, CategoryStatus.ART);
 
@@ -46,11 +52,10 @@ class CheckInputTest {
     @Test
     void checkCategorySuccess() {
         //Given
-        CheckInput checkInput = new CheckInput(this.manageElement);
         String element = "Element";
 
         //When
-        when(manageElement.getCategoryToDescription(element, CategoryStatus.ART)).thenReturn(new SimpleCategory(element));
+        when(manageElementMock.getCategoryToDescription(element, CategoryStatus.ART)).thenReturn(new SimpleCategory(element));
 
         boolean exists = checkInput.checkCategory(element, CategoryStatus.ART);
 
@@ -61,11 +66,10 @@ class CheckInputTest {
     @Test
     void checkCategoryFailure() {
         //Given
-        CheckInput checkInput = new CheckInput(this.manageElement);
         String element = "Element";
 
         //When
-        when(manageElement.getCategoryToDescription(element, CategoryStatus.ART)).thenReturn(null);
+        when(manageElementMock.getCategoryToDescription(element, CategoryStatus.ART)).thenReturn(null);
 
         boolean exists = checkInput.checkCategory(element, CategoryStatus.ART);
 
@@ -76,7 +80,6 @@ class CheckInputTest {
     @Test
     void checkTagsExistSuccess() {
         //Given
-        CheckInput checkInput = new CheckInput(this.manageElement);
         String[] tags = {"Tier"};
 
         //When
@@ -89,7 +92,6 @@ class CheckInputTest {
     @Test
     void checkTagsExistFailure() {
         //Given
-        CheckInput checkInput = new CheckInput(this.manageElement);
         String[] tags = {"Tag"};
 
         //When
@@ -102,7 +104,6 @@ class CheckInputTest {
     @Test
     void checkTagSuccess() {
         //Given
-        CheckInput checkInput = new CheckInput(this.manageElement);
         String tag = "Tier";
 
         //When
@@ -115,7 +116,6 @@ class CheckInputTest {
     @Test
     void checkTagFailure() {
         //Given
-        CheckInput checkInput = new CheckInput(this.manageElement);
         String tag = "Tag";
 
         //When
@@ -128,11 +128,10 @@ class CheckInputTest {
     @Test
     void elementDoNotExistsSuccess() {
         //Given
-        CheckInput checkInput = new CheckInput(this.manageElement);
         String element = "Element";
 
         //When
-        when(manageElement.getCategoryToDescription(element, CategoryStatus.ART)).thenReturn(null);
+        when(manageElementMock.getCategoryToDescription(element, CategoryStatus.ART)).thenReturn(null);
 
         boolean exists = checkInput.elementDoNotExists(element, CategoryStatus.ART);
 
@@ -143,11 +142,10 @@ class CheckInputTest {
     @Test
     void elementDoNotExistsFailure() {
         //Given
-        CheckInput checkInput = new CheckInput(this.manageElement);
         String element = "Element";
 
         //When
-        when(manageElement.getCategoryToDescription(element, CategoryStatus.ART)).thenReturn(new SimpleCategory(element));
+        when(manageElementMock.getCategoryToDescription(element, CategoryStatus.ART)).thenReturn(new SimpleCategory(element));
 
         boolean exists = checkInput.elementDoNotExists(element, CategoryStatus.ART);
 
