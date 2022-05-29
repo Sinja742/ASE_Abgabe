@@ -6,6 +6,7 @@ import java.util.Collections;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
 
 class TagTest {
 
@@ -18,7 +19,7 @@ class TagTest {
 
     @Test
     void getTag_Id_False() {
-        Tag returnTag = Tag.getTag(9);
+        Tag returnTag = Tag.getTag(42);
 
         assertNull(returnTag);
     }
